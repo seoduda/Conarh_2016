@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{546BFBEA-F895-4692-9A51-FDD762773DDB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Conrarh_2016</RootNamespace>
+    <AssemblyName>Conrarh_2016</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Application\AppController.cs" />
+    <Compile Include="Application\AppInformation.cs" />
+    <Compile Include="Application\AppModel.cs" />
+    <Compile Include="Application\AppResources.cs" />
+    <Compile Include="Application\BackgroundTasks\DeleteOldPushNotificationsBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadBadgesByUserBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadBadgesTypesBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadConnectRequestDataByUserBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadEventsDataBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadEventUserVotesBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadExhibitorsBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadFavouriteEventsBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadImageBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadListBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadPushNotificationsByTokenBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadPushNotificationsByUserBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadSponsorTypesBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadUsersBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadWallPostLikesBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadWallPostsBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\GetItemByIdBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\IDownloadSponsorTypesBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\Kinvey\DownloadListKinveyBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\LoginBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\SendData\DeleteDataBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\SendData\PostBadgeActionBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\SendData\PostDataBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\SendData\PostEventVoteBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\SendData\PostFavouriteEventBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\SendData\PostImageBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\SendData\PostPushNotificationsBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\SendData\PostWallLikeBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\SendData\RegisterUserBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\SendData\RequestConnectionBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\SendData\ResetPasswordBackgroundTask.cs" />
+    <Compile Include="Application\DataAccess\DbClient.cs" />
+    <Compile Include="Application\Domain\BadgeAction.cs" />
+    <Compile Include="Application\Domain\ConnectRequest.cs" />
+    <Compile Include="Application\Domain\EventData.cs" />
+    <Compile Include="Application\Domain\Exhibitor.cs" />
+    <Compile Include="Application\Domain\FavouriteEventData.cs" />
+    <Compile Include="Application\Domain\ImageData.cs" />
+    <Compile Include="Application\Domain\Item.cs" />
+    <Compile Include="Application\Domain\JsonConverters\TypedJsonConverter.cs" />
+    <Compile Include="Application\Domain\PostData\AddValueData.cs" />
+    <Compile Include="Application\Domain\PostData\AddWallPostLike.cs" />
+    <Compile Include="Application\Domain\PostData\CreateUserData.cs" />
+    <Compile Include="Application\Domain\PostData\CreateWallPostData.cs" />
+    <Compile Include="Application\Domain\PostData\LoginUserData.cs" />
+    <Compile Include="Application\Domain\PostData\QuestionData.cs" />
+    <Compile Include="Application\Domain\PostData\RequestConnectionData.cs" />
+    <Compile Include="Application\Domain\PostData\ResetPasswordData.cs" />
+    <Compile Include="Application\Domain\PushNotificationData.cs" />
+    <Compile Include="Application\Domain\RootCollections\RootListData.cs" />
+    <Compile Include="Application\Domain\ServerError.cs" />
+    <Compile Include="Application\Domain\Speaker.cs" />
+    <Compile Include="Application\Domain\Types\BadgeType.cs" />
+    <Compile Include="Application\Domain\Types\SponsorType.cs" />
+    <Compile Include="Application\Domain\User.cs" />
+    <Compile Include="Application\Domain\UserVoteData.cs" />
+    <Compile Include="Application\Domain\WallPost.cs" />
+    <Compile Include="Application\Domain\WallPostLike.cs" />
+    <Compile Include="Application\DynamicListData.cs" />
+    <Compile Include="Application\DynamicObservableData.cs" />
+    <Compile Include="Application\ImageLoader.cs" />
+    <Compile Include="Application\Tools\QueryBuilder.cs" />
+    <Compile Include="Application\UI\Connect\Android\ConnectionFastCell.cs" />
+    <Compile Include="Application\UI\Connect\Android\ConnectionGridPage.cs" />
+    <Compile Include="Application\UI\Connect\ConnectionCell.cs" />
+    <Compile Include="Application\UI\Connect\ConnectionPage.cs" />
+    <Compile Include="Application\UI\Controls\DownloadedImage.cs" />
+    <Compile Include="Application\UI\Controls\DynamicListView.cs" />
+    <Compile Include="Application\UI\Controls\DynamicTableView.cs" />
+    <Compile Include="Application\UI\Controls\ProfileHistoryItemCell.cs" />
+    <Compile Include="Application\UI\Events\AgendaPage.cs" />
+    <Compile Include="Application\UI\Events\Android\AgendaGridPage.cs" />
+    <Compile Include="Application\UI\Events\Android\EventFastCell.cs" />
+    <Compile Include="Application\UI\Events\EventActionsView.cs" />
+    <Compile Include="Application\UI\Events\EventCell.cs" />
+    <Compile Include="Application\UI\Events\EventDetailView.cs" />
+    <Compile Include="Application\UI\Events\EventGroupItem.cs" />
+    <Compile Include="Application\UI\Events\EventView.cs" />
+    <Compile Include="Application\UI\Events\LikedItemView.cs" />
+    <Compile Include="Application\UI\Events\SpeecherDetailView.cs" />
+    <Compile Include="Application\UI\Events\SpeecherView.cs" />
+    <Compile Include="Application\UI\Events\UserEventActionsModel.cs" />
+    <Compile Include="Application\UI\Exhibitors\Android\ExhibitorFastCell.cs" />
+    <Compile Include="Application\UI\Exhibitors\Android\ExhibitorsGridDynamicPage.cs" />
+    <Compile Include="Application\UI\Exhibitors\ExhibitorGroupItem.cs" />
+    <Compile Include="Application\UI\Exhibitors\ExhibitorsDynamicPage.cs" />
+    <Compile Include="Application\UI\Exhibitors\ExhibitorViewCell.cs" />
+    <Compile Include="Application\UI\Login\LoginPage.cs" />
+    <Compile Include="Application\UI\Login\LoginView.cs" />
+    <Compile Include="Application\UI\Login\SignUpView.cs" />
+    <Compile Include="Application\UI\Login\TermsPage.cs" />
+    <Compile Include="Application\UI\Main\MainMenuButton.cs" />
+    <Compile Include="Application\UI\Main\MainMenuPage.cs" />
+    <Compile Include="Application\UI\Main\RootPage.cs" />
+    <Compile Include="Application\UI\Map\MapPage.cs" />
+    <Compile Include="Application\UI\PopUpFactory.cs" />
+    <Compile Include="Application\UI\Profile\Android\ContactListGridPage.cs" />
+    <Compile Include="Application\UI\Profile\Android\ProfileGridPage.cs" />
+    <Compile Include="Application\UI\Profile\Android\ProfileHistoryItemFastCell.cs" />
+    <Compile Include="Application\UI\Profile\Android\ProfileHistoryPage.cs" />
+    <Compile Include="Application\UI\Profile\Android\RatingFastCell.cs" />
+    <Compile Include="Application\UI\Profile\Android\RatingGridPage.cs" />
+    <Compile Include="Application\UI\Profile\Android\UserFastCell.cs" />
+    <Compile Include="Application\UI\Profile\BadgeCell.cs" />
+    <Compile Include="Application\UI\Profile\BadgeGridView.cs" />
+    <Compile Include="Application\UI\Profile\ContactListPage.cs" />
+    <Compile Include="Application\UI\Profile\EditProfilePage.cs" />
+    <Compile Include="Application\UI\Profile\ProfileContentView.cs" />
+    <Compile Include="Application\UI\Profile\ProfileHistoryView.cs" />
+    <Compile Include="Application\UI\Profile\ProfilePage.cs" />
+    <Compile Include="Application\UI\Profile\Rating\RatingListModel.cs" />
+    <Compile Include="Application\UI\Profile\Rating\RatingPage.cs" />
+    <Compile Include="Application\UI\Profile\Rating\RatingUserCell.cs" />
+    <Compile Include="Application\UI\Profile\ViewProfilePage.cs" />
+    <Compile Include="Application\UI\Shared\DynamicChildContentView.cs" />
+    <Compile Include="Application\UI\Shared\EditorControl.cs" />
+    <Compile Include="Application\UI\Shared\FillUserDataView.cs" />
+    <Compile Include="Application\UI\Shared\InputFieldView.cs" />
+    <Compile Include="Application\UI\Shared\SearchBarView.cs" />
+    <Compile Include="Application\UI\Shared\ShareContentPage.cs" />
+    <Compile Include="Application\UI\Shared\UserCell.cs" />
+    <Compile Include="Application\UI\Shared\UserHeaderView.cs" />
+    <Compile Include="Application\UI\Wall\WallCreatePostPage.cs" />
+    <Compile Include="Application\UI\Wall\WallPage.cs" />
+    <Compile Include="Application\UI\Wall\WallPostCell.cs" />
+    <Compile Include="Application\UI\Wall\WallPostLikersPage.cs" />
+    <Compile Include="Application\UserController.cs" />
+    <Compile Include="Application\UserModel.cs" />
+    <Compile Include="Application\Wrappers\Android\EventsGridWrapper.cs" />
+    <Compile Include="Application\Wrappers\Android\ExhibitorsGridWrapper.cs" />
+    <Compile Include="Application\Wrappers\ConnectionModel.cs" />
+    <Compile Include="Application\Wrappers\ConnectionsDataWrapper.cs" />
+    <Compile Include="Application\Wrappers\ContactListWrapper.cs" />
+    <Compile Include="Application\Wrappers\EventsDataWrapper.cs" />
+    <Compile Include="Application\Wrappers\ExhibitorsDataWrapper.cs" />
+    <Compile Include="Application\Wrappers\PullRefreshListWrapper.cs" />
+    <Compile Include="Application\Wrappers\UserModelsWrapper.cs" />
+    <Compile Include="Application\Wrappers\WallPostLikesWrapper.cs" />
+    <Compile Include="Application\Wrappers\WallPostsDataWrapper.cs" />
+    <Compile Include="Conarh_2016.cs" />
+    <Compile Include="Core\AppProvider.cs" />
+    <Compile Include="Core\DataAccess\Config.cs" />
+    <Compile Include="Core\DataAccess\SQLiteClient.cs" />
+    <Compile Include="Core\Exceptions\CoreException.cs" />
+    <Compile Include="Core\Exceptions\ExceptionExtensions.cs" />
+    <Compile Include="Core\Exceptions\ServerException.cs" />
+    <Compile Include="Core\Exceptions\UnhandledSystemException.cs" />
+    <Compile Include="Core\Net\WebClient.cs" />
+    <Compile Include="Core\Services\CrossPushNotificationListener.cs" />
+    <Compile Include="Core\Services\IImageService.cs" />
+    <Compile Include="Core\Services\IIOManager.cs" />
+    <Compile Include="Core\Services\ILog.cs" />
+    <Compile Include="Core\Services\ShareService.cs" />
+    <Compile Include="Core\Singletone.cs" />
+    <Compile Include="Core\Tools\SortedObservableCollection.cs" />
+    <Compile Include="Core\UI\ExtendedEntry.cs" />
+    <Compile Include="Core\UI\ExtendedViewCell.cs" />
+    <Compile Include="Core\UI\IPopUpFactory.cs" />
+    <Compile Include="Core\UI\IScreenOptions.cs" />
+    <Compile Include="MyClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TwinTechs\Controls\FastCell.cs" />
+    <Compile Include="TwinTechs\Controls\FastImage.cs" />
+    <Compile Include="TwinTechs\Controls\IFastCellCache.cs" />
+    <Compile Include="TwinTechs\Controls\IScrollAwareElement.cs" />
+    <Compile Include="TwinTechs\Controls\PageViewContainer.cs" />
+    <Compile Include="TwinTechs\Extensions\ViewExtensions.cs" />
+    <Compile Include="TwinTechs\Gestures\BaseGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Gestures\Converters\SwipeGestureRecognizerDirectonConverter.cs" />
+    <Compile Include="TwinTechs\Gestures\GestureRecognizerExtensions.cs" />
+    <Compile Include="TwinTechs\Gestures\INativeGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Gestures\INativeGestureRecognizerCoordinator.cs" />
+    <Compile Include="TwinTechs\Gestures\INativeGestureRecognizerFactory.cs" />
+    <Compile Include="TwinTechs\Gestures\LongPressGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Gestures\PanGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Gestures\PinchGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Gestures\SwipeGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Gestures\TapGestureRecognizer.cs" />
+    <Compile Include="XLabs\Forms\Controls\FastGridCell.cs" />
+    <Compile Include="XLabs\Forms\Controls\GridView.cs" />
+    <Compile Include="XLabs\GridEventArgs{T}.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Acr.UserDialogs.5.2.2\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Acr.UserDialogs.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Acr.UserDialogs.5.2.2\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.Interface.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Core">
+      <HintPath>..\..\Libs\Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ExifLib, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ExifLib.PCL.1.0.1\lib\portable-net45+sl50+win+WindowsPhoneApp81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\ExifLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Kinvey-Utils, Version=1.0.6018.20959, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Kinvey.1.6.10\lib\Kinvey-Utils.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Kinvey-Xamarin, Version=1.0.6018.24231, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Kinvey.1.6.10\lib\Kinvey-Xamarin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ModernHttpClient, Version=2.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\modernhttpclient.2.4.2\lib\Portable-Net45+WinRT45+WP8+WPA81\ModernHttpClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PushNotification.Plugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugin.PushNotification.1.2.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\PushNotification.Plugin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PushNotification.Plugin.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugin.PushNotification.1.2.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\PushNotification.Plugin.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.0.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Remotion.Linq.2.0.1\lib\portable-net45+win+wpa81+wp80\Remotion.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp.Portable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Kinvey.1.6.10\lib\RestSharp.Portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLite.Net, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SQLite.Net-PCL.3.1.1\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLite.Net.Async, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SQLite.Net.Async-PCL.3.1.1\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.Async.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Forms.2.2.0.45\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Forms.2.2.0.45\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Forms.2.2.0.45\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="XLabs.Core, Version=2.0.5782.12218, Culture=neutral, PublicKeyToken=d65109b36e5040e4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XLabs.Core.2.0.5782\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\XLabs.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="XLabs.Ioc, Version=2.0.5782.12218, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XLabs.IoC.2.0.5782\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+Xamarin.iOS10\XLabs.Ioc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="XLabs.Platform, Version=2.0.5782.12218, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XLabs.Platform.2.0.5782\lib\portable-net45+netcore45+wpa81+wp8\XLabs.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="XLabs.Serialization, Version=2.0.5782.15703, Culture=neutral, PublicKeyToken=d65109b36e5040e4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\XLabs.Serialization.2.0.5782\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\XLabs.Serialization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="docs\CONARH2015-APIDocumentation.docx" />
+    <None Include="docs\Ranking patrocínio CONARH.DOC" />
+    <None Include="docs\resmaterialappconarh2016.zip" />
+    <None Include="docs\STATUS PALESTRAS 24.06.xlsx" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Application\Commands\Local\" />
+    <Folder Include="Application\Commands\Server\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="docs\Novo Documento de Texto.txt" />
+    <Content Include="Helpers\CrossPushNotificationListener.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+</Project>

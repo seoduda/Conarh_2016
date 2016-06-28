@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="preferExternal" package="br.com.i9acao.conarh_2016" android:versionName="Alpha 1" android:versionCode="1">
+	<uses-sdk android:minSdkVersion="15" />
+	<application android:label="Conarh_2016" android:icon="@drawable/Icon"></application>
+</manifest>
