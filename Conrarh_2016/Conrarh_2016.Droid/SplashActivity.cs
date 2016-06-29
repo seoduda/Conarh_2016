@@ -13,8 +13,8 @@ namespace Conarh_2016.Droid
 		{
 			base.OnCreate(bundle);
 
-			// Wait for 2,5 seconds
-			Thread.Sleep(2500); 
+			// Wait for 0,5 seconds
+			Thread.Sleep(500); 
 
 			//Moving to next activity
 			StartActivity(typeof(MainActivity));

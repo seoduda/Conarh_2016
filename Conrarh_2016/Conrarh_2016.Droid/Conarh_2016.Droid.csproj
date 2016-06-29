@@ -294,7 +294,6 @@
     <AndroidResource Include="Resources\drawable\level4.png" />
     <AndroidResource Include="Resources\drawable\level5.png" />
     <AndroidResource Include="Resources\drawable\loginEmailImage.png" />
-    <AndroidResource Include="Resources\drawable\loginHeaderImage.png" />
     <AndroidResource Include="Resources\drawable\loginPasswordImage.png" />
     <AndroidResource Include="Resources\drawable\settings.png" />
     <AndroidResource Include="Resources\drawable\shareBtn.png" />
@@ -308,11 +307,12 @@
     <AndroidResource Include="Resources\drawable-hdpi\splash.png" />
     <AndroidResource Include="Resources\drawable-mdpi\splash.png" />
     <AndroidResource Include="Resources\drawable\splash.png" />
-    <AndroidResource Include="Resources\drawable\bg_homeapp.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\splash.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\splash.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\splash.png" />
     <AndroidResource Include="Resources\drawable\i9acao_logo.png" />
+    <AndroidResource Include="Resources\drawable\login_bt_linkedin.png" />
+    <AndroidResource Include="Resources\drawable\healthways.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

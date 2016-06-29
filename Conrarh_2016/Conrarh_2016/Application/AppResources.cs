@@ -141,7 +141,8 @@ namespace Conarh_2016.Application
         public static Color DefaultLikeColor = Color.FromHex("bfa06e");
         public static Color SeparatorColor = Color.FromHex("acae8d");
         public static Color LoginBackgroundColor = Color.FromHex("abbbba");
-        public static Color LoginActiveTextColor = Color.FromHex("974644");
+        //public static Color LoginActiveTextColor = Color.FromHex("974644");
+        public static Color LoginActiveTextColor = Color.Black;
         public static Color LoginNormalTextColor = Color.FromHex("ca9e67");
         public static Color LoginButtonColor = Color.FromHex("2ab296");
         public static Color LoginBottomButtonColor = Color.FromHex("f4d657");
@@ -207,6 +208,9 @@ namespace Conarh_2016.Application
         public static string SignUpButtonImage = "signUpButtonImage.png";
 
         public static string SettingsImage = "settings.png";
+
+        public static string SponsorBanner = "healthways.png";
+        public static string SponsorUri = "http://www.healthways.com/";
 
         public static string I9acaoLogo = "i9acao_logo.png";
 
