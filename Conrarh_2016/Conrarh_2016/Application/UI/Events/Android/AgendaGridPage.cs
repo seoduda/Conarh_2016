@@ -9,7 +9,15 @@ using Conarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Events
 {
-	public sealed class AgendaGridPage : ShareContentPage
+    public class AgendaExpoGridPage : AgendaGridPage
+    {
+        public AgendaExpoGridPage() : base()
+        {
+            base.SelectExpo();
+        }
+    }
+
+    public class AgendaGridPage : ShareContentPage
 	{
 		public bool IsFreeEventsOpened = false; 
 		private readonly GridView _eventGridView;
@@ -30,7 +38,7 @@ namespace Conarh_2016.Application.UI.Events
 				Padding = new Thickness(0)
 			};
 				
-			int width = AppProvider.Screen.ConvertPixelsToDp (AppProvider.Screen.Width) - 20;
+			int width = AppProvider.Screen.ConvertPixelsToDp (AppProvider.Screen.Width) - 8;
 			_eventGridView = new GridView {
 				RowSpacing = 5,
 				ColumnSpacing = 5,
@@ -92,11 +100,11 @@ namespace Conarh_2016.Application.UI.Events
 
 		private Button GetButton(string title, Color color, EventHandler handler )
 		{
-			var btn = new Button () {
-				BorderRadius = 0,
-				Text = title.ToUpper(),
-				BackgroundColor = color,
-				TextColor = Color.White,
+            var btn = new Button() {
+                BorderRadius = 0,
+                Text = title.ToUpper(),
+                BackgroundColor = color,
+                TextColor = (color.Equals(AppResources.AgendaCongressoColor) ? AppResources.AgendaExpoColor : AppResources.AgendaCongressoColor),
 				FontSize = 15,
 			};
 			btn.Clicked += handler;
@@ -121,6 +129,16 @@ namespace Conarh_2016.Application.UI.Events
 				_eventGridView.ItemsSource = GetItemSource ();
 			}
 		}
-	}
+
+        public void SelectExpo()
+        {
+            if (!IsFreeEventsOpened)
+            {
+                IsFreeEventsOpened = true;
+                _eventGridView.ItemsSource = GetItemSource();
+            }
+
+        }
+    }
 
 }

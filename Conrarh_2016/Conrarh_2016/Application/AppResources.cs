@@ -152,9 +152,9 @@ namespace Conarh_2016.Application
         public static Color MenuTitleGreen = Color.FromHex("B0D7E3");
         public static Color Yellow = Color.FromHex("eec22e");
         public static Color Green = Color.FromHex("009933");
-        public static Color AgendaPageBackgroundColor = Color.FromHex("cbaf81");
-        public static Color AgendaExpoColor = Color.FromHex("f68631");
-        public static Color AgendaCongressoColor = Color.FromHex("914747");
+        public static Color AgendaPageBackgroundColor = Color.White;
+        public static Color AgendaExpoColor = Color.FromHex("AAB9B8");
+        public static Color AgendaCongressoColor = Color.FromHex("B8CA4F");
         public static Color SpeecherBackColor = Color.FromHex("ddcd8d");
         public static Color ExhibitorNameTextColor = Color.FromHex("95a5a6");
         public static Color ExhibitorDescTextColor = Color.FromHex("0079c2");

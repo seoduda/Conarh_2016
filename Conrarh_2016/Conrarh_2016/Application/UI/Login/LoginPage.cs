@@ -14,8 +14,7 @@ namespace Conarh_2016.Application.UI.Login
         {
             NavigationPage.SetHasNavigationBar(this, false);
             this.BackgroundImage = AppResources.LoginBGImage;
-            //this.BackgroundColor = Color.White;
-
+            
             Title = " ";
             LoginView loginView = new LoginView();
             loginView.SignUp += OpenSignUp;

@@ -18,7 +18,7 @@ namespace Conarh_2016.Application.UI.Events
 		private Label _dateLabel;
 		private Label _locationLabel;
 		private StackLayout _nameLocationLayout;
-		private Button _timeBoxView;
+		private BoxView _timeBoxView;
 		private Label _timeLabel;
 		private Button _favEventBoxView;
 
@@ -77,34 +77,36 @@ namespace Conarh_2016.Application.UI.Events
 			stackLayout.Children.Add (_eventImage);
 
 			_dateLabel = new Label {
-				HorizontalOptions = LayoutOptions.StartAndExpand,
-				VerticalOptions = LayoutOptions.Center,
+				HorizontalOptions = LayoutOptions.End,
+				VerticalOptions = LayoutOptions.Start,
 				FontAttributes = FontAttributes.Bold,
 				FontSize = 13,
 				TextColor = Color.White,
-				XAlign = TextAlignment.Start,
+                HorizontalTextAlignment = TextAlignment.End,
 				HeightRequest = 20,
-				BackgroundColor = AppResources.ConnectAcceptRequestColor,
-				WidthRequest = 70
+				BackgroundColor = Color.Transparent,
+				WidthRequest = 75
 			};
 
 
 			_nameLabel = new Label {
 				HorizontalOptions = LayoutOptions.FillAndExpand,
 				VerticalOptions = LayoutOptions.Center,
-				FontAttributes = FontAttributes.Bold,
-				FontSize = 13,
+				FontAttributes = FontAttributes.None,
+				FontSize = 14,
 				TextColor = Color.White,
-				XAlign = TextAlignment.Start,
-				HeightRequest = 35
+                HorizontalTextAlignment = TextAlignment.Start,
+				HeightRequest = 40
 			};
 
 			_locationLabel = new Label () 
 			{
-				FontSize = 9,
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.End,
+                FontSize = 12,
 				TextColor = Color.White,
-				XAlign = TextAlignment.Start,
-				HeightRequest = 10
+                HorizontalTextAlignment = TextAlignment.Start,
+				HeightRequest = 14
 			};
 
 			_nameLocationLayout = new StackLayout () {
@@ -114,23 +116,32 @@ namespace Conarh_2016.Application.UI.Events
 					_nameLabel,
 					_locationLabel
 				},
-				Padding = new Thickness(10, 4, 0, 10),
-				Spacing = 5,
+				Padding = new Thickness(8, 4, 0, 10),
+				Spacing = 4,
 				WidthRequest  = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width)
 			};
 
-			var timeLayout = new AbsoluteLayout () {Padding = new Thickness(10, 130, 0, 0)};
+			var timeLayout = new AbsoluteLayout () {Padding = new Thickness(10, 100, 0, 0)};
+            _timeBoxView = new BoxView
+            {
+                WidthRequest =  AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height / 5),
+                HeightRequest = 80,
+                Opacity = 0.7,
+                BackgroundColor = AppResources.AgendaCongressoColor
+            };
+            /*
 			_timeBoxView = new Button () {
 				WidthRequest = 110,
 				HeightRequest = 25,
 				BorderRadius = 12,
 				IsEnabled = false
 			};
-			timeLayout.Children.Add (_timeBoxView);
+            */
+            timeLayout.Children.Add (_timeBoxView);
 
 			var timeClockImage = new Image () {
-				WidthRequest = 21,
-				HeightRequest = 21,
+				WidthRequest = 40,
+				HeightRequest = 40,
 				Source = ImageLoader.Instance.GetImage(AppResources.EventClockImage, true)
 			};
 			timeLayout.Children.Add (timeClockImage, new Point(2, 2));
@@ -138,13 +149,13 @@ namespace Conarh_2016.Application.UI.Events
 			_timeLabel = new Label () 
 			{
 				FontAttributes = FontAttributes.Bold,
-				FontSize = 11,
+				FontSize = 12,
 				TextColor = Color.White,
-				XAlign = TextAlignment.Start,
-				WidthRequest = 100,
-				HeightRequest = 20
+                HorizontalTextAlignment = TextAlignment.Start,
+				WidthRequest = 800,
+				HeightRequest = 40
 			};
-			timeLayout.Children.Add (_timeLabel, new Point(30, 5));
+			timeLayout.Children.Add (_timeLabel, new Point(45, 10));
 
 			_favEventBoxView = new Button () {
 				WidthRequest = 35,

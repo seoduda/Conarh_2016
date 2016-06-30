@@ -54,23 +54,18 @@ namespace Conarh_2016.Application.UI.Main
             layout.Children.Add(GetMenuButton(MainMenuItemData.AgendaExpoPage));
             layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleGreen));
             layout.Children.Add(new Label { Text = "Evento", TextColor = AppResources.MenuTitleGreen, FontSize = 18 });
-            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, Color.White));
+            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleGreen));
 
             layout.Children.Add(GetMenuButton(MainMenuItemData.ExhibitorsPage));
             layout.Children.Add(GetMenuButton(MainMenuItemData.MapPage));
             layout.Children.Add(GetMenuButton(MainMenuItemData.WallPage));
+
+            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleGreen));
             var logoI9acao = new Image();
             logoI9acao.Source = ImageLoader.Instance.GetImage(AppResources.I9acaoLogo, false);
 
             layout.Children.Add(logoI9acao);
-
-            /*
-            if (AppModel.Instance.CurrentUser == null)
-                layout.Children.Add(GetMenuButton(MainMenuItemData.LoginPage));
-            else
-                AddLogout(layout);
-                */
-
+            
             AppModel.Instance.UserChanged += OnUserChanged;
 
             Content = layout;

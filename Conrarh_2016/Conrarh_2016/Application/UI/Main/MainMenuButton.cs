@@ -8,13 +8,15 @@ namespace Conarh_2016.Application.UI.Main
     public sealed class MainMenuItemData
     {
 #if __ANDROID__
-		public static MainMenuItemData AgendaPage = new MainMenuItemData(false, AppResources.Agenda, typeof(Events.AgendaGridPage), true, false);
+		
+        public static MainMenuItemData AgendaExpoPage = new MainMenuItemData(false, AppResourcesAgendaExpo., typeof(Events.AgendaExpoGridPage), true, false);
+        public static MainMenuItemData AgendaCongresso = new MainMenuItemData(false, AppResources.AgendaCongresso, typeof(Events.AgendaGridPage), true, false);
 		public static MainMenuItemData ConnectPage = new MainMenuItemData(true, AppResources.Connect, typeof(Connect.ConnectionGridPage), true, false);
 		public static MainMenuItemData ProfilePage = new MainMenuItemData(true, AppResources.Profile, typeof(Profile.ProfileGridPage), true, false);
 #else
 
         public static MainMenuItemData AgendaCongressoPage = new MainMenuItemData(false, AppResources.AgendaCongresso, typeof(Events.AgendaPage), false, false);
-        public static MainMenuItemData AgendaExpoPage = new MainMenuItemData(false, AppResources.AgendaExpo, typeof(Events.AgendaPage), false, false);
+        public static MainMenuItemData AgendaExpoPage = new MainMenuItemData(false, AppResources.AgendaExpo, typeof(Events.AgendaExpoPage), false, false);
         public static MainMenuItemData ConnectPage = new MainMenuItemData(true, AppResources.Connect, typeof(Connect.ConnectionPage), false, false);
         public static MainMenuItemData ProfilePage = new MainMenuItemData(true, AppResources.Profile, typeof(Profile.ProfilePage), false, false);
 

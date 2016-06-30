@@ -31,7 +31,17 @@ namespace Conarh_2016.Application.UI.Events
 		}
 	}
 
-	public sealed class AgendaPage : ShareContentPage
+    
+     public class AgendaExpoPage : AgendaPage
+    {
+        public AgendaExpoPage() : base()
+        {
+            base.SelectExpo();
+        }
+    }
+
+
+    public class AgendaPage : ShareContentPage
 	{
 		public bool IsFreeEventsOpened = false; 
 		private readonly ListView _eventListView;
@@ -145,6 +155,15 @@ namespace Conarh_2016.Application.UI.Events
 				_eventListView.ItemsSource = GetItemSource ();
 			}
 		}
-	}
+
+        public void SelectExpo()
+        {
+            if (!IsFreeEventsOpened)
+            {
+                IsFreeEventsOpened = true;
+                _eventListView.ItemsSource = GetItemSource();
+            }
+        }
+    }
 
 }
