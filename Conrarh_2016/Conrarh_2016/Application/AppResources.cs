@@ -33,7 +33,7 @@ namespace Conarh_2016.Application
         public static string AlreadySentRequestToError = "O usuário já lhe enviou um convite. Aguarde o pedido chegar!";
         public static string ContactListIsEmpty = "Você ainda não possui contatos!";
 
-        public static string Agenda = "Agenda";
+        public static string Agenda = "Eventos";
         public static string AgendaCongresso = "Agenda Congresso";
         public static string AgendaExpo = "Agenda Expo";
         public static string Exhibitors = "Expositores";
@@ -155,7 +155,9 @@ namespace Conarh_2016.Application
         public static Color AgendaPageBackgroundColor = Color.White;
         public static Color AgendaExpoColor = Color.FromHex("AAB9B8");
         public static Color AgendaCongressoColor = Color.FromHex("B8CA4F");
-        public static Color SpeecherBackColor = Color.FromHex("ddcd8d");
+        public static Color AgendaDataBGColor = Color.FromHex("E2EAB7");
+        public static Color SpeecherBgColor = Color.Transparent;
+        public static Color SpeecherTextColor = Color.FromHex("567675");
         public static Color ExhibitorNameTextColor = Color.FromHex("95a5a6");
         public static Color ExhibitorDescTextColor = Color.FromHex("0079c2");
         public static Color WallPostCreatedDateColor = Color.FromHex("d2b583");
@@ -197,14 +199,16 @@ namespace Conarh_2016.Application
         public static string EventDislikeNormalImage = "eventDislikeNormalImage.png";
 
         public static string LoginHeaderImage = "loginHeaderImage.png";
-        public static string LoginBGImage = "login_bg_image.png";
+        public static string LoginBgImage = "login_bg_image.png";
         public static string LoginBtLinkedin = "login_bt_linkedin";
         
 
         public static string LoginEmailImage = "loginEmailImage.png";
         public static string LoginPasswordImage = "loginPasswordImage.png";
 
+
         public static string SignUpHeaderImage = "signUpHeaderImage.png";
+        public static string SignUpBgImage = "signUpHeaderImage.png";
         public static string SignUpButtonImage = "signUpButtonImage.png";
 
         public static string SettingsImage = "settings.png";

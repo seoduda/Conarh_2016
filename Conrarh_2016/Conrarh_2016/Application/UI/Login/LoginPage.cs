@@ -13,7 +13,7 @@ namespace Conarh_2016.Application.UI.Login
         public LoginPage(string email, string password)
         {
             NavigationPage.SetHasNavigationBar(this, false);
-            this.BackgroundImage = AppResources.LoginBGImage;
+            //this.BackgroundImage = AppResources.LoginBgImage;
             
             Title = " ";
             LoginView loginView = new LoginView();

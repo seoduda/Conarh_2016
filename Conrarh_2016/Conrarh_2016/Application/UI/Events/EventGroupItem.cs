@@ -11,11 +11,11 @@ namespace Conarh_2016.Application.UI.Events
 		public EventGroupItem ()
 		{
 			_label = new Label
-			{ 
-				TextColor = Color.White, 
-				FontSize = 16,
-				XAlign = TextAlignment.Center,
-				YAlign = TextAlignment.Center,
+			{
+                TextColor = AppResources.MenuGreen,
+                FontSize = 16,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
 				FontAttributes = FontAttributes.Bold
 			};
 			_label.SetBinding (Label.TextProperty, EventsDynamicObservableData.SectionNamePropertyName);
@@ -23,7 +23,7 @@ namespace Conarh_2016.Application.UI.Events
 			var contentView = new ContentView {  
 				Content = _label, 
 				Padding = new Thickness(0, 10), 
-				BackgroundColor = AppResources.ConnectAcceptRequestColor
+				BackgroundColor = AppResources.AgendaDataBGColor
 			};
 
 			View = contentView;

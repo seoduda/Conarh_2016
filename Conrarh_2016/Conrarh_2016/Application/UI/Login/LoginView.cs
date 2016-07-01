@@ -21,7 +21,24 @@ namespace Conarh_2016.Application.UI.Login
         public LoginView() : base()
         {
             LeftBorder = AppProvider.Screen.ConvertPixelsToDp(20);
-            
+
+            RelativeLayout relatlay = new RelativeLayout
+            {
+                WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width)
+                // BackgroundColor =
+            };
+            Image bg = new Image()
+            {
+                Source = ImageLoader.Instance.GetImage(AppResources.LoginBgImage, false),
+                Aspect = Aspect.AspectFill
+            };
+
+            relatlay.Children.Add(bg,
+                Constraint.Constant(0),
+                Constraint.Constant(0),
+                Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                Constraint.RelativeToParent((parent) => { return parent.Height; }));
+
             var layout = new StackLayout { BackgroundColor = Color.Transparent };
 
             BoxView transpSpace = new BoxView();
@@ -51,12 +68,6 @@ namespace Conarh_2016.Application.UI.Login
             /** 
              * skipLoginBtn retirado e substituido por login Linkedin
              */
-            /*
-
-           Image loginLinkedInBtn = new Image();
-           loginLinkedInBtn.Source = ImageLoader.Instance.GetImage(AppResources.LoginBtLinkedin, false);
-           loginLinkedInBtn.HorizontalOptions = LayoutOptions.FillAndExpand;
-           */
             Image loginLinkedInBtn = new Image()
             {
                 Source = ImageLoader.Instance.GetImage(AppResources.LoginBtLinkedin, false),
@@ -143,8 +154,16 @@ namespace Conarh_2016.Application.UI.Login
 
             layout.Children.Add(new ContentView { HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height / 10), Padding = new Thickness(LeftBorder, 5, LeftBorder, 0), HorizontalOptions = LayoutOptions.Center, Content = bannerImage });
 
+            relatlay.Children.Add(layout,
+                Constraint.Constant(0),
+                Constraint.Constant(0),
+                Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                Constraint.RelativeToParent((parent) => { return parent.Height; }));
 
-            Content = new ScrollView { Content = layout };
+
+
+            //Content = new ScrollView { Content = layout };
+            Content = new ScrollView { Content = relatlay };
         }
 
         private void OnBannerClicked(object sender, EventArgs e)

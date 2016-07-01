@@ -16,11 +16,27 @@ namespace Conarh_2016.Application.UI.Events
 		{
 			Model = model;
 			Title = "";
+            RelativeLayout relatlay = new RelativeLayout
+            {
+                WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width)
+                            };
+            Image bg = new Image()
+            {
+                Source = ImageLoader.Instance.GetImage(AppResources.LoginBgImage, false),
+                Aspect = Aspect.AspectFill
+            };
 
-			var topItemLayout = new StackLayout { Padding = new Thickness (0, 5, 0, 5), BackgroundColor = AppResources.SpeecherBackColor};
+            relatlay.Children.Add(bg,
+                Constraint.Constant(0),
+                Constraint.Constant(0),
+                Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                Constraint.RelativeToParent((parent) => { return parent.Height; }));
+
+
+            var topItemLayout = new StackLayout { Padding = new Thickness (0, 5, 0, 5), BackgroundColor = AppResources.SpeecherBgColor};
 			topItemLayout.Children.Add (GetBoxWithHeader (AppResources.EventsActionHeader, 25, 17));
 
-			var layout = new StackLayout {BackgroundColor= AppResources.SpeecherBackColor};
+			var layout = new StackLayout {BackgroundColor= AppResources.SpeecherBgColor};
 			layout.Children.Add (topItemLayout);
 
 			AddLikedItemView (Model.Items[0], layout);
@@ -63,7 +79,7 @@ namespace Conarh_2016.Application.UI.Events
 		{
 			var bottomItemLayout = new StackLayout { 
 				Padding = new Thickness (0, 0, 0, 20), 
-				BackgroundColor = AppResources.SpeecherBackColor
+				BackgroundColor = AppResources.SpeecherBgColor
 			};
 
 			_questionItem = new EditorControl(AppResources.EventsQuestionDefaultAnswer) {

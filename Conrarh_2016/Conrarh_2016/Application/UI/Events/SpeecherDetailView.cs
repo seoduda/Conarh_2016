@@ -37,13 +37,13 @@ namespace Conarh_2016.Application.UI.Events
 			absoluteLayout.Children.Add (new BoxView {
 				WidthRequest = AppProvider.Screen.Width,
 				HeightRequest = SecondItemHeight,
-				BackgroundColor = AppResources.SpeecherBackColor
+				BackgroundColor = AppResources.SpeecherBgColor
 			}, new Point(0, FirstItemHeight));
 
 			absoluteLayout.Children.Add (new Label {
 				FontSize = 80,
 				Text = AppResources.BioHeader,
-				TextColor = AppResources.SpeecherBackColor
+				TextColor = AppResources.SpeecherTextColor
 			}, new Point(125, 46));
 
 			_speecherImage = new DownloadedImage (AppResources.DefaultUserImage) {

@@ -69,10 +69,9 @@ namespace Conarh_2016.Application.UI.Events
 				HasUnevenRows = true,
 				IsGroupingEnabled = true,
 				GroupHeaderTemplate = new DataTemplate (typeof(EventGroupItem)),
-				BackgroundColor = AppResources.AgendaPageBackgroundColor,
+				BackgroundColor = Color.Transparent,
 				SeparatorVisibility = SeparatorVisibility.None,
 				ItemTemplate = new DataTemplate (typeof (EventCell)),
-
 				RefreshCommand = _wrapper.RefreshCommand,
 				IsPullToRefreshEnabled = true,
 				ItemsSource = GetItemSource(),
@@ -116,8 +115,8 @@ namespace Conarh_2016.Application.UI.Events
 				BorderRadius = 0,
 				Text = title.ToUpper(),
 				BackgroundColor = color,
-				TextColor = Color.White,
-				FontSize = 15,
+                TextColor = Color.White,
+                FontSize = 15,
 			};
 			btn.Clicked += handler;
 

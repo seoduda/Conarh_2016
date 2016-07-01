@@ -61,7 +61,21 @@ namespace Conarh_2016.Application.UI.Main
             layout.Children.Add(GetMenuButton(MainMenuItemData.WallPage));
 
             layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleGreen));
-            var logoI9acao = new Image();
+            BoxView trasnpSpace = new BoxView()
+            {
+                BackgroundColor = Color.Transparent,
+                WidthRequest = 1,
+                HeightRequest = 50
+
+            };
+            
+            layout.Children.Add(trasnpSpace);
+            var logoI9acao = new Image()
+            {
+                HeightRequest = 100,
+                HorizontalOptions = LayoutOptions.End,
+                
+            };
             logoI9acao.Source = ImageLoader.Instance.GetImage(AppResources.I9acaoLogo, false);
 
             layout.Children.Add(logoI9acao);

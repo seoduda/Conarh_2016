@@ -157,6 +157,7 @@
     <Compile Include="Application\UI\Shared\InputFieldView.cs" />
     <Compile Include="Application\UI\Shared\SearchBarView.cs" />
     <Compile Include="Application\UI\Shared\ShareContentPage.cs" />
+    <Compile Include="Application\UI\Shared\SponsorBannerView.cs" />
     <Compile Include="Application\UI\Shared\UserCell.cs" />
     <Compile Include="Application\UI\Shared\UserHeaderView.cs" />
     <Compile Include="Application\UI\Wall\WallCreatePostPage.cs" />

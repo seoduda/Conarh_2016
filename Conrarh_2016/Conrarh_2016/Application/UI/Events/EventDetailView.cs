@@ -1,134 +1,174 @@
-﻿using System;
-using Xamarin.Forms;
-using Conarh_2016.Core;
-using Conarh_2016.Application.Domain;
+﻿using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.UI.Controls;
+using Conarh_2016.Core;
+using Conrarh_2016.Application.UI.Shared;
+using System;
+using Xamarin.Forms;
 
 namespace Conarh_2016.Application.UI.Events
 {
-	public sealed class EventDetailView: ContentPage
-	{
-		public readonly EventData Data;
+    public sealed class EventDetailView : ContentPage
+    {
+        public readonly EventData Data;
 
-		public EventDetailView(EventData data)
-		{
-			Data = data;
+        public EventDetailView(EventData data)
+        {
+            Data = data;
 
-			Title = AppResources.EventDetailsHeader.ToUpper();
-			BackgroundColor = AppResources.AgendaPageBackgroundColor;
+            Title = AppResources.EventDetailsHeader.ToUpper();
+            BackgroundColor = AppResources.AgendaPageBackgroundColor;
+            RelativeLayout relatlay = new RelativeLayout
+            {
+                WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width)
+                // BackgroundColor =
+            };
+            Image bg = new Image()
+            {
+                Source = ImageLoader.Instance.GetImage(AppResources.LoginBgImage, false),
+                Aspect= Aspect.AspectFill
+            };
 
-			StackLayout layout = new StackLayout () { VerticalOptions = LayoutOptions.StartAndExpand };
+            relatlay.Children.Add(bg,
+                Constraint.Constant(0),
+                Constraint.Constant(0),
+                Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                Constraint.RelativeToParent((parent) => { return parent.Height; }));
 
-			EventView eventView = new EventView ();
-			eventView.BindingContext = Data;
-			layout.Children.Add (eventView);
+            StackLayout layout = new StackLayout() { VerticalOptions = LayoutOptions.StartAndExpand };
 
-			if (!Data.FreeAttending && (!string.IsNullOrEmpty(Data.PointsImagePath) || !string.IsNullOrEmpty(Data.SponsorImagePath)) )
-			{
-				var whiteBoxLayout = new AbsoluteLayout { Padding = new Thickness (0, -10, 0, 0) };
-				whiteBoxLayout.Children.Add (new BoxView {
-					WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width),
-					HeightRequest = 60,
-					BackgroundColor = Color.White,
-				});
+            EventView eventView = new EventView();
+            eventView.BindingContext = Data;
+            layout.Children.Add(eventView);
 
-				var imagesStackLayout = new StackLayout { Orientation = StackOrientation.Horizontal,
-					WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width),
-					Spacing = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width) - 60 * 2,
-					Padding = new Thickness(5)
-				};
+            if (!Data.FreeAttending && (!string.IsNullOrEmpty(Data.PointsImagePath) || !string.IsNullOrEmpty(Data.SponsorImagePath)))
+            {
+                var whiteBoxLayout = new AbsoluteLayout { Padding = new Thickness(0, -10, 0, 0) };
+                whiteBoxLayout.Children.Add(new BoxView
+                {
+                    WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width),
+                    HeightRequest = 60,
+                    BackgroundColor = Color.Transparent
+                });
 
-				if (!string.IsNullOrEmpty (Data.PointsImagePath)) {
-					var pointsImage = new DownloadedImage (AppResources.DefaultPointsImage) { HeightRequest = 50 };
-					pointsImage.UpdateAtTime = Data.UpdatedAtTime;
-					pointsImage.ServerImagePath = Data.PointsImagePath;
-					imagesStackLayout.Children.Add (pointsImage);
-				}
+                var imagesStackLayout = new StackLayout
+                {
+                    Orientation = StackOrientation.Horizontal,
+                    WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width),
+                    Spacing = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width) - 60 * 2,
+                    Padding = new Thickness(5)
+                };
 
-				if (!string.IsNullOrEmpty (Data.SponsorImagePath)) {
-					var sponsorImage = new DownloadedImage (AppResources.DefaultSponsorImage) { HeightRequest = 50 };
-					sponsorImage.UpdateAtTime = Data.UpdatedAtTime;
-					sponsorImage.ServerImagePath = Data.SponsorImagePath;
-					imagesStackLayout.Children.Add (sponsorImage);
-				}
+                if (!string.IsNullOrEmpty(Data.PointsImagePath))
+                {
+                    var pointsImage = new DownloadedImage(AppResources.DefaultPointsImage) { HeightRequest = 50 };
+                    pointsImage.UpdateAtTime = Data.UpdatedAtTime;
+                    pointsImage.ServerImagePath = Data.PointsImagePath;
+                    imagesStackLayout.Children.Add(pointsImage);
+                }
 
-				whiteBoxLayout.Children.Add (imagesStackLayout);
-				layout.Children.Add (whiteBoxLayout);
-			}
+                if (!string.IsNullOrEmpty(Data.SponsorImagePath))
+                {
+                    var sponsorImage = new DownloadedImage(AppResources.DefaultSponsorImage) { HeightRequest = 50 };
+                    sponsorImage.UpdateAtTime = Data.UpdatedAtTime;
+                    sponsorImage.ServerImagePath = Data.SponsorImagePath;
+                    imagesStackLayout.Children.Add(sponsorImage);
+                }
 
-			var descriptionContent = new ContentView () {
-				Content = new Label {
-					FontSize = 11,
-					TextColor = Color.Black,
-					Text = Data.Description
-				},
-				Padding = new Thickness (10, 10, 0, 0)
-			};
-			layout.Children.Add (descriptionContent);
+                whiteBoxLayout.Children.Add(imagesStackLayout);
+                layout.Children.Add(whiteBoxLayout);
+            }
 
-			foreach (Speaker speecherData in Data.Speechers)
-			{
-				layout.Children.Add (GetSpeecherItem(speecherData));
-			}
+            var descriptionContent = new ContentView()
+            {
+                Content = new Label
+                {
+                    FontSize = 11,
+                    TextColor = Color.Black,
+                    Text = Data.Description
+                },
+                Padding = new Thickness(10, 10, 0, 0)
+            };
+            layout.Children.Add(descriptionContent);
 
-			if (!Data.FreeAttending) 
-			{
-				var absoluteBtnLayout = new AbsoluteLayout { HorizontalOptions = LayoutOptions.Center,
-					Padding = new Thickness(0, 0, 0, 20)};
+            foreach (Speaker speecherData in Data.Speechers)
+            {
+                layout.Children.Add(GetSpeecherItem(speecherData));
+            }
 
-				var eventsActionBtn = new Button { 
-					BorderRadius = 25,
-					HeightRequest = 50,
-					WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width / 2),
-					BackgroundColor = Data.BackgroundColorNonOpacity
-				};
-				absoluteBtnLayout.Children.Add (eventsActionBtn);
+            if (!Data.FreeAttending)
+            {
+                var absoluteBtnLayout = new AbsoluteLayout
+                {
+                    HorizontalOptions = LayoutOptions.Center,
+                    Padding = new Thickness(0, 0, 0, 20)
+                };
 
-				var btnLabel = new Label { 
-					WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width / 2) - 50,
-					Text = AppResources.EventsActionBtnHeader,
-					TextColor = AppResources.SpeecherBackColor,
-					FontSize = 15
-				};
-				absoluteBtnLayout.Children.Add (btnLabel, new Point(50, 6));
+                var eventsActionBtn = new Button
+                {
+                    //BorderRadius = 25,
+                    BorderColor = AppResources.SpeecherTextColor,
+                    BorderWidth = 1,
+                    HeightRequest = 40,
+                    WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width*3)/4),
+                    BackgroundColor = AppResources.SpeecherBgColor
+                };
+                absoluteBtnLayout.Children.Add(eventsActionBtn);
 
-				var btnIcon = new Image { 
-					Source =  ImageLoader.Instance.GetImage(AppResources.EventButtonActionImage, true),
-					HeightRequest = 40
-				};
-				absoluteBtnLayout.Children.Add (btnIcon, new Point(20, 6));
+                var btnLabel = new Label
+                {
+                    WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width * 3) / 4) - 20,
+                    Text = AppResources.EventsActionBtnHeader,
+                    TextColor = AppResources.SpeecherTextColor,
+                    FontSize = 15
+                };
+                absoluteBtnLayout.Children.Add(btnLabel, new Point(50, 6));
 
-				if (Device.OS == TargetPlatform.iOS) {
-					TapGestureRecognizer gesture = new TapGestureRecognizer ();
-					gesture.Tapped += OnEventsActionsClicked;
-					absoluteBtnLayout.GestureRecognizers.Add (gesture);
-				}
-				else
-					eventsActionBtn.Clicked += OnEventsActionsClicked;
+                if (Device.OS == TargetPlatform.iOS)
+                {
+                    TapGestureRecognizer gesture = new TapGestureRecognizer();
+                    gesture.Tapped += OnEventsActionsClicked;
+                    absoluteBtnLayout.GestureRecognizers.Add(gesture);
+                }
+                else
+                    eventsActionBtn.Clicked += OnEventsActionsClicked;
 
-				layout.Children.Add (absoluteBtnLayout);
-			}
+                layout.Children.Add(absoluteBtnLayout);
+            }
+            relatlay.Children.Add(layout,
+                Constraint.Constant(0),
+                Constraint.Constant(0),
+                Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                Constraint.RelativeToParent((parent) => { return parent.Height; }));
 
-			Content = new ScrollView {Content = layout};
-		}
-			
-		private SpeecherView GetSpeecherItem(Speaker speecherData)
-		{
-			var item = new SpeecherView (speecherData, Data.BackgroundColorNonOpacity);
-			item.SelectItem += OnSpeecherSelected;
-			return item;
-		}
+            relatlay.Children.Add( new SponsorBannerView(),
+                Constraint.Constant(0),
+                Constraint.RelativeToParent((parent) => { return parent.Height - 60; }),
+                Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                Constraint.Constant(60)
+                );
 
-		private void OnEventsActionsClicked (object sender, EventArgs e)
-		{
-			Navigation.PushAsync (new EventActionsView (
-				new UserEventActionsModel(Data, AppModel.Instance.GetVoteDataByEvent(Data))));
-		}
 
-		private void OnSpeecherSelected (Speaker speecherData)
-		{
-			Navigation.PushAsync (new SpeecherDetailView (speecherData, Data.BackgroundColorNonOpacity));
-		}
-	}
+
+
+            Content = new ScrollView { Content = relatlay };
+        }
+
+        private SpeecherView GetSpeecherItem(Speaker speecherData)
+        {
+            var item = new SpeecherView(speecherData, Data.BackgroundColorNonOpacity);
+            item.SelectItem += OnSpeecherSelected;
+            return item;
+        }
+
+        private void OnEventsActionsClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new EventActionsView(
+                new UserEventActionsModel(Data, AppModel.Instance.GetVoteDataByEvent(Data))));
+        }
+
+        private void OnSpeecherSelected(Speaker speecherData)
+        {
+            Navigation.PushAsync(new SpeecherDetailView(speecherData, Data.BackgroundColorNonOpacity));
+        }
+    }
 }
-

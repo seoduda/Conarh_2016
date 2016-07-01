@@ -16,12 +16,12 @@ namespace Conarh_2016.Application.UI.Events
 		public SpeecherView (Speaker data, Color eventColor)
 		{
 			Data = data;
-			var absoluteLayout = new AbsoluteLayout {Padding = new Thickness(0, 5, 0, 5)};
+			var absoluteLayout = new AbsoluteLayout {Padding = new Thickness(10, 5, 0, 5)};
 
 			absoluteLayout.Children.Add (new BoxView {
 				WidthRequest = AppProvider.Screen.Width,
 				HeightRequest = ItemHeight,
-				BackgroundColor = AppResources.SpeecherBackColor
+				BackgroundColor = AppResources.SpeecherBgColor
 			});
 
 			absoluteLayout.Children.Add (new BoxView {
@@ -40,19 +40,19 @@ namespace Conarh_2016.Application.UI.Events
 			absoluteLayout.Children.Add (speecherImage, new Point(10, 0));
 
 			absoluteLayout.Children.Add (new Label {
-				FontSize = 10,
-				XAlign = TextAlignment.Start,
+				FontSize = 12,
+				HorizontalTextAlignment = TextAlignment.Start,
 				Text = AppResources.Speakers.ToUpper(),
-				TextColor = eventColor
-			}, new Point(85, 10));
+				TextColor = AppResources.SpeecherTextColor
+            }, new Point(85, 10));
 					
 			absoluteLayout.Children.Add (new Label () {
 				FontAttributes = FontAttributes.Bold,
 				FontSize = 14,
-				XAlign = TextAlignment.Start,
+                HorizontalTextAlignment = TextAlignment.Start,
 				Text = Data.Name,
-				TextColor = eventColor
-			}, new Point(85, 30));
+				TextColor = AppResources.SpeecherTextColor
+            }, new Point(85, 30));
 
 
 			Content = absoluteLayout;

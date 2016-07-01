@@ -5,22 +5,27 @@ using Xamarin.Forms;
 
 namespace Conarh_2016.Application.UI.Main
 {
+/* retirado do if andoid
+    public static MainMenuItemData AgendaExpoPage = new MainMenuItemData(false, AppResources.AgendaExpo, typeof(Events.AgendaExpoGridPage), true, false);
+    public static MainMenuItemData AgendaCongresso = new MainMenuItemData(false, AppResources.AgendaCongresso, typeof(Events.AgendaGridPage), true, false);
+    */
+
     public sealed class MainMenuItemData
     {
-#if __ANDROID__
-		
-        public static MainMenuItemData AgendaExpoPage = new MainMenuItemData(false, AppResourcesAgendaExpo., typeof(Events.AgendaExpoGridPage), true, false);
-        public static MainMenuItemData AgendaCongresso = new MainMenuItemData(false, AppResources.AgendaCongresso, typeof(Events.AgendaGridPage), true, false);
-		public static MainMenuItemData ConnectPage = new MainMenuItemData(true, AppResources.Connect, typeof(Connect.ConnectionGridPage), true, false);
-		public static MainMenuItemData ProfilePage = new MainMenuItemData(true, AppResources.Profile, typeof(Profile.ProfileGridPage), true, false);
-#else
+        
+      #if __ANDROID__
+        
+              public static MainMenuItemData ConnectPage = new MainMenuItemData(true, AppResources.Connect, typeof(Connect.ConnectionGridPage), true, false);
+              public static MainMenuItemData ProfilePage = new MainMenuItemData(true, AppResources.Profile, typeof(Profile.ProfileGridPage), true, false);
+      #else
 
-        public static MainMenuItemData AgendaCongressoPage = new MainMenuItemData(false, AppResources.AgendaCongresso, typeof(Events.AgendaPage), false, false);
-        public static MainMenuItemData AgendaExpoPage = new MainMenuItemData(false, AppResources.AgendaExpo, typeof(Events.AgendaExpoPage), false, false);
-        public static MainMenuItemData ConnectPage = new MainMenuItemData(true, AppResources.Connect, typeof(Connect.ConnectionPage), false, false);
-        public static MainMenuItemData ProfilePage = new MainMenuItemData(true, AppResources.Profile, typeof(Profile.ProfilePage), false, false);
+              public static MainMenuItemData ConnectPage = new MainMenuItemData(true, AppResources.Connect, typeof(Connect.ConnectionPage), false, false);
+              public static MainMenuItemData ProfilePage = new MainMenuItemData(true, AppResources.Profile, typeof(Profile.ProfilePage), false, false);
 
 #endif
+        public static MainMenuItemData AgendaCongressoPage = new MainMenuItemData(false, AppResources.AgendaCongresso, typeof(Events.AgendaPage), false, false);
+        public static MainMenuItemData AgendaExpoPage = new MainMenuItemData(false, AppResources.AgendaExpo, typeof(Events.AgendaExpoPage), false, false);
+
         public static MainMenuItemData ExhibitorsPage = new MainMenuItemData(false, AppResources.Exhibitors, typeof(Exhibitors.ExhibitorsDynamicPage), false, false);
         public static MainMenuItemData MapPage = new MainMenuItemData(false, AppResources.Map, typeof(Map.MapPage), false, false);
         public static MainMenuItemData WallPage = new MainMenuItemData(false, AppResources.Wall, typeof(Wall.WallPage), false, false);
