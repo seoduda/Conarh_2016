@@ -82,7 +82,12 @@
       <HintPath>..\..\packages\Xamarin.Forms.2.2.0.45\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Android.Export" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PushNotification.Plugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugin.PushNotification.1.2.2\lib\MonoAndroid10\PushNotification.Plugin.dll</HintPath>
       <Private>True</Private>
@@ -108,6 +113,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Json" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
@@ -141,6 +147,10 @@
     </Reference>
     <Reference Include="Xamarin.Android.Support.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Auth, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Auth.1.3.0\lib\MonoAndroid10\Xamarin.Auth.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -211,6 +221,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ImageServiceAndroid.cs" />
     <Compile Include="Services\IOManager.cs" />
+    <Compile Include="Services\LinkedinLogin.cs" />
     <Compile Include="Services\Log.cs" />
     <Compile Include="Services\ShareServiceAndroid.cs" />
     <Compile Include="SplashActivity.cs" />
@@ -313,6 +324,11 @@
     <AndroidResource Include="Resources\drawable\i9acao_logo.png" />
     <AndroidResource Include="Resources\drawable\login_bt_linkedin.png" />
     <AndroidResource Include="Resources\drawable\healthways.png" />
+    <AndroidResource Include="Resources\drawable\signupBgImage.png" />
+    <AndroidResource Include="Resources\drawable\defaultBgImage.png" />
+    <AndroidResource Include="Resources\drawable\editBtImage.png" />
+    <AndroidResource Include="Resources\drawable\levelProgressBarImageLabel.png" />
+    <AndroidResource Include="Resources\drawable\InteractBgImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

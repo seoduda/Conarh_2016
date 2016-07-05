@@ -11,7 +11,7 @@ namespace Conarh_2016.Droid.UI
 	{
 		protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			if (Control != null)
+            if (Control != null)
 			{
 				Control.Settings.BuiltInZoomControls = true;
 				Control.Settings.DisplayZoomControls = true;

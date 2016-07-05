@@ -38,6 +38,7 @@ namespace Conarh_2016.Droid
             AppProvider.ShareService = new ShareServiceAndroid();
             AppProvider.ImageService = new ImageServiceAndroid();
             AppProvider.ImageCache = new ImageLoaderCache();
+            AppProvider.LinkedinLogin = new LinkedinLogin();
             AppProvider.FastCellCache = FastCellCache.Instance;
             AppProvider.Initialize();
 
@@ -55,6 +56,7 @@ namespace Conarh_2016.Droid
             ActionBar.SetIcon(new ColorDrawable(global::Android.Graphics.Color.Transparent));
 
             DbClient.Instance.Initialize(new SQLitePlatformAndroid());
+
             AppController.Instance.Start();
         }
 

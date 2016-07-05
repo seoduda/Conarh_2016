@@ -27,16 +27,19 @@ namespace Conarh_2016.Application.Domain
 			get;
 		}
 
-		public new static class JsonKeys
+
+        public new static class JsonKeys
 		{
 			public const string Title = "title";
 			public const string Color = "color";
 			public const string Type = "type";
-		}
+        }
 
 		public override string ToString ()
 		{
 			return string.Format ("[SponsorType] [ Id: {0} Title: {1}]", Id, Title);
 		}
-	}
+
+      
+    }
 }

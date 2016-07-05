@@ -4,6 +4,9 @@ using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.UI.Shared;
 using Conarh_2016.Application.Wrappers;
 using Conarh_2016.Core;
+using Conrarh_2016.Application.UI.Shared;
+using Conrarh_2016.Core.DataAccess.Local;
+using System.Threading;
 
 namespace Conarh_2016.Application.UI.Exhibitors
 {
@@ -75,14 +78,23 @@ namespace Conarh_2016.Application.UI.Exhibitors
 		{
 			base.OnAppearing ();
 
+            /*
 			var searchBarView = new SearchBarView ();
 			searchBarView.Clear += OnSearchClear;
 			searchBarView.Search += OnSearch;
+            */
 
 			_listWrapper = new ExhibitorsListWrapper ();
 
-			ExhibitorsWrapper =  AppModel.Instance.ExhibitorsWrapper;
-			_groupListView = new ListView {
+            ExhibitorsWrapper =  AppModel.Instance.ExhibitorsWrapper;
+            /*
+            if (ExhibitorsWrapper == null)
+            {
+                AppModel.Instance.SponsorTypes.UpdateData(LocalData.getLocalSponsorList());
+                AppModel.Instance.Exhibitors.UpdateData(LocalData.getLocalExhibitorList());
+                ExhibitorsWrapper = new ExhibitorsDataWrapper(AppModel.Instance.SponsorTypes, AppModel.Instance.Exhibitors, false);
+            }*/
+            _groupListView = new ListView {
 				HasUnevenRows = false,
 				RowHeight = 60,
 				IsGroupingEnabled = true,
@@ -97,13 +109,23 @@ namespace Conarh_2016.Application.UI.Exhibitors
 			};
 			_groupListView.SetBinding<ExhibitorsListWrapper> (ListView.IsRefreshingProperty, vm => vm.IsBusy, BindingMode.OneWay);
 
-			Content = new StackLayout { 
-				Padding = new Thickness (20),
-				Children = {searchBarView, _groupListView}
-			};
+            var layout = new StackLayout
+            {
+                Padding = new Thickness(20),
+                Children = { _groupListView }
+                //Children = {searchBarView, _groupListView}
+            };
+
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, false, true);
+
+            Content =  bgLayout ;
 
 			_groupListView.BeginRefresh ();
-		}
+
+            
+
+            _groupListView.BeginRefresh();
+        }
 
 		void OnSearch (string pattern)
 		{

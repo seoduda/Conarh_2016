@@ -12,7 +12,7 @@ namespace Conarh_2016.Application.UI.Main
         {
             Icon = AppResources.SettingsImage;
             Title = "menu"; // The Title property must be set.
-            BackgroundColor = AppResources.MenuGreen;
+            BackgroundColor = AppResources.MenuColor;
 
             var layout = new StackLayout
             {
@@ -36,31 +36,31 @@ namespace Conarh_2016.Application.UI.Main
                     }
                 });
             }
-            var label1 = new Label { Text = "Minha Conta", TextColor = AppResources.MenuTitleGreen, FontSize = 18 };
+            var label1 = new Label { Text = "Minha Conta", TextColor = AppResources.MenuTitleTextColor, FontSize = 18 };
 
-            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleGreen));
+            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
             layout.Children.Add(label1);
-            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleGreen));
+            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
             layout.Children.Add(GetMenuButton(MainMenuItemData.ProfilePage));
             layout.Children.Add(GetMenuButton(MainMenuItemData.ConnectPage));
             if (AppModel.Instance.CurrentUser == null)
                 layout.Children.Add(GetMenuButton(MainMenuItemData.LoginPage));
             else
                 AddLogout(layout);
-            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleGreen));
-            layout.Children.Add(new Label { Text = "Agendas", TextColor = AppResources.MenuTitleGreen, FontSize = 18 });
-            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleGreen));
+            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
+            layout.Children.Add(new Label { Text = "Agendas", TextColor = AppResources.MenuTitleTextColor, FontSize = 18 });
+            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
             layout.Children.Add(GetMenuButton(MainMenuItemData.AgendaCongressoPage));
             layout.Children.Add(GetMenuButton(MainMenuItemData.AgendaExpoPage));
-            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleGreen));
-            layout.Children.Add(new Label { Text = "Evento", TextColor = AppResources.MenuTitleGreen, FontSize = 18 });
-            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleGreen));
+            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
+            layout.Children.Add(new Label { Text = "Evento", TextColor = AppResources.MenuTitleTextColor, FontSize = 18 });
+            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
 
             layout.Children.Add(GetMenuButton(MainMenuItemData.ExhibitorsPage));
             layout.Children.Add(GetMenuButton(MainMenuItemData.MapPage));
             layout.Children.Add(GetMenuButton(MainMenuItemData.WallPage));
 
-            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleGreen));
+            layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
             BoxView trasnpSpace = new BoxView()
             {
                 BackgroundColor = Color.Transparent,

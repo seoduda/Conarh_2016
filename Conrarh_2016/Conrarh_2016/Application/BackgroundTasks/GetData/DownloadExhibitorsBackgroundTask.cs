@@ -1,8 +1,6 @@
 ﻿using Conarh_2016.Application.DataAccess;
 using Conarh_2016.Application.Domain;
-using Conrarh_2016.Core.DataAccess;
-using KinveyXamarin;
-using System;
+using Conrarh_2016.Core.DataAccess.Local;
 using System.Collections.Generic;
 
 namespace Conarh_2016.Application.BackgroundTasks
@@ -20,10 +18,16 @@ namespace Conarh_2016.Application.BackgroundTasks
             DList = data;
         }
 
+
+        
         public override List<Exhibitor> Execute()
         {
+            /*
+            if (AppModel.Instance.SponsorTypes.Items.Count > 0)
+                return new List<SponsorType>();
+                */
             List<Exhibitor> result;
-            result = getKinveyExhibitors();
+            result = LocalData.getLocalExhibitorList();
             if (DList != null)
             {
                 DList.ClearData();
@@ -32,12 +36,17 @@ namespace Conarh_2016.Application.BackgroundTasks
                     DList.AddOne(xb);
                 }
                 //DList.UpdateData(result);
+
+                var x = AppModel.Instance.Exhibitors.Items.Count;
                 DbClient.Instance.SaveData<Exhibitor>(result).ConfigureAwait(false);
             }
 
             return result;
         }
 
+    
+
+/*
         private List<Exhibitor> getKinveyExhibitors()
         {
             List<Exhibitor> result = new List<Exhibitor>();
@@ -56,10 +65,11 @@ namespace Conarh_2016.Application.BackgroundTasks
             }
             catch (Exception e)
             {
-                //ops
+                AppProvider.Log.WriteLine(LogChannel.Exception, e.Message);
             }
 
             return result;
         }
+        */
     }
 }

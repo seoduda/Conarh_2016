@@ -65,8 +65,8 @@ namespace Conarh_2016.Application.UI.Events
 			layout.Children.Add(new Label {
 				Text = Data.Name,
 				FontSize = Data.UI_NameFontSize, 
-				TextColor = AppResources.AgendaCongressoColor
-			}, new Point(30, Data.UI_TextYPosition));
+				TextColor = AppResources.LikedItemTextColor
+			}, new Point(40, Data.UI_TextYPosition));
 
 			_likeImage = new Image  { 
 				Source = ImageLoader.Instance.GetImage(Data.LikeImage, true), 

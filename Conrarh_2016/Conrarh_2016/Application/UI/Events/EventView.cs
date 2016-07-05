@@ -17,7 +17,6 @@ namespace Conarh_2016.Application.UI.Events
         private Label _locationLabel;
         private StackLayout _nameLocationLayout;
 
-        //private Button _timeBoxView;
         private Label _timeLabel;
 
         private Button _favEventBoxView;
@@ -25,16 +24,6 @@ namespace Conarh_2016.Application.UI.Events
         public EventView()
         {
             BackgroundColor = Color.Transparent;
-
-            /*
-            _coloredBoxView = new BoxView()
-            {
-                BackgroundColor = Color.Yellow,
-                WidthRequest = 10,
-                HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height / 6),
-                Opacity = 0.9
-            };
-            */
 
             _eventImage = new Image
             {
@@ -79,18 +68,7 @@ namespace Conarh_2016.Application.UI.Events
                 Padding = new Thickness(8, 120, 0, 0),
             };
 
-            double hDiv6 = (AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height / 6));
-            /*
-            BoxView timeBox = new BoxView()
-            {
-                BackgroundColor = Color.Gray,
-                HeightRequest = hDiv6,
-                WidthRequest =  AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width / 3),
-                Opacity = 0.6,
-            };
-            */
-            //timeLayout.Children.Add (timeBox, new Point(0, hDiv6));
-            //timeLayout.Children.Add(timeBox, new Point(-10, -20));
+           // double hDiv6 = (AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height / 6));
 
             var timeClockImage = new Image()
             {

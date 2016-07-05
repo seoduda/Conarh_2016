@@ -8,7 +8,7 @@ namespace Conarh_2016.Application.UI.Shared
 {
     public sealed class UserHeaderView : ContentView
     {
-        private const int ImageHeight = 60;
+        private const int ImageHeight = 80;
 
         public readonly UserModel Model;
 
@@ -24,17 +24,25 @@ namespace Conarh_2016.Application.UI.Shared
                 Orientation = StackOrientation.Vertical
             };
 
-            var tappableHeaderLayout = new StackLayout { Orientation = StackOrientation.Vertical };
 
-            var topLayout = new StackLayout { Orientation = StackOrientation.Horizontal };
+            /**
+            Tirei o click do header inteiro e passei para o btEdit
+            var tappableHeaderLayout = new StackLayout { Orientation = StackOrientation.Vertical };
+            */
+
+            var headerLayout = new StackLayout { Orientation = StackOrientation.Vertical };
+
+            var topLayout = new StackLayout { Orientation = StackOrientation.Horizontal, Padding = new  Thickness (20, 5, 5, 0) };
+
 
             var photoLayout = new AbsoluteLayout { };
             photoLayout.Children.Add(new BoxView
             {
                 WidthRequest = 10,
                 HeightRequest = ImageHeight,
-                Color = AppResources.AgendaExpoColor
+                Color = AppResources.MenuColor
             });
+
 
             var userImage = new DownloadedImage(AppResources.DefaultUserImage)
             {
@@ -49,84 +57,141 @@ namespace Conarh_2016.Application.UI.Shared
             topLayout.Children.Add(photoLayout);
 
             var namesLayout = new StackLayout { Orientation = StackOrientation.Vertical, Padding = new Thickness(10, 10) };
-            var nameLabel = new Label { TextColor = Color.White, FontSize = 17 };
+            var nameLabel = new Label { TextColor = AppResources.UserHeaderNameTextColor, FontSize = 17 };
             nameLabel.SetBinding(Label.TextProperty, User.NamePropertyName);
 
-            var jobLabel = new Label { TextColor = Color.White, FontSize = 13 };
+            var jobLabel = new Label { TextColor = AppResources.UserHeaderJobTextColor, FontSize = 14 };
             jobLabel.SetBinding(Label.TextProperty, User.JobPropertyName);
 
             namesLayout.Children.Add(nameLabel);
             namesLayout.Children.Add(jobLabel);
 
             topLayout.Children.Add(namesLayout);
-            tappableHeaderLayout.Children.Add(topLayout);
+            Image btEdit = new Image()
+            {
+                Source = ImageLoader.Instance.GetImage(AppResources.DefaultBtEdit, false),
+                HeightRequest = ImageHeight/2,
+                WidthRequest = ImageHeight/2,
+            };
+
+            TapGestureRecognizer tapRecognizer = new TapGestureRecognizer();
+            tapRecognizer.Tapped += OnEditUserTapped;
+
+            btEdit.GestureRecognizers.Add(tapRecognizer);
+
+
+
+            topLayout.Children.Add(btEdit);
+
+            headerLayout.Children.Add(topLayout);
 
             if (showContacts)
             {
                 var middleLayout = new StackLayout { Orientation = StackOrientation.Vertical, Padding = new Thickness(10, 10) };
                 var contactsHeaderLabel = new Label
                 {
-                    TextColor = AppResources.ProfileContactsHeaderColor,
+                    //TextColor = AppResources.ProfileContactsHeaderColor,
+                    TextColor = Color.Purple,
                     Text = AppResources.ProfileContactsHeader,
                     FontSize = 14
                 };
                 middleLayout.Children.Add(contactsHeaderLabel);
 
-                var userEmailLabel = new Label { TextColor = Color.White, FontSize = 13 };
+                var userEmailLabel = new Label { TextColor = AppResources.UserHeaderNameTextColor, FontSize = 14 };
                 userEmailLabel.SetBinding(Label.TextProperty, User.EmailPropertyName);
                 middleLayout.Children.Add(userEmailLabel);
 
-                var userCellphoneLabel = new Label { TextColor = Color.White, FontSize = 16 };
+                var userCellphoneLabel = new Label { TextColor = AppResources.UserHeaderNameTextColor, FontSize = 14 };
                 userCellphoneLabel.SetBinding(Label.TextProperty, User.PhonePropertyName);
                 middleLayout.Children.Add(userCellphoneLabel);
 
-                tappableHeaderLayout.Children.Add(middleLayout);
+                headerLayout.Children.Add(middleLayout);
             }
 
-            TapGestureRecognizer tapRecognizer = new TapGestureRecognizer();
-            tapRecognizer.Tapped += OnEditUserTapped;
+            stackLayout.Children.Add(headerLayout);
 
-            tappableHeaderLayout.GestureRecognizers.Add(tapRecognizer);
 
-            stackLayout.Children.Add(tappableHeaderLayout);
+            /* Implementação com Progressbar */
 
-            stackLayout.Children.Add(new BoxView
+            var pointsLayout = new AbsoluteLayout
             {
-                WidthRequest = AppProvider.Screen.Width,
-                HeightRequest = 1,
-                Color = Color.Gray
-            });
-
-            var pointsLayout = new StackLayout
-            {
-                Padding = new Thickness(30, 5),
-                Spacing = 20,
-                Orientation = StackOrientation.Horizontal
+                Padding = new Thickness(10, 5),
             };
+            int pgImagelabelHeigth = 69;
+            int pointsCountBoxHeigth = 51;
+            int boxYpos = pgImagelabelHeigth - (pointsCountBoxHeigth / 3);
 
             var pointsCountLabel = new Label
             {
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
                 TextColor = AppResources.ProfilePointsColor,
-                FontSize = 25,
-                FontAttributes = FontAttributes.Bold,
-                YAlign = TextAlignment.Center
+                FontSize = 18,
+                //FontAttributes = FontAttributes.Bold,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Start,
+                HeightRequest = pointsCountBoxHeigth - 12,
+                WidthRequest = pointsCountBoxHeigth - 2,
             };
-            pointsCountLabel.SetBinding(Label.TextProperty, User.ScorePointsPropertyName);
+            
+            //pointsCountLabel.SetBinding(Label.TextProperty, User.ScorePointsPropertyName);
+            pointsCountLabel.SetBinding(Label.TextProperty, User.ScorePointsProperty);
 
-            pointsLayout.Children.Add(pointsCountLabel);
+            var pointsCountText = new Label
+            {
+                Text = AppResources.ProfilePointsLabelText,
+                TextColor = AppResources.ProfilePointsColor,
+                FontSize = 9,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Start,
+                //HeightRequest = 10,
+                WidthRequest = pointsCountBoxHeigth - 2,
+            };
 
-            var pointsImage = new Image { HeightRequest = 70 };
-            pointsImage.SetBinding(Image.SourceProperty, User.LevelImagePathPropertyName);
-            pointsLayout.Children.Add(pointsImage);
+            var pointsCountBox = new Button
+            {
+                BackgroundColor = AppResources.UserHeaderNameTextColor,
+                IsEnabled = false,
+                BorderRadius = 25,
+                HeightRequest = pointsCountBoxHeigth,
+                WidthRequest = pointsCountBoxHeigth
+            };
+            pointsLayout.Children.Add(pointsCountBox, new Point(0, boxYpos));
+            pointsLayout.Children.Add(pointsCountLabel, new Point(2, boxYpos + 8));
+            pointsLayout.Children.Add(pointsCountText, new Point(2, boxYpos + 30));
+
+            var progbar = new ProgressBar()
+            {
+                HeightRequest =17,
+                //BackgroundColor = AppResources.ProfilePointsColor,
+                WidthRequest = 300,
+                Progress = 0.3
+
+
+            };
+
+            Image progbarImageLabel = new Image()
+            {
+                Source = ImageLoader.Instance.GetImage(AppResources.ProfileLevelProgressBarImageLabel, false),
+                HeightRequest = pgImagelabelHeigth,
+                WidthRequest = 300,
+
+            };
+
+            pointsLayout.Children.Add(progbar, new Point(pointsCountBoxHeigth, pgImagelabelHeigth));
+            pointsLayout.Children.Add(progbarImageLabel, new Point(pointsCountBoxHeigth, 0));
+            // progbar.SetBinding(ProgressBar.ProgressProperty, User.ScorePointsProgressionProperty);
 
             stackLayout.Children.Add(pointsLayout);
 
+/*
             stackLayout.Children.Add(new BoxView
             {
                 WidthRequest = AppProvider.Screen.Width,
                 HeightRequest = 1,
                 Color = Color.Gray
             });
+
+    */
 
             Content = stackLayout;
 

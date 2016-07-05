@@ -6,14 +6,13 @@ namespace Conrarh_2016.Application.UI.Shared
 {
     internal class SponsorBannerView : ContentView
     {
-        private Image bannerImage;
         private const int ImageHeight = 60;
 
         public SponsorBannerView()
         {
             Image bannerImage = new Image();
             bannerImage.Source = ImageLoader.Instance.GetImage(AppResources.SponsorBanner, true);
-            bannerImage.Aspect = Aspect.AspectFill;
+            bannerImage.Aspect = Aspect.Fill;
             var bannerRecognizer = new TapGestureRecognizer();
             bannerRecognizer.Tapped += OnBannerClicked;
             bannerImage.GestureRecognizers.Add(bannerRecognizer);

@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using Conarh_2016.Core;
 using Conarh_2016.Application.UI.Shared;
+using Conrarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Events
 {
@@ -8,36 +9,23 @@ namespace Conarh_2016.Application.UI.Events
 	{
 		private EditorControl _questionItem;
 
-		const int EditorHeight = 100;
+		const int EditorHeight = 80;
 
 		private UserEventActionsModel Model;
 
 		public EventActionsView (UserEventActionsModel model)
 		{
 			Model = model;
-			Title = "";
-            RelativeLayout relatlay = new RelativeLayout
-            {
-                WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width)
-                            };
-            Image bg = new Image()
-            {
-                Source = ImageLoader.Instance.GetImage(AppResources.LoginBgImage, false),
-                Aspect = Aspect.AspectFill
-            };
-
-            relatlay.Children.Add(bg,
-                Constraint.Constant(0),
-                Constraint.Constant(0),
-                Constraint.RelativeToParent((parent) => { return parent.Width; }),
-                Constraint.RelativeToParent((parent) => { return parent.Height; }));
-
-
+			Title = AppResources.EventsActionHeader;
+            
+            /*
             var topItemLayout = new StackLayout { Padding = new Thickness (0, 5, 0, 5), BackgroundColor = AppResources.SpeecherBgColor};
 			topItemLayout.Children.Add (GetBoxWithHeader (AppResources.EventsActionHeader, 25, 17));
+            */
+
 
 			var layout = new StackLayout {BackgroundColor= AppResources.SpeecherBgColor};
-			layout.Children.Add (topItemLayout);
+			//layout.Children.Add (topItemLayout);
 
 			AddLikedItemView (Model.Items[0], layout);
 			AddLikedItemView (Model.Items[1], layout);
@@ -46,18 +34,21 @@ namespace Conarh_2016.Application.UI.Events
 				Content = new Label { 
 					Text = AppResources.Speakers, 
 					FontSize = 20,
-					TextColor = AppResources.AgendaCongressoColor
-				},
-				Padding = new Thickness(30, 10, 0, 0)
+					TextColor = AppResources.EventActionsTextColor
+                },
+				Padding = new Thickness(40, 10, 0, 0)
 			});
-			layout.Children.Add (GetSeparator(new Thickness(0, 14, 0, 0)));
+			layout.Children.Add (GetSeparator(new Thickness(0, 8, 0, 0)));
 
 			for(int i = 2; i < Model.Items.Count; i++)
 				AddLikedItemView (Model.Items[i], layout);
 
 			layout.Children.Add (CreateQuestionsBlock());
 
-			Content = new ScrollView { Content = layout };
+            //BGLayoutView bgLayout = new BGLayoutView(AppResources.InteractBgImage, layout, true, true);
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
+            //Content = new ScrollView {Content = bgLayout };
+            Content = new ContentView { Content = bgLayout };
 
 			UserController.Instance.UpdateEventUserVotes (Model);
 		}
@@ -77,30 +68,142 @@ namespace Conarh_2016.Application.UI.Events
 
 		private StackLayout CreateQuestionsBlock()
 		{
-			var bottomItemLayout = new StackLayout { 
-				Padding = new Thickness (0, 0, 0, 20), 
-				BackgroundColor = AppResources.SpeecherBgColor
-			};
+            
+            var questionBoxLayout = new StackLayout
+            {
+                Padding = new Thickness(15, 5, 15, 5),
+                //Orientation = StackOrientation.Vertical,
+                //WidthRequest = AppProvider.Screen.Width - 80,
+                BackgroundColor = AppResources.EventActionsQuestionsBlockColor,
+                Opacity = 0.75,
+                Spacing =0,
+                //HorizontalOptions = LayoutOptions.Fill,
+                //HeightRequest = 80
+            };
+            /*
+            Button questionsBlockTitle = new Button
+            {
+                //Text = AppResources.EventsQuestionHeader,
+                //FontSize = 20,
+                HeightRequest = 25,
+                WidthRequest = AppProvider.Screen.Width - 50,
+                BackgroundColor = AppResources.EventActionsQuestionsBlockTitleColor,
+                Text = "Jurema",
+            //    TextColor = AppResources.EventActionsQuestionsBlockTitleTextColor,
+                TextColor = Color.Black,
+                VerticalOptions = LayoutOptions.Center,
+                BorderRadius = 0
+                //IsEnabled = false
+            };
+            
+            questionBoxLayout.Children.Add(questionsBlockTitle);
+            */
+            //_questionItem = new EditorControl(AppResources.EventsQuestionDefaultAnswer)
+            _questionItem = new EditorControl(AppResources.EventsQuestionDefaultAnswer)
+            {
+                HeightRequest = EditorHeight,
+                //WidthRequest = AppProvider.Screen.Width - 60,
+                WidthRequest = AppProvider.Screen.Width - 50,
+            };
 
-			_questionItem = new EditorControl(AppResources.EventsQuestionDefaultAnswer) {
+            questionBoxLayout.Children.Add(_questionItem);
+
+            Button btnEnviar = new Button
+            {
+                BackgroundColor = AppResources.EventActionsQuestionsBlockBtnBgColor,
+                HeightRequest = 40,
+                //WidthRequest = AppProvider.Screen.Width - 50,
+                Text = AppResources.EventsActionPostQuestion,
+                TextColor = Color.White,
+                BorderRadius = 0
+            };
+            btnEnviar.Clicked += OnSendQuestionClicked;
+
+            questionBoxLayout.Children.Add(btnEnviar);
+            //btnLayout.Children.Add(trasnpSpace);
+            //btnLayout.Children.Add(btnEnviar);
+
+
+
+
+
+
+
+            /*
+            
+
+            var questionBoxLayout = new StackLayout {
+                //Padding = new Thickness(15, 0, 0, 15),
+                WidthRequest = AppProvider.Screen.Width - 80,
+                BackgroundColor = AppResources.EventActionsQuestionsBlockColor,
+                Opacity = 0.75,
+                HorizontalOptions = LayoutOptions.Fill,
+            };
+            
+            Label questionsBlockTitle = new Label
+            {
+                Text = AppResources.EventsQuestionHeader,
+                FontSize = 20,
+                HeightRequest = 25,
+                WidthRequest = AppProvider.Screen.Width - 100,
+                BackgroundColor = AppResources.EventActionsQuestionsBlockTitleColor,
+                TextColor = AppResources.EventActionsCreateQuestionsBlockTitleTextColor
+            };
+            questionBoxLayout.Children.Add(questionsBlockTitle);
+            
+            StackLayout innerQuestionBoxLayout = new StackLayout()
+            {
+                Spacing = 0
+            };
+
+            _questionItem = new EditorControl(AppResources.EventsQuestionDefaultAnswer) {
 				HeightRequest = EditorHeight,
-				WidthRequest = AppProvider.Screen.Width - 60,
-			};
-			bottomItemLayout.Children.Add (_questionItem);
+				//WidthRequest = AppProvider.Screen.Width - 60,
+                WidthRequest = AppProvider.Screen.Width - 50,
+            };
 
-			float btnWidth = (AppProvider.Screen.Width - 60) / 2;
-			var btnEnviar = new Button { 
-				BackgroundColor = AppResources.AgendaPageBackgroundColor,
-				WidthRequest = btnWidth,
-				HeightRequest = 40,
-				Text = AppResources.EventsActionPostQuestion,
-				TextColor = Color.White,
-				BorderRadius = 0
-			};
-			btnEnviar.Clicked += OnSendQuestionClicked;
-			bottomItemLayout.Children.Add (btnEnviar);
+            */
 
-			return bottomItemLayout;
+            /*StackLayout btnLayout = new StackLayout()
+            {
+                Orientation = StackOrientation.Horizontal,
+                Spacing = 0
+            };
+            BoxView trasnpSpace = new BoxView()
+            {
+                BackgroundColor = Color.Teal,
+                HeightRequest = 20,
+                //WidthRequest = ((AppProvider.Screen.Width - 50)/2)
+                WidthRequest = 40
+            };
+            */
+            /*
+            Button btnEnviar = new Button
+            {
+                BackgroundColor = AppResources.EventActionsQuestionsBlockBtnBgColor,
+                HeightRequest = 20,
+                //WidthRequest = (AppProvider.Screen.Width - 50)/ 2,
+                WidthRequest = AppProvider.Screen.Width - 50,
+                Text = AppResources.EventsActionPostQuestion,
+                TextColor = Color.White,
+                BorderRadius = 0
+            };
+            btnEnviar.Clicked += OnSendQuestionClicked;
+            //btnLayout.Children.Add(trasnpSpace);
+            //btnLayout.Children.Add(btnEnviar);
+
+
+            innerQuestionBoxLayout.Children.Add(_questionItem);
+            innerQuestionBoxLayout.Children.Add(btnEnviar);
+
+            questionBoxLayout.Children.Add (innerQuestionBoxLayout);
+            outerLayout.Children.Add(questionBoxLayout);
+            outerLayout.Children.Add(new BoxView { WidthRequest = 15 });
+
+            */
+
+
+            return questionBoxLayout;
 		}
 			
 		private void OnSendQuestionClicked (object sender, System.EventArgs e)
@@ -127,6 +230,7 @@ namespace Conarh_2016.Application.UI.Events
 			return absoluteLayout;
 		}
 
+        /*
 		private View GetBoxWithHeader(string text, int boxHeight, int fontSize)
 		{
 			return new ContentView{ 
@@ -143,6 +247,7 @@ namespace Conarh_2016.Application.UI.Events
 				}
 			};
 		}
+        */
 	}
 }
 

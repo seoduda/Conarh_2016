@@ -37,7 +37,7 @@ namespace Conarh_2016.Application.UI.Shared
 			_fakeProfileImagePath = Path.Combine(AppProvider.IOManager.DocumentPath, "fakeProfileImage.jpeg");
 			Model = userData;
 			var layout = new StackLayout {
-				BackgroundColor = Color.White,
+				BackgroundColor = Color.Transparent,
 				Padding = new Thickness(0, 0, 10, 0)
 			};
 
@@ -60,7 +60,7 @@ namespace Conarh_2016.Application.UI.Shared
 				WidthRequest = 100,
 				FontSize = 15,
 				Text = AppResources.SignUpChooseImage,
-				BackgroundColor = Color.White,
+				BackgroundColor = Color.Transparent,
 				TextColor = AppResources.SignUpChooseImageButtonColor,
 				BorderRadius = 0,
 				BorderWidth = 2,
@@ -78,31 +78,31 @@ namespace Conarh_2016.Application.UI.Shared
 			topLayout.Children.Add (imageLayout);
 
 			var nameSurnameLayout = new StackLayout();
-			nameSurnameLayout.Children.Add (GetEntry (Keyboard.Create(KeyboardFlags.CapitalizeSentence), AppResources.GetName(Model.Name), AppResources.LoginNameDefaultEntry, 30, false, out _nameEntry, 140, 10));
-			nameSurnameLayout.Children.Add (GetEntry (Keyboard.Create(KeyboardFlags.CapitalizeSentence), AppResources.GetSurname(Model.Name), AppResources.LoginSurnameDefaultEntry, 20, false, out _surnameEntry, 140, 10));
+			nameSurnameLayout.Children.Add (GetEntry (Keyboard.Create(KeyboardFlags.CapitalizeSentence), AppResources.GetName(Model.Name), AppResources.LoginNameDefaultEntry, 20, false, out _nameEntry, 140, 10));
+			nameSurnameLayout.Children.Add (GetEntry (Keyboard.Create(KeyboardFlags.CapitalizeSentence), AppResources.GetSurname(Model.Name), AppResources.LoginSurnameDefaultEntry, 15, false, out _surnameEntry, 140, 10));
 
 			topLayout.Children.Add (nameSurnameLayout);
 
 			layout.Children.Add (topLayout);
 
-			layout.Children.Add (GetEntry (Keyboard.Email, Model.Email, AppResources.LoginEmailDefaultEntry, 20, false, out _emailEntry));
+			layout.Children.Add (GetEntry (Keyboard.Email, Model.Email, AppResources.LoginEmailDefaultEntry, 10, false, out _emailEntry));
 
 			if(isPasswordEnabled)
-				layout.Children.Add (GetEntry (Keyboard.Text, Model.Password, AppResources.LoginPasswordDefaultEntry, 20, true, out _passwordEntry));
+				layout.Children.Add (GetEntry (Keyboard.Text, Model.Password, AppResources.LoginPasswordDefaultEntry, 10, true, out _passwordEntry));
 
-			layout.Children.Add (GetEntry (Keyboard.Create(KeyboardFlags.CapitalizeSentence), Model.Job, AppResources.LoginJobDefaultEntry, 20, false, out _jobEntry));
-			layout.Children.Add (GetEntry (Keyboard.Telephone, Model.Phone, AppResources.LoginPhoneDefaultEntry, 20, false, out _phoneEntry));
+			layout.Children.Add (GetEntry (Keyboard.Create(KeyboardFlags.CapitalizeSentence), Model.Job, AppResources.LoginJobDefaultEntry, 15, false, out _jobEntry));
+			layout.Children.Add (GetEntry (Keyboard.Telephone, Model.Phone, AppResources.LoginPhoneDefaultEntry, 10, false, out _phoneEntry));
 
 			var applyBtn = new Button {
 				BorderRadius = 5,
 				WidthRequest = AppProvider.Screen.Width,
-				FontSize = 16,
+				FontSize = 14,
 				TextColor = Color.White,
 				BackgroundColor = AppResources.LoginButtonColor,
 				Text = buttonName
 			};
 			applyBtn.Clicked += OnApplyClicked;
-			layout.Children.Add (new ContentView {Padding = new Thickness(LeftBorder, 20, LeftBorder, 0), HorizontalOptions = LayoutOptions.Center, Content = applyBtn});
+			layout.Children.Add (new ContentView {Padding = new Thickness(LeftBorder, 10, LeftBorder, 0), HorizontalOptions = LayoutOptions.Center, Content = applyBtn});
 
 			var fs = new FormattedString ();
 
@@ -111,10 +111,10 @@ namespace Conarh_2016.Application.UI.Shared
 			string thirdPart = "e a";
 			string fourthPart = " Política de Privacidade";
 
-			fs.Spans.Add (new Span { Text = firstPart, ForegroundColor = Color.Black, FontSize = 16});
-			fs.Spans.Add (new Span { Text= secondPart, ForegroundColor = Color.Blue, FontSize = 16});
-			fs.Spans.Add (new Span { Text= thirdPart, ForegroundColor = Color.Black, FontSize = 16 });
-			fs.Spans.Add (new Span { Text= fourthPart, ForegroundColor = Color.Blue, FontSize = 16});
+			fs.Spans.Add (new Span { Text = firstPart, ForegroundColor = Color.Black, FontSize = 14});
+			fs.Spans.Add (new Span { Text= secondPart, ForegroundColor = Color.Blue, FontSize = 14});
+			fs.Spans.Add (new Span { Text= thirdPart, ForegroundColor = Color.Black, FontSize = 14 });
+			fs.Spans.Add (new Span { Text= fourthPart, ForegroundColor = Color.Blue, FontSize = 14});
 
 			var labelTerms = new Label {
 				FormattedText = fs
@@ -123,7 +123,7 @@ namespace Conarh_2016.Application.UI.Shared
 			tap.Tapped += OnClicked;
 			labelTerms.GestureRecognizers.Add (tap);
 
-			layout.Children.Add (new ContentView { Content = labelTerms, Padding = new Thickness(20)});
+			layout.Children.Add (new ContentView { Content = labelTerms, Padding = new Thickness(10)});
 
 			Content = new ScrollView {Content = layout};
 

@@ -33,7 +33,7 @@ namespace Conarh_2016.Application.UI.Wall
 			};
 
 			_creatorNameLabel = new Label { 
-				TextColor = AppResources.AgendaCongressoColor, 
+				TextColor = AppResources.AgendaExpoColor, 
 				FontSize = 15, 
 				XAlign = TextAlignment.Start,
 				HeightRequest = 20,

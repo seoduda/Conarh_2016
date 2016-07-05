@@ -63,7 +63,7 @@ namespace Conarh_2016.Application.UI.Events
 					buttonLayout,
 					container
 				}};
-
+            /* pq isso aqui?*/
 			AppController.Instance.DownloadExhibitorsData (null);
 			_eventGridView.ItemSelected += OnItemSelected;;
 

@@ -151,6 +151,7 @@
     <Compile Include="Application\UI\Profile\Rating\RatingPage.cs" />
     <Compile Include="Application\UI\Profile\Rating\RatingUserCell.cs" />
     <Compile Include="Application\UI\Profile\ViewProfilePage.cs" />
+    <Compile Include="Application\UI\Shared\BGLayoutView.cs" />
     <Compile Include="Application\UI\Shared\DynamicChildContentView.cs" />
     <Compile Include="Application\UI\Shared\EditorControl.cs" />
     <Compile Include="Application\UI\Shared\FillUserDataView.cs" />
@@ -180,6 +181,8 @@
     <Compile Include="Conarh_2016.cs" />
     <Compile Include="Core\AppProvider.cs" />
     <Compile Include="Core\DataAccess\Config.cs" />
+    <Compile Include="Core\DataAccess\Local\LocalData.cs" />
+    <Compile Include="Core\DataAccess\Local\LocalLists.cs" />
     <Compile Include="Core\DataAccess\SQLiteClient.cs" />
     <Compile Include="Core\Exceptions\CoreException.cs" />
     <Compile Include="Core\Exceptions\ExceptionExtensions.cs" />
@@ -189,6 +192,7 @@
     <Compile Include="Core\Services\CrossPushNotificationListener.cs" />
     <Compile Include="Core\Services\IImageService.cs" />
     <Compile Include="Core\Services\IIOManager.cs" />
+    <Compile Include="Core\Services\ILinkedinLogin.cs" />
     <Compile Include="Core\Services\ILog.cs" />
     <Compile Include="Core\Services\ShareService.cs" />
     <Compile Include="Core\Singletone.cs" />

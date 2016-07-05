@@ -17,6 +17,7 @@ namespace Conarh_2016.Application.UI.Events
 
             Title = AppResources.EventDetailsHeader.ToUpper();
             BackgroundColor = AppResources.AgendaPageBackgroundColor;
+            /*
             RelativeLayout relatlay = new RelativeLayout
             {
                 WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width)
@@ -33,6 +34,7 @@ namespace Conarh_2016.Application.UI.Events
                 Constraint.Constant(0),
                 Constraint.RelativeToParent((parent) => { return parent.Width; }),
                 Constraint.RelativeToParent((parent) => { return parent.Height; }));
+                */
 
             StackLayout layout = new StackLayout() { VerticalOptions = LayoutOptions.StartAndExpand };
 
@@ -109,7 +111,7 @@ namespace Conarh_2016.Application.UI.Events
                     BorderColor = AppResources.SpeecherTextColor,
                     BorderWidth = 1,
                     HeightRequest = 40,
-                    WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width*3)/4),
+                    WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width * 3) / 4),
                     BackgroundColor = AppResources.SpeecherBgColor
                 };
                 absoluteBtnLayout.Children.Add(eventsActionBtn);
@@ -119,7 +121,10 @@ namespace Conarh_2016.Application.UI.Events
                     WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width * 3) / 4) - 20,
                     Text = AppResources.EventsActionBtnHeader,
                     TextColor = AppResources.SpeecherTextColor,
-                    FontSize = 15
+                    FontSize = 15,
+
+                    // TODO : habilitar comentários e ediatr tela de comentarios
+                    IsEnabled = false,
                 };
                 absoluteBtnLayout.Children.Add(btnLabel, new Point(50, 6));
 
@@ -134,23 +139,10 @@ namespace Conarh_2016.Application.UI.Events
 
                 layout.Children.Add(absoluteBtnLayout);
             }
-            relatlay.Children.Add(layout,
-                Constraint.Constant(0),
-                Constraint.Constant(0),
-                Constraint.RelativeToParent((parent) => { return parent.Width; }),
-                Constraint.RelativeToParent((parent) => { return parent.Height; }));
 
-            relatlay.Children.Add( new SponsorBannerView(),
-                Constraint.Constant(0),
-                Constraint.RelativeToParent((parent) => { return parent.Height - 60; }),
-                Constraint.RelativeToParent((parent) => { return parent.Width; }),
-                Constraint.Constant(60)
-                );
-
-
-
-
-            Content = new ScrollView { Content = relatlay };
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
+            //Content = new ScrollView {Content = bgLayout };
+            Content = new ContentView { Content = bgLayout };
         }
 
         private SpeecherView GetSpeecherItem(Speaker speecherData)

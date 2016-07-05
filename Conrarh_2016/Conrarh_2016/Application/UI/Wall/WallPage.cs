@@ -2,6 +2,7 @@
 using Conarh_2016.Core;
 using Conarh_2016.Application.Wrappers;
 using Conarh_2016.Application.UI.Shared;
+using Conrarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Wall
 {
@@ -50,19 +51,28 @@ namespace Conarh_2016.Application.UI.Wall
 			}; 
 					
 			Button postButton = new Button {
-				BackgroundColor = AppResources.AgendaPageBackgroundColor,
+				BackgroundColor = AppResources.MenuColor,
 				WidthRequest = AppProvider.Screen.Width,
 				Text = AppResources.PostOnWall,
-				TextColor = AppResources.AgendaCongressoColor,
+				TextColor = Color.White,
 				BorderRadius = 0
 			};
 			postButton.Clicked += OnPostClicked;
 
-			Content = new StackLayout {
-				Orientation = StackOrientation.Vertical,
-				Children = {listContent, postButton }
-			};
-		}
+            var layout =  new StackLayout()
+            {
+                Orientation = StackOrientation.Vertical,
+                Children = { listContent, postButton }
+            };
+
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.InteractBgImage, layout, true, true);
+            //Content = new ScrollView {Content = bgLayout };
+            Content = new ContentView { Content = bgLayout };
+
+
+            Content = bgLayout;
+
+        }
 
 
 		protected override void OnDisappearing ()
@@ -91,7 +101,7 @@ namespace Conarh_2016.Application.UI.Wall
 				return;
 			}
 
-			Navigation.PushAsync (new WallCreatePostPage (), false);
+			//Navigation.PushAsync (new WallCreatePostPage (), false);
 		}
 	}
 }

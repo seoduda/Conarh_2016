@@ -12,7 +12,7 @@ namespace Conarh_2016.Application.UI.Events
 		{
 			_label = new Label
 			{
-                TextColor = AppResources.MenuGreen,
+                TextColor = AppResources.MenuColor,
                 FontSize = 16,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center,

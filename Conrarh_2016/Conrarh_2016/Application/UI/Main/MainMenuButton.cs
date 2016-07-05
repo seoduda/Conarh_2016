@@ -82,7 +82,7 @@ namespace Conarh_2016.Application.UI.Main
 
             var menuItemContentView = new ContentView()
             {
-                BackgroundColor = AppResources.MenuGreen,
+                BackgroundColor = AppResources.MenuColor,
                 Padding = new Thickness(14, 0, 0, 0),
                 HeightRequest = 30,
                 VerticalOptions = LayoutOptions.Center,

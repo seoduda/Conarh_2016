@@ -2,6 +2,8 @@
 using System;
 using Conarh_2016.Application.Domain.PostData;
 using Conarh_2016.Application.UI.Shared;
+using Conarh_2016.Core;
+using Conrarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Login
 {
@@ -14,16 +16,21 @@ namespace Conarh_2016.Application.UI.Login
 		{
 			Title = AppResources.LoginCreateUser;
 			NavigationPage.SetHasNavigationBar (this, false);
-			var layout = new StackLayout {BackgroundColor = Color.White};
+            BackgroundColor = AppResources.SignUpBgColor;
 
-			layout.Children.Add (new Image { Source = ImageLoader.Instance.GetImage(AppResources.SignUpHeaderImage, false) });
+
+            var layout = new StackLayout { Padding = new Thickness(0, 20, 0, 0) };
+
+			//layout.Children.Add (new Image { Source = ImageLoader.Instance.GetImage(AppResources.SignUpHeaderImage, false) });
 
 			FillUserDataView fillDataView = new FillUserDataView (new CreateUserData (), AppResources.LoginCreateUser, true);
 			fillDataView.Apply += OnApplyData;
 			layout.Children.Add (fillDataView);
 
-			Content = new ScrollView {Content = layout};
-		}
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.SignUpBgImage, layout, false, true);
+            //Content = new ScrollView {Content = bgLayout };
+            Content = new ContentView { Content = bgLayout };
+        }
 
 		void OnApplyData (CreateUserData data)
 		{

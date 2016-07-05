@@ -9,9 +9,12 @@ namespace Conarh_2016.Application.Domain
 		public const string NamePropertyName = "Name";
 		public const string EmailPropertyName = "Email";
 		public const string ProfileImagePathPropertyName = "ProfileImagePath";
-		public const string JobPropertyName = "Job";
+        public const string ProfileServerImagePathPropertyName = "ServerImagePath";
+        public const string JobPropertyName = "Job";
 		public const string ScorePointsPropertyName = "ScorePointsString";
-		public const string PhonePropertyName = "Phone";
+        public const string ScorePointsProperty = "ScorePointsInt";
+        public const string ScorePointsProgressionProperty = "ScorePointsProgression";
+        public const string PhonePropertyName = "Phone";
 		public const string LevelImagePathPropertyName = "LevelImagePath";
 
 		[JsonProperty(JsonKeys.UserName)]
@@ -35,7 +38,17 @@ namespace Conarh_2016.Application.Domain
 			get;
 		}
 
-		[JsonProperty(JsonKeys.UserType, NullValueHandling = NullValueHandling.Ignore)]
+        /*
+        [JsonProperty(JsonKeys.ServerImagePath, NullValueHandling = NullValueHandling.Ignore)]
+        public string ServerImagePath
+        {
+            set;
+            get;
+        }
+        */
+
+
+        [JsonProperty(JsonKeys.UserType, NullValueHandling = NullValueHandling.Ignore)]
 		public string UserType
 		{
 			set;
@@ -77,7 +90,24 @@ namespace Conarh_2016.Application.Domain
 			}
 		}
 
-		public string LevelImagePath
+        public int ScorePointsInt
+        {
+            get
+            {
+                return ScorePoints;
+            }
+        }
+
+        public double ScorePointsProgression
+        {
+            get
+            {
+                return (double) (ScorePoints/1000);
+            }
+        }
+
+
+        public string LevelImagePath
 		{
 			get 
 			{
@@ -91,8 +121,9 @@ namespace Conarh_2016.Application.Domain
 			public const string UserName = "username";
 
 			public const string ProfileImagePath = "profile_image";
+            //public const string ServerImagePath = "profile_server_image";
 
-			public const string UserType = "user_type";
+            public const string UserType = "user_type";
 			public const string Phone = "phone";
 			public const string Points = "points";
 

@@ -74,8 +74,8 @@ namespace Conarh_2016.Application.UI.Main
 
             var navPage = new NavigationPage(CurrentPage);
 
-            navPage.BarBackgroundColor = AppResources.MenuGreen;
-            navPage.BarTextColor = AppResources.MenuTitleGreen;
+            navPage.BarBackgroundColor = AppResources.MenuColor;
+            navPage.BarTextColor = AppResources.MenuTitleTextColor;
             Detail = navPage;
 
             IsPresented = false;

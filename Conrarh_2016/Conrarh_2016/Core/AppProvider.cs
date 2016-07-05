@@ -27,6 +27,8 @@ namespace Conarh_2016.Core
 
         public static IFastCellCache FastCellCache;
 
+        public static ILinkedinLogin LinkedinLogin;
+
         public static void Initialize()
         {
         }

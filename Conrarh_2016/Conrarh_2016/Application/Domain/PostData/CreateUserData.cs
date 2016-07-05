@@ -25,7 +25,12 @@ namespace Conarh_2016.Application.Domain.PostData
 		[JsonProperty(User.JsonKeys.ProfileImagePath, NullValueHandling = NullValueHandling.Ignore)]
 		public string ProfileImage;
 
-		[JsonProperty(User.JsonKeys.Points, NullValueHandling = NullValueHandling.Ignore)]
+        /*
+        [JsonProperty(User.JsonKeys.ServerImagePath, NullValueHandling = NullValueHandling.Ignore)]
+        public string ServerImage;
+
+    */
+        [JsonProperty(User.JsonKeys.Points, NullValueHandling = NullValueHandling.Ignore)]
 		public int? ScorePoints;
 
 		public bool IsEmpty()

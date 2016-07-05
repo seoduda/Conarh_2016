@@ -120,6 +120,7 @@ namespace Conarh_2016.Application
         public static string RequestEnterPassphraseWrong = "Palavra-chave está errada!";
         public static string ProfileHistoryItemHeaderFormat = "Conectou-se com {0}";
         public static string ProfileHistoryItemPointsFormat = "pontos";
+        public static string ProfilePointsLabelText = "pontos";
         public static string LoadingWallPostLikes = "Carregando lista de likes…";
         public static string ProfileHistoryHeader = "Histórico de pontuação";
         public static string ProfileHistoryClickHeader = "Ir para Histórico";
@@ -139,36 +140,70 @@ namespace Conarh_2016.Application
         public static string LoadingPushNotification = "Carregando o Push Notifications…";
 
         public static Color DefaultLikeColor = Color.FromHex("bfa06e");
-        public static Color SeparatorColor = Color.FromHex("acae8d");
+        public static Color SeparatorColor = Color.FromHex("567675");
+
         public static Color LoginBackgroundColor = Color.FromHex("abbbba");
-        //public static Color LoginActiveTextColor = Color.FromHex("974644");
         public static Color LoginActiveTextColor = Color.Black;
-        public static Color LoginNormalTextColor = Color.FromHex("ca9e67");
-        public static Color LoginButtonColor = Color.FromHex("2ab296");
+        public static Color LoginNormalTextColor = Color.FromHex("2b3b3b");
+        public static Color LoginButtonColor = Color.FromHex("567675");
         public static Color LoginBottomButtonColor = Color.FromHex("f4d657");
         public static Color LoginBottomButtonTextColor = Color.FromHex("ca9e67");
         public static Color LoginSkipButtonColor = Color.FromHex("3597d3");
-        public static Color MenuGreen = Color.FromHex("567675");
-        public static Color MenuTitleGreen = Color.FromHex("B0D7E3");
+
+        public static Color MenuColor = Color.FromHex("567675");
+        public static Color MenuTitleTextColor = Color.FromHex("B0D7E3");
+
         public static Color Yellow = Color.FromHex("eec22e");
         public static Color Green = Color.FromHex("009933");
+
+        public static Color LikedItemTextColor = Color.FromHex("567675");
+
+        public static Color EventActionsTextColor = Color.FromHex("567675");
+        public static Color EventActionsQuestionsBlockColor = Color.FromHex("B0D5E1");
+        public static Color EventActionsQuestionsBlockTitleColor = Color.FromHex("4398B6");
+        public static Color EventActionsQuestionsBlockTitleTextColor = Color.White;
+        public static Color EventActionsQuestionsBlockBtnBgColor = Color.FromHex("567675");
+
+
+
         public static Color AgendaPageBackgroundColor = Color.White;
         public static Color AgendaExpoColor = Color.FromHex("AAB9B8");
         public static Color AgendaCongressoColor = Color.FromHex("B8CA4F");
         public static Color AgendaDataBGColor = Color.FromHex("E2EAB7");
+
         public static Color SpeecherBgColor = Color.Transparent;
         public static Color SpeecherTextColor = Color.FromHex("567675");
+
         public static Color ExhibitorNameTextColor = Color.FromHex("95a5a6");
         public static Color ExhibitorDescTextColor = Color.FromHex("0079c2");
+
         public static Color WallPostCreatedDateColor = Color.FromHex("d2b583");
         public static Color WallPostBackgroundColor = Color.FromHex("f7f0db");
-        public static Color WallPageBackgroundColor = Color.FromHex("e9d9a2");
+        public static Color WallPageBackgroundColor = Color.Transparent;
+
         public static Color ExhibitorsSearchBarColor = Color.FromHex("e9d9a2");
         public static Color ExhibitorsSearchBarTextColor = Color.FromHex("d2b582");
-        public static Color SignUpChooseImageButtonColor = Color.FromHex("f8b03a");
-        public static Color UserBackgroundColor = Color.FromHex("974543");
-        public static Color ProfileContactsHeaderColor = Color.FromHex("e9d9a2");
-        public static Color ProfilePointsColor = Color.FromHex("feca19");
+
+        public static Color SignUpChooseImageButtonColor = Color.FromHex("AAB9B8");
+        public static Color SignUpBgColor = Color.Transparent;
+
+        public static Color UserBackgroundColor = Color.Transparent;
+        public static Color UserHeaderNameTextColor = Color.FromHex("567675");
+        public static Color UserHeaderJobTextColor = Color.FromHex("819894");
+
+
+        //public static Color UserHeaderJobTextColor = Color.FromHex("819894");
+
+
+
+        public static Color ProfileContactsHeaderColor = Color.White;
+        public static Color ProfilePendingContactsHeaderColor = Color.FromHex("567675");
+        public static Color ProfileRankingHeaderColor = Color.FromHex("AAB9B8"); 
+        public static Color ProfileContactsTextColor = Color.FromHex("567675");
+
+
+
+        public static Color ProfilePointsColor = Color.White;
         public static Color ConnectRequestNotSentColor = Color.FromHex("e9daa2");
 
         public static Color ConnectRequestNotSentColorText = Color.FromHex("B99F5B");
@@ -188,6 +223,9 @@ namespace Conarh_2016.Application
         public static string DefaultExhibitorImage = "defaultExhibitorImage.png";
         public static string DefaultSponsorImage = "defaultSponsorImage.png";
         public static string DefaultPointsImage = "defaultPointsImage.png";
+        public static string DefaultBgImage = "defaultBgImage.png";
+
+        
 
         public static string EventButtonActionImage = "eventButtonActionImage.png";
         public static string EventClockImage = "eventClockImage.png";
@@ -198,7 +236,9 @@ namespace Conarh_2016.Application
         public static string EventDislikeActiveImage = "eventDislikeActiveImage.png";
         public static string EventDislikeNormalImage = "eventDislikeNormalImage.png";
 
-        public static string LoginHeaderImage = "loginHeaderImage.png";
+        public static string InteractBgImage = "InteractBgImage.png";
+
+
         public static string LoginBgImage = "login_bg_image.png";
         public static string LoginBtLinkedin = "login_bt_linkedin";
         
@@ -206,11 +246,15 @@ namespace Conarh_2016.Application
         public static string LoginEmailImage = "loginEmailImage.png";
         public static string LoginPasswordImage = "loginPasswordImage.png";
 
+        //public static string ProfileLevelProgressBar = "levelProgressBar.png";
+        public static string ProfileLevelProgressBarImageLabel = "levelProgressBarImageLabel.png";
+        public static string DefaultBtEdit = "editBtImage.png";
+
 
         public static string SignUpHeaderImage = "signUpHeaderImage.png";
-        public static string SignUpBgImage = "signUpHeaderImage.png";
+        public static string SignUpBgImage = "signupBgImage.png";
         public static string SignUpButtonImage = "signUpButtonImage.png";
-
+        
         public static string SettingsImage = "settings.png";
 
         public static string SponsorBanner = "healthways.png";
@@ -231,6 +275,13 @@ namespace Conarh_2016.Application
         public static string ShareLink = "https://www.facebook.com/ABRHNacional";
         public static string ShareMessage = "Curta o #conarh2016 !";
         public static string ShareTitle = "CONARH 2016";
+
+        public static string ApiLinkedinClientId = "77c1rz71bj79xe";
+        public static string ApiLinkedinClientSecret = "ixk8ykW2zSTqYLes";
+        public static string ApiLinkedinScope= "r_basicprofile r_emailaddress";
+        public static string ApiLinkedinAuthorizeUrl = "https://www.linkedin.com/uas/oauth2/authorization";
+        public static string ApiLinkedinRedirectUrl = "http://www.i9acao.com.br/";
+        public static string ApiLinkedinAccessTokenUrl = "https://www.linkedin.com/uas/oauth2/accessToken";
 
         public static ImageSource GetImageSource(int id)
         {

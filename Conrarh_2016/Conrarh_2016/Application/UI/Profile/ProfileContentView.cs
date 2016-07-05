@@ -1,5 +1,6 @@
 ﻿using Conarh_2016.Application.UI.Shared;
 using Conarh_2016.Core;
+using Conrarh_2016.Application.UI.Shared;
 using System;
 using Xamarin.Forms;
 
@@ -22,13 +23,15 @@ namespace Conarh_2016.Application.UI.Profile
 		{
 			Model = parameters.UserModel;
 			var layout = new StackLayout {VerticalOptions = LayoutOptions.FillAndExpand};
-			var userHeaderView = new UserHeaderView (Model, true);
-			if(parameters.OnSaveChanges != null)
+            var userHeaderView = new UserHeaderView(Model, false);
+            if (parameters.OnSaveChanges != null)
 				userHeaderView.EditUserProfile += parameters.OnSaveChanges;
 			
 			layout.Children.Add (userHeaderView);
 
+            /*
 			if (parameters.IsBtnEnabled) {
+                
 				var btnLayout = new StackLayout { Padding = new Thickness (0),
 					Orientation = StackOrientation.Horizontal};
 
@@ -39,18 +42,25 @@ namespace Conarh_2016.Application.UI.Profile
 					AppResources.ProfileContactListBtnHeader, parameters.OnContactList, new Thickness(10, 0, 20, 0)));
 
 				layout.Children.Add (btnLayout);
-			}
-
-			var badgeView = new BadgeGridView(Model);
+                
+             }
+             */
+            var badgeView = new BadgeGridView(Model);
 			layout.Children.Add (badgeView);
 
+            /*
 			if (parameters.IsBtnEnabled) 
 			{
 				var historyView = new ProfileHistoryView (AppModel.Instance.CurrentContactListWrapper);
 				layout.Children.Add (historyView);
 			}
-			Content = new ScrollView { Content = layout, BackgroundColor = AppResources.UserBackgroundColor };
-		}
+            */
+
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
+            // Content = new ScrollView { Content = layout, BackgroundColor = AppResources.UserBackgroundColor };
+            //Content = new ScrollView { Content = bgLayout };
+            Content = new ContentView { Content = bgLayout };
+        }
 
 		private ContentView GetButton(Color btnColor, string name, EventHandler onClicked, Thickness padding)
 		{

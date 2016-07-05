@@ -16,9 +16,10 @@ namespace Conarh_2016.Application.UI.Profile
 		{
 			Model = model;
 
-			int px20Padding = AppProvider.Screen.ConvertPixelsToDp (20);
+			//int px20Padding = AppProvider.Screen.ConvertPixelsToDp (20);
+            int px40Padding = AppProvider.Screen.ConvertPixelsToDp(40);
 
-			int badgeCellSize = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width - 50) / 3);
+            int badgeCellSize = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width - 100) / 3);
 			_badgeGrid = new Grid
 			{
 				VerticalOptions = LayoutOptions.FillAndExpand,
@@ -35,7 +36,7 @@ namespace Conarh_2016.Application.UI.Profile
 					new ColumnDefinition { Width = new GridLength(badgeCellSize, GridUnitType.Absolute) },
 
 				},
-				Padding = new Thickness(px20Padding, px20Padding / 2, px20Padding, px20Padding / 2)
+				Padding = new Thickness(px40Padding, px40Padding / 4, px40Padding, px40Padding / 4)
 			};
 
 			if (!AppModel.Instance.BadgeTypes.IsEmpty ())
