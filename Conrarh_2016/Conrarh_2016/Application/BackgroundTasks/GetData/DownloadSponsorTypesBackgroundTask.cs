@@ -24,8 +24,8 @@ namespace Conarh_2016.Application.BackgroundTasks
 
 
             List<SponsorType> result;
-            result = LocalData.getLocalSponsorList();
-            //result = base.Execute();
+            //result = LocalData.getLocalSponsorList();
+            result = base.Execute();
 
 
             //List<SponsorType> result = base.Execute();

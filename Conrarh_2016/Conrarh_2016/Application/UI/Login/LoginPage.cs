@@ -6,8 +6,8 @@ namespace Conarh_2016.Application.UI.Login
 {
     public sealed class LoginPage : ContentPage
     {
-        //public LoginPage() : this(string.Empty, string.Empty)
-        public LoginPage() : this("fernando@i9acao.com.br", "mytobas45")
+        // public LoginPage() : this("fernando@i9acao.com.br", "mytobas45")
+        public LoginPage() : this(string.Empty, string.Empty)
         {
         }
 

@@ -103,6 +103,8 @@
     <Compile Include="Application\UI\Connect\Android\ConnectionGridPage.cs" />
     <Compile Include="Application\UI\Connect\ConnectionCell.cs" />
     <Compile Include="Application\UI\Connect\ConnectionPage.cs" />
+    <Compile Include="Application\UI\Connect\HowToPlayPage.cs" />
+    <Compile Include="Application\UI\Connect\HowToPlayCarouselPage.cs" />
     <Compile Include="Application\UI\Controls\DownloadedImage.cs" />
     <Compile Include="Application\UI\Controls\DynamicListView.cs" />
     <Compile Include="Application\UI\Controls\DynamicTableView.cs" />

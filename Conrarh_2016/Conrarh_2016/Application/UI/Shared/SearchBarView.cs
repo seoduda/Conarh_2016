@@ -27,8 +27,8 @@ namespace Conarh_2016.Application.UI.Shared
 					new ColumnDefinition { Width = new GridLength(30, GridUnitType.Absolute) },
 					new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
 				},
-				Padding = new Thickness(20, 10),
-				BackgroundColor = AppResources.ExhibitorsSearchBarColor
+				Padding = new Thickness(10, 10),
+				BackgroundColor = AppResources.AgendaExpoColor
 			};
 
 			var searchIcon = new Image {
@@ -40,7 +40,7 @@ namespace Conarh_2016.Application.UI.Shared
 			grid.Children.Add(searchIcon, 0, 0);
 			_searchEntry = new ExtendedEntry { 
 				Placeholder = AppResources.ExhibitorsSearchText, 
-				TextColor = AppResources.ExhibitorsSearchBarTextColor, 
+				TextColor = AppResources.MenuColor, 
 				BackgroundColor = Color.Transparent, 
 				Font = Font.SystemFontOfSize(18),
 				YAlign = TextAlignment.Center,

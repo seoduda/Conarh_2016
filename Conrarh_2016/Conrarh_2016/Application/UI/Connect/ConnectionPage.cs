@@ -1,9 +1,9 @@
 ﻿using Xamarin.Forms;
-using Conarh_2016.Application;
 using Conarh_2016.Application.UI.Shared;
 using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.Wrappers;
 using Conarh_2016.Core;
+using Conrarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Connect
 {
@@ -85,7 +85,7 @@ namespace Conarh_2016.Application.UI.Connect
 		public ConnectionPage ()
 		{
 			Title = AppResources.Connect;
-			BackgroundColor = Color.White;
+			BackgroundColor = Color.Transparent;
 
 			CurrentModel = AppModel.Instance.CurrentConnectionsWrapper;
 
@@ -105,15 +105,21 @@ namespace Conarh_2016.Application.UI.Connect
 			};
 			UserListView.SetBinding<ConnectListWrapper> (ListView.IsRefreshingProperty, vm => vm.IsBusy, BindingMode.OneWay);
 
-			Content = new StackLayout {
-				Orientation = StackOrientation.Vertical,
-				Children = {
-					new UserHeaderView (CurrentModel.LoginedUser, false),
-					searchBarView,
-					UserListView
-				}
-			};
-		}
+            var layout = new StackLayout
+            {
+                Orientation = StackOrientation.Vertical,
+                Children = {
+                    new UserHeaderView (CurrentModel.LoginedUser, false),
+                    searchBarView,
+                    UserListView
+                }
+            };
+
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
+
+            Content = bgLayout;
+
+        }
 
 		protected override void OnAppearing ()
 		{

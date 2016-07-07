@@ -4,6 +4,7 @@ using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.UI.Shared;
 using Conarh_2016.Application.Domain.PostData;
 using Conarh_2016.Core;
+using Conrarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Profile
 {
@@ -34,8 +35,14 @@ namespace Conarh_2016.Application.UI.Profile
 			};
 			FillUserDataView fillData = new FillUserDataView (data, AppResources.SaveProfileButton, false);
 			fillData.Apply += OnSaveUserProfile;
+            var layout = new ContentView { Content = fillData, Padding = new Thickness(0, 10, 0, 0) };
 
-			Content = new ScrollView { Content = fillData, Padding = new Thickness(0, 10, 0, 0) };
+
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, false, true);
+            //Content = new ScrollView { Content = layout };
+            //Content = new ScrollView { Content = bgLayout };
+
+            Content = bgLayout;
 		}
 
 		private void OnSaveUserProfile (CreateUserData data)

@@ -3,7 +3,6 @@ using System;
 using Conarh_2016.Core;
 using System.Collections.Generic;
 using Conarh_2016.Application.Domain.PostData;
-using Conarh_2016.Application.UI.Shared;
 using System.IO;
 using Conarh_2016.Application.UI.Login;
 
@@ -132,7 +131,7 @@ namespace Conarh_2016.Application.UI.Shared
 				_emailEntry,
 				_nameEntry,
 				_passwordEntry,
-				_phoneEntry,
+				//_phoneEntry,
 				_surnameEntry
 			};
 		}

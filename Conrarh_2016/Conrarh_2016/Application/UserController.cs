@@ -816,5 +816,34 @@ namespace Conarh_2016.Application
 
             _backgroundWorkers[AppBackgroundWorkerType.UserDefault].Add(downloadProfileTask);
         }
+        public void RegisterUserLinkedin(CreateUserData data)
+        {
+            UserDialogs.Instance.ShowLoading(AppResources.LoadingCreatingUser);
+
+            var registerTask = new RegisterUserBackgroundTask(data);
+            registerTask.ContinueWith((task, result) =>
+            {
+                UserDialogs.Instance.HideLoading();
+
+                if (task.Exception != null)
+                {
+                    ServerException exception = (ServerException)task.Exception.InnerException;
+                    var serverError = JsonConvert.DeserializeObject<ServerError>(exception.ErrorMessage);
+
+                    AppProvider.PopUpFactory.ShowMessage(serverError.ErrorMessage, AppResources.Warning);
+                }
+                else
+                {
+                    LoginUserData lud = new LoginUserData();
+                    lud.Email = result.Email;
+                    lud.Password = result.Password;
+                    LoginUser(lud);
+
+                    //Device.BeginInvokeOnMainThread(() => AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.ProfilePage, true));
+                    // () => AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.LoginPage, true, result.Email, result.Password));
+                }
+            });
+            _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(registerTask);
+        }
     }
 }

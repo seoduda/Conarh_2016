@@ -17,7 +17,7 @@ namespace Conrarh_2016.Application.UI.Shared
             bannerRecognizer.Tapped += OnBannerClicked;
             bannerImage.GestureRecognizers.Add(bannerRecognizer);
             HeightRequest = ImageHeight;
-            Padding = new Thickness(10, 5, 10, 2);
+            Padding = new Thickness(5, 2, 5, 2);
             HorizontalOptions = LayoutOptions.Center;
             Content = bannerImage;
         }

@@ -42,6 +42,7 @@ namespace Conarh_2016.Application.UI.Main
             layout.Children.Add(label1);
             layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
             layout.Children.Add(GetMenuButton(MainMenuItemData.ProfilePage));
+            layout.Children.Add(GetMenuButton(MainMenuItemData.HowtoPlayPage));
             layout.Children.Add(GetMenuButton(MainMenuItemData.ConnectPage));
             if (AppModel.Instance.CurrentUser == null)
                 layout.Children.Add(GetMenuButton(MainMenuItemData.LoginPage));

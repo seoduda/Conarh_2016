@@ -58,10 +58,11 @@ namespace Conarh_2016.Droid.Services
                                 udata.Email = (string)result["emailAddress"];
                                 udata.Name = (string)result["firstName"] + " " + (string)result["lastName"];
                                 udata.Password = access_token;
-                                udata.ServerImage = (string)result["pictureUrl"];
+                                udata.Phone = "00000000000";
+                                //udata.ServerImage = (string)result["pictureUrl"];
                                 udata.ScorePoints = 30;
 
-                                UserController.Instance.RegisterUser(udata);
+                                UserController.Instance.RegisterUserLinkedin(udata);
                                 //infoText.Text = result;
                                 //infoText.Text = content.ToString();
                             }
@@ -73,8 +74,7 @@ namespace Conarh_2016.Droid.Services
                     }
                 }
             };
-
-            return udata;
+         
         }
 
         public void openPage()

@@ -329,6 +329,13 @@
     <AndroidResource Include="Resources\drawable\editBtImage.png" />
     <AndroidResource Include="Resources\drawable\levelProgressBarImageLabel.png" />
     <AndroidResource Include="Resources\drawable\InteractBgImage.png" />
+    <AndroidResource Include="Resources\drawable\icon_close.png" />
+    <AndroidResource Include="Resources\drawable\icon_left.png" />
+    <AndroidResource Include="Resources\drawable\icon_right.png" />
+    <AndroidResource Include="Resources\drawable\carousel_1.png" />
+    <AndroidResource Include="Resources\drawable\carousel_2.png" />
+    <AndroidResource Include="Resources\drawable\carousel_3.png" />
+    <AndroidResource Include="Resources\drawable\carousel_4.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

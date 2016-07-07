@@ -34,10 +34,10 @@ namespace Conarh_2016.Application.UI.Connect
 
 			int textWidthRequest = AppProvider.Screen.Width - ButtonWidth - 20 - ImageWidth - 10;
 
-			_userNameLabel = new Label { TextColor = AppResources.AgendaCongressoColor, FontSize = 14, XAlign = TextAlignment.Start, WidthRequest = textWidthRequest};
+			_userNameLabel = new Label { TextColor = AppResources.MenuColor, FontSize = 14, XAlign = TextAlignment.Start, WidthRequest = textWidthRequest};
 			namesLayout.Children.Add (_userNameLabel);
 
-			_userEmailLabel = new Label { TextColor = AppResources.AgendaCongressoColor, FontSize = 11, XAlign = TextAlignment.Start, WidthRequest = textWidthRequest};
+			_userEmailLabel = new Label { TextColor = AppResources.MenuColor, FontSize = 11, XAlign = TextAlignment.Start, WidthRequest = textWidthRequest};
 			namesLayout.Children.Add (_userEmailLabel);
 
 			userChooseLayout.Children.Add (namesLayout, new Point(ImageWidth * 1.2f, 0));
@@ -48,8 +48,8 @@ namespace Conarh_2016.Application.UI.Connect
 
 			_connectBtn = new Button () {
 				WidthRequest = ButtonWidth,
-				TextColor = AppResources.AgendaCongressoColor,
-				BackgroundColor = AppResources.ConnectRequestNotSentColor,
+				TextColor = Color.White,
+				BackgroundColor = AppResources.AgendaExpoColor,
 				BorderRadius = 0,
 				FontSize = 13,
 				Text = AppResources.ConnectRequestNotSent,

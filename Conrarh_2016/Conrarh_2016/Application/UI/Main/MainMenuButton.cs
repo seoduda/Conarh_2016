@@ -5,22 +5,21 @@ using Xamarin.Forms;
 
 namespace Conarh_2016.Application.UI.Main
 {
-/* retirado do if andoid
-    public static MainMenuItemData AgendaExpoPage = new MainMenuItemData(false, AppResources.AgendaExpo, typeof(Events.AgendaExpoGridPage), true, false);
-    public static MainMenuItemData AgendaCongresso = new MainMenuItemData(false, AppResources.AgendaCongresso, typeof(Events.AgendaGridPage), true, false);
-    */
+    /* retirado do if andoid
+        public static MainMenuItemData AgendaExpoPage = new MainMenuItemData(false, AppResources.AgendaExpo, typeof(Events.AgendaExpoGridPage), true, false);
+        public static MainMenuItemData AgendaCongresso = new MainMenuItemData(false, AppResources.AgendaCongresso, typeof(Events.AgendaGridPage), true, false);
+        */
 
     public sealed class MainMenuItemData
     {
-        
-      #if __ANDROID__
-        
+#if __ANDROID__
+
               public static MainMenuItemData ConnectPage = new MainMenuItemData(true, AppResources.Connect, typeof(Connect.ConnectionGridPage), true, false);
               public static MainMenuItemData ProfilePage = new MainMenuItemData(true, AppResources.Profile, typeof(Profile.ProfileGridPage), true, false);
-      #else
+#else
 
-              public static MainMenuItemData ConnectPage = new MainMenuItemData(true, AppResources.Connect, typeof(Connect.ConnectionPage), false, false);
-              public static MainMenuItemData ProfilePage = new MainMenuItemData(true, AppResources.Profile, typeof(Profile.ProfilePage), false, false);
+        public static MainMenuItemData ConnectPage = new MainMenuItemData(true, AppResources.Connect, typeof(Connect.ConnectionPage), false, false);
+        public static MainMenuItemData ProfilePage = new MainMenuItemData(true, AppResources.Profile, typeof(Profile.ProfilePage), false, false);
 
 #endif
         public static MainMenuItemData AgendaCongressoPage = new MainMenuItemData(false, AppResources.AgendaCongresso, typeof(Events.AgendaPage), false, false);
@@ -30,9 +29,9 @@ namespace Conarh_2016.Application.UI.Main
         public static MainMenuItemData MapPage = new MainMenuItemData(false, AppResources.Map, typeof(Map.MapPage), false, false);
         public static MainMenuItemData WallPage = new MainMenuItemData(false, AppResources.Wall, typeof(Wall.WallPage), false, false);
 
+        public static MainMenuItemData HowtoPlayPage = new MainMenuItemData(false, AppResources.HowToPlay, typeof(Connect.HowToPlayPage), false, false);
         public static MainMenuItemData LoginPage = new MainMenuItemData(false, AppResources.Login, typeof(Login.LoginPage), false, false);
         public static MainMenuItemData LogOutPage = new MainMenuItemData(false, AppResources.LogOut, null, false, false);
-
 
         public string Title { get; set; }
         public Type TargetType { get; set; }

@@ -65,6 +65,10 @@ namespace Conarh_2016.Application
         public static string LoginPhoneDefaultEntry = "Celular";
         public static string LoginNameDefaultEntry = "Nome";
         public static string LoginSurnameDefaultEntry = "Sobrenome";
+        public static string HowToPlay = "Como Jogar";
+        public static string HowToPlayPageTitle = "Como Jogar";
+
+       
 
         public static string LoginFirstMessage = "Você precisa se logar primeiro!";
         public static string Warning = "Aviso!";
@@ -99,7 +103,7 @@ namespace Conarh_2016.Application
         public static string LoadingUpdateEventVotes = "Atualizando…";
         public static string ProfileContactsHeader = "Meus contatos";
         public static string SaveProfileButton = "Salvar";
-        public static string EditProfile = "Edit perfil";
+        public static string EditProfile = "Editar perfil";
         public static string ConnectRequestNotSent = "Conecte-se";
         public static string ConnectRequestSent = "Enviado";
         public static string ConnectAcceptRequest = "Aceitar";
@@ -225,7 +229,10 @@ namespace Conarh_2016.Application
         public static string DefaultPointsImage = "defaultPointsImage.png";
         public static string DefaultBgImage = "defaultBgImage.png";
 
-        
+        public static string CloseIcon = "icon_close.png";
+        public static string LeftIcon = "icon_left.png";
+        public static string RightIcon = "icon_right.png";
+
 
         public static string EventButtonActionImage = "eventButtonActionImage.png";
         public static string EventClockImage = "eventClockImage.png";
@@ -246,6 +253,11 @@ namespace Conarh_2016.Application
         public static string LoginEmailImage = "loginEmailImage.png";
         public static string LoginPasswordImage = "loginPasswordImage.png";
 
+        public static string HowToPlayCarouselPageImage1 = "carousel_1.png";
+        public static string HowToPlayCarouselPageImage2 = "carousel_2.png";
+        public static string HowToPlayCarouselPageImage3 = "carousel_3.png";
+        public static string HowToPlayCarouselPageImage4 = "carousel_4.png";
+
         //public static string ProfileLevelProgressBar = "levelProgressBar.png";
         public static string ProfileLevelProgressBarImageLabel = "levelProgressBarImageLabel.png";
         public static string DefaultBtEdit = "editBtImage.png";
@@ -258,7 +270,7 @@ namespace Conarh_2016.Application
         public static string SettingsImage = "settings.png";
 
         public static string SponsorBanner = "healthways.png";
-        public static string SponsorUri = "http://www.healthways.com/";
+        public static string SponsorUri = "http://www.healthways.com.br/";
 
         public static string I9acaoLogo = "i9acao_logo.png";
 
