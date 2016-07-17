@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Conarh_2016.Application.BackgroundTasks;
+using Conarh_2016.Application.BackgroundTasks.GetData.Kinvey;
 using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.Domain.PostData;
 using Conarh_2016.Application.Tools;
@@ -154,6 +155,10 @@ namespace Conarh_2016.Application
                 {
                     if (result != null)
                     {
+                        UserDialogs.Instance.HideLoading();
+                        Device.BeginInvokeOnMainThread(() => AppModel.Instance.LoginUser(result, data.Password));
+
+                        /* TODO Ativar Push notification -  UserController - Login
                         var getUserPushNotificationData = new DownloadPushNotificationsByUserBackgroundTask(
                             result.Id, AppModel.Instance.AppInformation.PushNotificationPlatform);
 
@@ -220,6 +225,7 @@ namespace Conarh_2016.Application
                             }
                         });
                         _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(getUserPushNotificationData);
+                        */
                     }
                 }
             });
@@ -772,8 +778,8 @@ namespace Conarh_2016.Application
 
             //download user profile
 
-            var downloadProfileTask = new DownloadUsersBackgroundTask(null, new DownloadListParameters(DownloadCountType.FirstPage,
-                QueryBuilder.Instance.GetUserByUsernameQuery(userModel.User.Email)));
+            var downloadProfileTask = new DownloadUsersBackgroundTask(null, new KinveyDownloadListParameters(KinveyDownloadCountType.FirstPage,
+                QueryBuilder.Instance.GetUserByEmailKinveyQuery(userModel.User.Email)));
             downloadProfileTask.ContinueWith((profileTask, profileResult) =>
             {
                 if (profileResult == null)
@@ -784,7 +790,8 @@ namespace Conarh_2016.Application
                 else
                 {
                     userModel.UpdateUser(profileResult[0]); //points, score, etc
-
+                    UserDialogs.Instance.HideLoading();
+                    /*
                     var downloadBadges = new DownloadBadgesTypesBackgroundTask();
                     downloadBadges.ContinueWith((badgesTask, badgesResult) =>
                     {
@@ -811,6 +818,7 @@ namespace Conarh_2016.Application
                         }
                     });
                     _backgroundWorkers[AppBackgroundWorkerType.UserDefault].Add(downloadBadges);
+                    */
                 }
             });
 

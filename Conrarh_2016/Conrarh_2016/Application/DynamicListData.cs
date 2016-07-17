@@ -6,8 +6,8 @@ namespace Conarh_2016.Application
 {
     public class DynamicListData<T> where T : UpdatedUniqueItem
     {
-
         public readonly List<T> Items;
+
         public event Action<List<T>> CollectionChanged;
 
         public DynamicListData()
@@ -40,7 +40,11 @@ namespace Conarh_2016.Application
 
         public T Find(string id)
         {
-            return Items.Find(temp => temp.Id.Equals(id));
+            string s = " ";
+            if (!String.IsNullOrEmpty(id))
+                s = id;
+            T tmp = Items.Find(temp => temp.Id.Equals(s));
+            return tmp;
         }
 
         private bool AddItem(T item)
@@ -93,7 +97,5 @@ namespace Conarh_2016.Application
                 RaiseCollectionChanged();
             }
         }
-
-
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Conarh_2016.Application.BackgroundTasks;
+using Conarh_2016.Application.BackgroundTasks.GetData.Kinvey;
 using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.Tools;
 using Conarh_2016.Application.UI.Main;
@@ -107,8 +108,13 @@ namespace Conarh_2016.Application
                 {
                     if (result != null)
                     {
+                        /*
                         var parameters = new DownloadListParameters(DownloadCountType.All,
                             QueryBuilder.Instance.GetExhibitorsQuery());
+                         */
+                        var parameters = new KinveyDownloadListParameters(KinveyDownloadCountType.All,
+                           QueryBuilder.Instance.GetExhibitorsKinveyQuery());
+
 
                         var downloadTask = new DownloadExhibitorsBackgroundTask(AppModel.Instance.Exhibitors, parameters);
                         downloadTask.ContinueWith((ttask, tresult) => Device.BeginInvokeOnMainThread(onFinish));
@@ -133,8 +139,8 @@ namespace Conarh_2016.Application
         public void SearchExhibitors(string pattern, DynamicListData<Exhibitor> searchModel, Action onFinish)
         {
             UserDialogs.Instance.ShowLoading(AppResources.LoadingSearchExhibitors);
-            var parameters = new DownloadListParameters(DownloadCountType.All,
-                                 QueryBuilder.Instance.GetSearchExhibitorsQuery(pattern));
+            var parameters = new KinveyDownloadListParameters(KinveyDownloadCountType.All,
+                                 QueryBuilder.Instance.GetSearchExhibitorsKinveyQuery(pattern));
 
             var searchTask = new DownloadExhibitorsBackgroundTask(searchModel, parameters);
             searchTask.ContinueWith((task, result) =>
@@ -151,8 +157,8 @@ namespace Conarh_2016.Application
 
         public void DownloadAllUsers(Action onFinish = null)
         {
-            var parameters = new DownloadListParameters(DownloadCountType.All,
-                QueryBuilder.Instance.GetUsersSortByNameQuery());
+            var parameters = new KinveyDownloadListParameters(KinveyDownloadCountType.All,
+                QueryBuilder.Instance.GetUsersSortByNameKinveyQuery());
 
             var downloadAllUsersTask = new DownloadUsersBackgroundTask(AppModel.Instance.Users,
                 parameters);
@@ -163,21 +169,24 @@ namespace Conarh_2016.Application
 
         public void SearchUsers(DynamicListData<User> dataModel, string pattern, Action onFinish)
         {
-            var parameters = new DownloadListParameters(DownloadCountType.All,
-                QueryBuilder.Instance.GetSearchUsersQuery(pattern));
+             //TODO reativar Search user AppController
+             var parameters = new KinveyDownloadListParameters(KinveyDownloadCountType.All,
+                 QueryBuilder.Instance.GetSearchUsersKinveyQuery(pattern));
 
-            var searchTask = new DownloadUsersBackgroundTask(dataModel, parameters);
-            searchTask.ContinueWith((task, result) =>
-            {
-                Device.BeginInvokeOnMainThread(onFinish);
-                if (result == null)
-                    AppProvider.PopUpFactory.ShowMessage(AppResources.FailedServer, AppResources.Error);
-            });
-            _backgroundWorkers[AppBackgroundWorkerType.SearchUsers].Add(searchTask);
+             var searchTask = new DownloadUsersBackgroundTask(dataModel, parameters);
+             searchTask.ContinueWith((task, result) =>
+             {
+                 Device.BeginInvokeOnMainThread(onFinish);
+                 if (result == null)
+                     AppProvider.PopUpFactory.ShowMessage(AppResources.FailedServer, AppResources.Error);
+             });
+             _backgroundWorkers[AppBackgroundWorkerType.SearchUsers].Add(searchTask);
+             
         }
 
         public void UpdateRating(DynamicListData<User> users, Action onFinish)
         {
+            /* TODO reativar ranking AppController
             UserDialogs.Instance.ShowLoading(AppResources.LoadingRanking);
 
             var parameters = new DownloadListParameters(DownloadCountType.FirstPage,
@@ -199,6 +208,7 @@ namespace Conarh_2016.Application
                 }
             });
             _backgroundWorkers[AppBackgroundWorkerType.DownloadRanking].Add(requestTask);
+            */
         }
 
         public void TryResetPassword()

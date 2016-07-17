@@ -19,9 +19,15 @@ namespace Conarh_2016.Application.UI.Events
 			IsBusy = true;
 			progress = 0;
 
-			AppController.Instance.DownloadEventsData (true, Increase);
-			AppController.Instance.DownloadEventsData (false, Increase);
+			
+			AppController.Instance.DownloadEventsData (false, doTheOtherOne);
 		}
+
+        public void doTheOtherOne()
+        {
+            progress += 1;
+            AppController.Instance.DownloadEventsData(true, Increase);
+        }
 
 		public void Increase()
 		{

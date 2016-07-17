@@ -12,7 +12,7 @@ namespace Conarh_2016.Application.Wrappers
 		public const string SectionColorPropertyName = "SectionColor";
 
 		public readonly SponsorType Sponsor;
-		public ExhibitorsDynamicObservableData(SponsorType sponsorType) : base(false)
+		public ExhibitorsDynamicObservableData(SponsorType sponsorType) : base(true)
 		{
 			Sponsor = sponsorType;
 		}
@@ -65,8 +65,9 @@ namespace Conarh_2016.Application.Wrappers
 		{
 			if (exhibitors == null)
 				return;
-			
-			if (DontShowCategoryIfEmpty) 
+            
+
+            if (DontShowCategoryIfEmpty) 
 			{
 				var items = new Dictionary<SponsorType, List<Exhibitor>>();
 				foreach (Exhibitor exhibitor in exhibitors) {
@@ -95,8 +96,19 @@ namespace Conarh_2016.Application.Wrappers
 			else 
 			{
 				foreach (ExhibitorsDynamicObservableData data in Items) {
-					data.UpdateData (exhibitors.FindAll (temp => temp.SponsorType.Id.Equals (data.Sponsor.Id)));
-				}
+                    List<Exhibitor> lexh = new List<Exhibitor>();
+
+                    foreach (Exhibitor exh in exhibitors)
+                    {
+                        if (exh.SponsorType.Type == data.Sponsor.Type)
+                        {
+                            lexh.Add(exh);
+                        }
+                    }
+                    data.UpdateData(lexh);
+                    //data.UpdateData(exhibitors.FindAll(temp => temp.SponsorTypeId.Equals(data.Sponsor.Type)));
+                    //data.UpdateData (exhibitors.FindAll (temp => temp.SponsorType.Id.Equals (data.Sponsor.Id)));
+                }
 			}
 		}
 

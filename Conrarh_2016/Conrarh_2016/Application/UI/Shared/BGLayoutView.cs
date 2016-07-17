@@ -12,7 +12,7 @@ namespace Conrarh_2016.Application.UI.Shared
     internal class BGLayoutView : RelativeLayout
     {
         private double posY;
-        private readonly double bannerHeight = 50;
+        private readonly double bannerHeight = AppProvider.Screen.ConvertPixelsToDp(90);
         private Image _backgroundImage;
         
         public BGLayoutView(String backgroundImage, Layout layout, bool showBanner, bool hasNavigationBar) : base()

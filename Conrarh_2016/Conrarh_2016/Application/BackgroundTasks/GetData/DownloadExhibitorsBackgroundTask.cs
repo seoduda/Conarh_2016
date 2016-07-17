@@ -1,49 +1,47 @@
-﻿using Conarh_2016.Application.DataAccess;
+﻿using Conarh_2016.Application.BackgroundTasks.GetData.Kinvey;
+using Conarh_2016.Application.DataAccess;
 using Conarh_2016.Application.Domain;
 using Conrarh_2016.Core.DataAccess.Local;
 using System.Collections.Generic;
 
 namespace Conarh_2016.Application.BackgroundTasks
 {
-    public sealed class DownloadExhibitorsBackgroundTask : DownloadListBackgroundTask<Exhibitor, RootListData<Exhibitor>>
+    //public sealed class DownloadExhibitorsBackgroundTask : DownloadListBackgroundTask<Exhibitor, RootListData<Exhibitor>>
+    public sealed class DownloadExhibitorsBackgroundTask : DownloadListKinveyBackgroundTask<Exhibitor, KinveyRootListData<Exhibitor>>
     {
         public readonly DynamicListData<Exhibitor> DList;
 
-        public DownloadExhibitorsBackgroundTask(DownloadListParameters parameters) : base(parameters)
+        public DownloadExhibitorsBackgroundTask(KinveyDownloadListParameters parameters) : base(parameters)
         {
         }
 
-        public DownloadExhibitorsBackgroundTask(DynamicListData<Exhibitor> data, DownloadListParameters parameters) : base(data, parameters)
+        public DownloadExhibitorsBackgroundTask(DynamicListData<Exhibitor> data, KinveyDownloadListParameters parameters) : base(data, parameters)
         {
             DList = data;
         }
 
-        /*
+        
         
         public override List<Exhibitor> Execute()
         {
-            /*
+        /*
             if (AppModel.Instance.SponsorTypes.Items.Count > 0)
-                return new List<SponsorType>();
-          
+                return new List<Exhibitor>();
+          */
             List<Exhibitor> result;
-            result = LocalData.getLocalExhibitorList();
-            if (DList != null)
-            {
-                DList.ClearData();
-                foreach (Exhibitor xb in result)
-                {
-                    DList.AddOne(xb);
-                }
-                //DList.UpdateData(result);
-
-                var x = AppModel.Instance.Exhibitors.Items.Count;
-                DbClient.Instance.SaveData<Exhibitor>(result).ConfigureAwait(false);
-            }
+            //result = LocalData.getLocalExhibitorList();
+            result = base.Execute();
+                
+                //var x = AppModel.Instance.Exhibitors.Items.Count;
+               // DbClient.Instance.SaveData<Exhibitor>(result).ConfigureAwait(false);
+            if (result != null)
+                AppModel.Instance.Exhibitors.UpdateData(result);
 
             return result;
         }
-              */
+
+
+
 
 
         /*

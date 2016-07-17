@@ -111,19 +111,23 @@ namespace Conarh_2016.Application.UI.Events
             tapFavEvent.Tapped += TapFavEvent_Tapped;
             _favImage.GestureRecognizers.Add(tapFavEvent);
 
+            /*
             var favLayout = new AbsoluteLayout
             {
                 Children = { _favEventBoxView },
                 Padding = new Thickness(AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width) - 50, 120, 0, 0)
             };
             favLayout.Children.Add(_favImage, new Point(2.5f, 2.5f));
+            */
+            /* TODO reativar FAV no eventView */
 
+                
             var absoluteLayout = new AbsoluteLayout { Padding = new Thickness(0, 5) };
             absoluteLayout.Children.Add(stackLayout);
 
             absoluteLayout.Children.Add(_nameLocationLayout);
             absoluteLayout.Children.Add(timeLayout, new Point(20, 0));
-            absoluteLayout.Children.Add(favLayout);
+            //absoluteLayout.Children.Add(favLayout);
 
             Content = absoluteLayout;
 

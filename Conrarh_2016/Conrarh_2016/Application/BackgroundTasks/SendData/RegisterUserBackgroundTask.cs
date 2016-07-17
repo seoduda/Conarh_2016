@@ -1,12 +1,12 @@
 ﻿using System;
-using Conarh_2016.Application.Domain;
-using Conarh_2016.Application.Domain.PostData;
-using Conarh_2016.Application.Tools;
-using Conarh_2016.Core;
-using Conarh_2016.Core.Net;
 using Conarh_2016.Core.Services;
 using Newtonsoft.Json;
 using Core.Tasks;
+using Conarh_2016.Application.Domain.PostData;
+using Conarh_2016.Core.Net;
+using Conarh_2016.Application.Domain;
+using Conarh_2016.Core;
+using Conarh_2016.Application.Tools;
 
 namespace Conarh_2016.Application.BackgroundTasks
 {
@@ -39,26 +39,28 @@ namespace Conarh_2016.Application.BackgroundTasks
 		
 				if(IsCreateNew)
 				{
-					var result = WebClient.PostStringAsync(QueryBuilder.Instance.GetUsersQuery (), serializedData).Result;
-					UniqueItem uniqueItemId = JsonConvert.DeserializeObject<UniqueItem>(result);
+                    //	var result = WebClient.PostStringAsync(QueryBuilder.Instance.GetUsersQuery (), serializedData).Result;
+                    var result = KinveyWebClient.PostSignUpStringAsync(QueryBuilder.Instance.GetUsersKinveyQuery(), serializedData).Result;
+
+                    UniqueItem uniqueItemId = JsonConvert.DeserializeObject<UniqueItem>(result);
 					userId = uniqueItemId.Id;
 				}
 				else
 				{
 					if(!Data.IsEmpty())
 					{
-						AppProvider.Log.WriteLine(LogChannel.All, QueryBuilder.Instance.GetPostUserProfileChangesQuery (UserId) + " : " + serializedData);
-						var update = WebClient.PutStringAsync(QueryBuilder.Instance.GetPostUserProfileChangesQuery (UserId), serializedData).Result;
+						AppProvider.Log.WriteLine(LogChannel.All, QueryBuilder.Instance.GetPostUserProfileChangesKinveyQuery (UserId) + " : " + serializedData);
+						var update = KinveyWebClient.PutStringAsync(QueryBuilder.Instance.GetPostUserProfileChangesKinveyQuery(UserId), serializedData).Result;
 					}
 				}
-
+                /* Todo - arrumar upload de fotos RegisterUserBackgroundTask
 				if(!string.IsNullOrEmpty(imagePath))
 				{
 					var imageContent = AppProvider.IOManager.GetBytesFileContent(imagePath);
 					var response = WebClient.PutBytesAsync(QueryBuilder.Instance.GetUploadUserImageQuery (userId), imageContent).Result;
 				}
-
-				return Data;
+                */
+                return Data;
 			}
 			catch(Exception ex) 
 			{

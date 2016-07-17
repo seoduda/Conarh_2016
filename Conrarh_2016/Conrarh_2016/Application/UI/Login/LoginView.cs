@@ -2,7 +2,7 @@
 using Conarh_2016.Core;
 using Conrarh_2016.Application.UI.Shared;
 using Conrarh_2016.Core.DataAccess;
-using KinveyXamarin;
+//using KinveyXamarin;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -33,7 +33,7 @@ namespace Conarh_2016.Application.UI.Login
             BoxView transpSpace = new BoxView();
             transpSpace.Color = Color.Transparent;
             transpSpace.WidthRequest = 1;
-            transpSpace.HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height/5);
+            transpSpace.HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height/4);
             
             layout.Children.Add(transpSpace);
 

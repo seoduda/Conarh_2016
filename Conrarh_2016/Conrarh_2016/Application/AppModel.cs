@@ -80,6 +80,9 @@ namespace Conarh_2016.Application
             SponsorTypes = new DynamicListData<SponsorType>();
             SponsorTypes.UpdateData(DbClient.Instance.GetData<SponsorType>().Result);
 
+            /* TODO ARumar o load data */
+            SponsorTypes.Items.Clear();
+
             Users = new DynamicListData<User>();
             Users.UpdateData(DbClient.Instance.GetData<User>().Result);
 
@@ -92,10 +95,15 @@ namespace Conarh_2016.Application
             }
             Requests.UpdateData(requestsData);
 
+
+            /* TODO ARumar o load data */
             Exhibitors = new DynamicListData<Exhibitor>();
             List<Exhibitor> exhibitorData = DbClient.Instance.GetData<Exhibitor>().Result;
+            /*
             foreach (Exhibitor exhibitor in exhibitorData)
                 exhibitor.SponsorType = SponsorTypes.Find(exhibitor.SponsorTypeId);
+            */
+            exhibitorData.Clear();
             Exhibitors.UpdateData(exhibitorData);
 
             PayedEvents = new DynamicListData<EventData>();

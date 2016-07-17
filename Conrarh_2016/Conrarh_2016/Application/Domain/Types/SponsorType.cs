@@ -6,7 +6,8 @@ namespace Conarh_2016.Application.Domain
 	[JsonConverter(typeof(TypedJsonConverter<SponsorType>))]
 	public sealed class SponsorType:UpdatedUniqueItem
 	{
-		[JsonProperty(JsonKeys.Title)]
+
+        [JsonProperty(JsonKeys.Title)]
 		public string Title
 		{
 			set;
@@ -30,7 +31,7 @@ namespace Conarh_2016.Application.Domain
 
         public new static class JsonKeys
 		{
-			public const string Title = "title";
+            public const string Title = "title";
 			public const string Color = "color";
 			public const string Type = "type";
         }

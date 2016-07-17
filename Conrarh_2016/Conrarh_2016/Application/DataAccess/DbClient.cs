@@ -88,8 +88,12 @@ namespace Conarh_2016.Application.DataAccess
 				else if (data is EventData) {
 					var eventData = data as EventData;
 					List<string> ids = new List<string> ();
-					foreach (Speaker speaker in eventData.Speechers)
-						ids.Add (speaker.Id);
+                    foreach (Speaker speaker in eventData.Speechers)
+                    {
+                        /* Todo arrumar gambi da ID DB_clien.cs */
+                        //speaker.Id = speaker.Xid;
+                        ids.Add(speaker.Id);
+                    }
 					eventData.SpeechersList = JsonConvert.SerializeObject (ids);
 				}
 				else if (data is WallPostLike) {

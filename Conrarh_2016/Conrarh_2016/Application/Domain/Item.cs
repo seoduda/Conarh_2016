@@ -13,11 +13,20 @@ namespace Conarh_2016.Application.Domain
 			set;
 			get;
 		}
+        /*
+        [JsonProperty(JsonKeys.XID)]
+        public string Xid
+        {
+            set;
+            get;
+        }
+        */
 
-		public static class JsonKeys
+        public static class JsonKeys
 		{
-			public const string Id = "id";
-		}
+			public const string Id = "_id";
+            //public const string XID = "id";
+        }
 
 		public override string ToString ()
 		{

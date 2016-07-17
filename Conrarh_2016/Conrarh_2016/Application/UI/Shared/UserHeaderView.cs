@@ -161,12 +161,10 @@ namespace Conarh_2016.Application.UI.Shared
 
             var progbar = new ProgressBar()
             {
-                HeightRequest =17,
+                HeightRequest = 17,
                 //BackgroundColor = AppResources.ProfilePointsColor,
                 WidthRequest = 300,
-                Progress = 0.3
-
-
+                Progress = AppModel.Instance.CurrentUser.User.ScorePointsProgression
             };
 
             Image progbarImageLabel = new Image()

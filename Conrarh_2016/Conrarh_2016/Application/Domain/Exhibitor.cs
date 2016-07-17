@@ -7,7 +7,8 @@ namespace Conarh_2016.Application.Domain
 	[JsonConverter(typeof(TypedJsonConverter<Exhibitor>))]
 	public sealed class Exhibitor:UpdatedUniqueItem
 	{
-		[JsonProperty(JsonKeys.Title)]
+
+        [JsonProperty(JsonKeys.Title)]
 		public string Title 
 		{
 			set;
@@ -42,8 +43,8 @@ namespace Conarh_2016.Application.Domain
 			set;
 			get;
 		}
-
-		public string SponsorTypeId
+        [JsonProperty(JsonKeys.SponsorTypeId)]
+        public string SponsorTypeId
 		{
 			set;
 			get;
@@ -53,16 +54,18 @@ namespace Conarh_2016.Application.Domain
 		{
 			get 
 			{
-				return string.Format ("{0} / Stand {1}", Venue, Stand);
-			}
+                //return string.Format ("{0} / Stand {1}", Venue, Stand);
+                return string.Format("{0} {1}", Venue, Stand);
+            }
 		}
 
 		public new static class JsonKeys
 		{
-			public const string Title = "title";
+            public const string Title = "title";
 			public const string Venue = "venue";
-			public const string SponsorType = "sponsor_type";
-			public const string Stand = "stand";
+			public const string SponsorType = "sponsorType";
+            public const string SponsorTypeId = "sponsorType_Type";
+            public const string Stand = "stand";
 			public const string Icon = "icon";
 		}
 
