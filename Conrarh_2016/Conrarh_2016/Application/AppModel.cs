@@ -90,8 +90,14 @@ namespace Conarh_2016.Application
             List<ConnectRequest> requestsData = DbClient.Instance.GetData<ConnectRequest>().Result;
             foreach (ConnectRequest request in requestsData)
             {
+                /*
+
                 request.Requester = Users.Find(request.RequesterId);
                 request.Responder = Users.Find(request.ResponderId);
+                */
+
+                request.RequesterId = request.RequesterId;
+                request.ResponderId = request.ResponderId;
             }
             Requests.UpdateData(requestsData);
 
@@ -180,8 +186,12 @@ namespace Conarh_2016.Application
             List<ConnectRequest> requests = DbClient.Instance.GetUserConnectRequest(newUserModel.User.Id).Result;
             foreach (ConnectRequest request in requests)
             {
+
+                /*
+
                 request.Requester = Users.Find(request.RequesterId);
                 request.Responder = Users.Find(request.ResponderId);
+                */
             }
             newUserModel.Connections.UpdateData(requests);
 

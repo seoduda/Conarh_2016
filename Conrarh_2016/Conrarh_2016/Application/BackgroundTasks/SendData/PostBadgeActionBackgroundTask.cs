@@ -10,7 +10,7 @@ namespace Conarh_2016.Application.BackgroundTasks
 		public readonly DynamicListData<BadgeAction> ListData;
 
 		public PostBadgeActionBackgroundTask(AppBadgeType badgeType, string userId, DynamicListData<BadgeAction> listData):
-		base(QueryBuilder.Instance.GetPostBadgesActionQuery (), new BadgeAction (userId, AppResources.GetBadgeIdByType(badgeType)), true)
+		base(QueryBuilder.Instance.GetPostBadgesActionKinveyQuery(), new BadgeAction (userId, AppResources.GetBadgeIdByType(badgeType)), true)
 		{
 			ListData = listData;
 		}

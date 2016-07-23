@@ -17,24 +17,6 @@ namespace Conarh_2016.Application.UI.Events
 
             Title = AppResources.EventDetailsHeader.ToUpper();
             BackgroundColor = AppResources.AgendaPageBackgroundColor;
-            /*
-            RelativeLayout relatlay = new RelativeLayout
-            {
-                WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width)
-                // BackgroundColor =
-            };
-            Image bg = new Image()
-            {
-                Source = ImageLoader.Instance.GetImage(AppResources.LoginBgImage, false),
-                Aspect= Aspect.AspectFill
-            };
-
-            relatlay.Children.Add(bg,
-                Constraint.Constant(0),
-                Constraint.Constant(0),
-                Constraint.RelativeToParent((parent) => { return parent.Width; }),
-                Constraint.RelativeToParent((parent) => { return parent.Height; }));
-                */
 
             StackLayout layout = new StackLayout() { VerticalOptions = LayoutOptions.StartAndExpand };
 
@@ -48,7 +30,7 @@ namespace Conarh_2016.Application.UI.Events
                 whiteBoxLayout.Children.Add(new BoxView
                 {
                     WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width),
-                    HeightRequest = 60,
+                    HeightRequest = 10,
                     BackgroundColor = Color.Transparent
                 });
 
@@ -59,16 +41,18 @@ namespace Conarh_2016.Application.UI.Events
                     Spacing = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width) - 60 * 2,
                     Padding = new Thickness(5)
                 };
-
+                /*
                 if (!string.IsNullOrEmpty(Data.PointsImagePath))
                 {
+
                     var pointsImage = new DownloadedImage(AppResources.DefaultPointsImage) { HeightRequest = 50 };
                     pointsImage.UpdateAtTime = Data.UpdatedAtTime;
                     pointsImage.ServerImagePath = Data.PointsImagePath;
                     imagesStackLayout.Children.Add(pointsImage);
+                
                 }
-
-                if (!string.IsNullOrEmpty(Data.SponsorImagePath))
+                */
+                if (!string.IsNullOrEmpty(Data.SponsorImagePath.Trim()))
                 {
                     var sponsorImage = new DownloadedImage(AppResources.DefaultSponsorImage) { HeightRequest = 50 };
                     sponsorImage.UpdateAtTime = Data.UpdatedAtTime;
@@ -114,7 +98,7 @@ namespace Conarh_2016.Application.UI.Events
                     WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width * 3) / 4),
                     BackgroundColor = AppResources.SpeecherBgColor
                 };
-                absoluteBtnLayout.Children.Add(eventsActionBtn);
+              //  absoluteBtnLayout.Children.Add(eventsActionBtn);
 
                 var btnLabel = new Label
                 {
@@ -123,7 +107,7 @@ namespace Conarh_2016.Application.UI.Events
                     TextColor = AppResources.SpeecherTextColor,
                     FontSize = 15,
 
-                    // TODO : habilitar comentários e ediatr tela de comentarios
+                    // TODO : habilitar comentários e editar tela de comentarios
                     IsEnabled = false,
                 };
                 absoluteBtnLayout.Children.Add(btnLabel, new Point(50, 6));
@@ -141,8 +125,8 @@ namespace Conarh_2016.Application.UI.Events
             }
 
             BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
-            //Content = new ScrollView {Content = bgLayout };
-            Content = new ContentView { Content = bgLayout };
+            Content = new ScrollView {Content = bgLayout };
+            //Content = new ContentView { Content = bgLayout };
         }
 
         private SpeecherView GetSpeecherItem(Speaker speecherData)

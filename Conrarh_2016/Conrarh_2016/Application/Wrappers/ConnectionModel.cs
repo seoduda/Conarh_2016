@@ -100,19 +100,31 @@ namespace Conarh_2016.Application.Wrappers
 
 		private void RequestIsChanged(ConnectRequest request)
 		{
-			if (Request.Accepted)
-				State = ConnectState.RequestAccepted;
-			else 
-			{
+            if (Request.Accepted)
+            {
+                State = ConnectState.RequestAccepted;
+            }
+            else
+            {
+                /* TODO VAlidar
 				if (UserModel.User.Id.Equals (Request.Requester.Id))
 					State = ConnectState.RequestedToAccept;
 				else if (UserModel.User.Id.Equals (Request.Responder.Id))
 					State = ConnectState.RequestSent;
 				else
 					State = ConnectState.RequestNotSent;
-			}
+                    */
+                if (UserModel.User.Id.Equals(Request.RequesterId))
+                    State = ConnectState.RequestedToAccept;
+                else if (UserModel.User.Id.Equals(Request.ResponderId))
+                    State = ConnectState.RequestSent;
+                else
+                    State = ConnectState.RequestNotSent;
 
-			RaiseIsChanged ();
+
+            }
+
+            RaiseIsChanged ();
 		}
 
 		public void ApplyConnectRequest(ConnectRequest request)
@@ -175,8 +187,13 @@ namespace Conarh_2016.Application.Wrappers
 		{
 			get
 			{
-				return Request.Responder.Id.Equals (AppModel.Instance.CurrentUser.User.Id) ? Request.Requester : Request.Responder;
-			}
+                /* TODO validar
+                 return Request.Responder.Id.Equals (AppModel.Instance.CurrentUser.User.Id) ? Request.Requester : Request.Responder;
+                 */
+                return Request.ResponderId.Equals(AppModel.Instance.CurrentUser.User.Id) ?
+                        AppModel.Instance.Users.Find(Request.RequesterId) :
+                        AppModel.Instance.Users.Find(Request.ResponderId);
+            }
 		}
 
 		public FormattedString HeaderLabel

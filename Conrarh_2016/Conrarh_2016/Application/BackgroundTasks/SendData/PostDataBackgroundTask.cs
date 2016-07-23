@@ -34,9 +34,10 @@ namespace Conarh_2016.Application.BackgroundTasks
 				try
 				{
 					if(IsPostQuery)
-						result = WebClient.PostStringAsync(Query, serializedData).Result;
-					else 
-						result = WebClient.PutStringAsync(Query, serializedData).Result;
+                        result = KinveyWebClient.PostStringAsync(Query, serializedData).Result;
+                    //result = WebClient.PostStringAsync(Query, serializedData).Result;
+                    else 
+						result = KinveyWebClient.PutStringAsync(Query, serializedData).Result;
 				}
 				catch(Exception ex)
 				{

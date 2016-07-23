@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using Conarh_2016.Application;
 using Conarh_2016.Application.BackgroundTasks;
 using Conarh_2016.Application.BackgroundTasks.GetData.Kinvey;
 using Conarh_2016.Application.Domain;
@@ -508,10 +509,10 @@ namespace Conarh_2016.Application
         public void DownloadConnections(Action onFinish = null, bool lookAccepted = false)
         {
             string userId = AppModel.Instance.CurrentUser.User.Id;
-            string query = QueryBuilder.Instance.GetConnectRequestByUserQuery(userId);
+            string query = QueryBuilder.Instance.GetConnectRequestedByUserKinveyQuery(userId);
 
-            AppProvider.Log.WriteLine(LogChannel.All, query);
-            var task = new DownloadConnectRequestDataByUserBackgroundTask(AppModel.Instance.CurrentUser.Connections, query);
+            AppProvider.Log.WriteLine(LogChannel.All, userId);
+            var task = new DownloadUserConnectRequestDataBackgroundTask(AppModel.Instance.CurrentUser.Connections, query);
             task.ContinueWith((rtask, result) => Device.BeginInvokeOnMainThread(onFinish));
             _backgroundWorkers[AppBackgroundWorkerType.UserDownloadConnections].Add(task);
         }
@@ -532,7 +533,7 @@ namespace Conarh_2016.Application
             string requestedUserId = connectionModel.UserModel.User.Id;
 
             var checkIsCurrentUserSendRequest = new DownloadConnectRequestDataByUserBackgroundTask(AppModel.Instance.CurrentUser.Connections,
-                QueryBuilder.Instance.GetConnectRequestByUsersQuery(currentUserId, requestedUserId));
+                QueryBuilder.Instance.GetConnectRequestByUsersKimveyQuery(currentUserId, requestedUserId));
 
             checkIsCurrentUserSendRequest.ContinueWith((task, result) =>
             {
@@ -547,7 +548,7 @@ namespace Conarh_2016.Application
                     if (result.Count == 0)
                     {
                         var checkIsUserSendRequestToCurrentUser = new DownloadConnectRequestDataByUserBackgroundTask(AppModel.Instance.CurrentUser.Connections,
-                            QueryBuilder.Instance.GetConnectRequestByUsersQuery(requestedUserId, currentUserId));
+                            QueryBuilder.Instance.GetConnectRequestByUsersKimveyQuery(requestedUserId, currentUserId));
 
                         checkIsUserSendRequestToCurrentUser.ContinueWith((rtask, rresult) =>
                         {
@@ -571,7 +572,7 @@ namespace Conarh_2016.Application
                                     }
                                     else
                                     {
-                                        string query = QueryBuilder.Instance.GetConnectionRequestByIdQuery(reresult.Id);
+                                        string query = QueryBuilder.Instance.GetConnectionRequestByIdKinveyQuery(reresult.Id);
                                         var getRequestTask = new GetItemByIdBackgroundTask<ConnectRequest>(query, connectionModel.UserModel.Connections);
 
                                         getRequestTask.ContinueWith((getTask, getResult) =>
@@ -606,10 +607,18 @@ namespace Conarh_2016.Application
         {
             UserDialogs.Instance.ShowLoading(AppResources.LoadingSendingAcceptRequest);
 
+            /* Todo validar
             var data = new RequestConnectionData(connectionModel.Request.Requester.Id,
                 connectionModel.Request.Responder.Id,
                 AppResources.GetPointsEarned(connectionModel.Request.Responder.UserType),
                 true);
+                */
+            var data = new RequestConnectionData(connectionModel.Request.RequesterId,
+                connectionModel.Request.ResponderId,
+                AppResources.GetPointsEarned(AppModel.Instance.Users.Find(connectionModel.Request.ResponderId).UserType),
+                true);
+
+
 
             var requestTask = new RequestConnectionBackgroundTask(data, true, connectionModel.Request.Id);
             requestTask.ContinueWith((task, result) =>
@@ -624,7 +633,7 @@ namespace Conarh_2016.Application
                     var postBadgeTask = new PostBadgeActionBackgroundTask(AppBadgeType.ConnectTo50Users, AppModel.Instance.CurrentUser.User.Id, AppModel.Instance.CurrentUser.BadgeActions);
                     postBadgeTask.ContinueWith((badgeTask, badgeResult) =>
                     {
-                        string query = QueryBuilder.Instance.GetConnectionRequestByIdQuery(connectionModel.Request.Id);
+                        string query = QueryBuilder.Instance.GetConnectionRequestByIdKinveyQuery(connectionModel.Request.Id);
                         var getRequestTask = new GetItemByIdBackgroundTask<ConnectRequest>(query, connectionModel.UserModel.Connections);
 
                         getRequestTask.ContinueWith((getTask, getResult) =>
@@ -636,7 +645,6 @@ namespace Conarh_2016.Application
                                 {
                                     if (Device.OS == TargetPlatform.iOS)
                                         UserDialogs.Instance.ShowSuccess(AppResources.SuccessfulAcceptRequestConnection, 1);
-
                                     connectionModel.ApplyConnectRequest(getResult);
                                     UpdateProfileData(AppModel.Instance.CurrentUser);
                                 });
@@ -685,7 +693,7 @@ namespace Conarh_2016.Application
                                 var postBadgeTask = new PostBadgeActionBackgroundTask(AppBadgeType.ConnectToUncommonUser, AppModel.Instance.CurrentUser.User.Id, AppModel.Instance.CurrentUser.BadgeActions);
                                 postBadgeTask.ContinueWith((badgeTask, badgeResult) =>
                                 {
-                                    string query = QueryBuilder.Instance.GetConnectionRequestByIdQuery(result.Id);
+                                    string query = QueryBuilder.Instance.GetConnectionRequestByIdKinveyQuery(result.Id);
                                     var getRequestTask = new GetItemByIdBackgroundTask<ConnectRequest>(query, connectionModel.UserModel.Connections);
 
                                     getRequestTask.ContinueWith((getTask, getResult) =>
@@ -735,13 +743,13 @@ namespace Conarh_2016.Application
             var saveProfileChanges = new RegisterUserBackgroundTask(profileChanges, false, AppModel.Instance.CurrentUser.User.Id);
             saveProfileChanges.ContinueWith((task, result) =>
             {
+                //AppModel.Instance.ap
                 UserDialogs.Instance.HideLoading();
 
                 if (task.Exception != null)
                 {
                     ServerException exception = (ServerException)task.Exception.InnerException;
                     var serverError = JsonConvert.DeserializeObject<ServerError>(exception.ErrorMessage);
-
                     AppProvider.PopUpFactory.ShowMessage(serverError.ErrorMessage, AppResources.Warning);
                 }
                 else
@@ -790,8 +798,8 @@ namespace Conarh_2016.Application
                 else
                 {
                     userModel.UpdateUser(profileResult[0]); //points, score, etc
-                    UserDialogs.Instance.HideLoading();
-                    /*
+                    //UserDialogs.Instance.HideLoading();
+
                     var downloadBadges = new DownloadBadgesTypesBackgroundTask();
                     downloadBadges.ContinueWith((badgesTask, badgesResult) =>
                     {
@@ -809,22 +817,24 @@ namespace Conarh_2016.Application
 
                                 if (badgesUserResult == null)
                                     AppProvider.PopUpFactory.ShowMessage(AppResources.FailedServer, AppResources.Error);
+                                /* TODO - reativar DownloadConnections USERCONTROLLER:UpdateProfileData - validar se necessário
                                 else if (downloadConnections)
                                     DownloadConnections(onFinish: onFinish);
                                 else
-                                    Device.BeginInvokeOnMainThread(onFinish);
+                                */
+                                Device.BeginInvokeOnMainThread(onFinish);
                             });
                             _backgroundWorkers[AppBackgroundWorkerType.UserDefault].Add(downloadBadgesByUserTask);
                         }
                     });
                     _backgroundWorkers[AppBackgroundWorkerType.UserDefault].Add(downloadBadges);
-                    */
                 }
             });
 
             _backgroundWorkers[AppBackgroundWorkerType.UserDefault].Add(downloadProfileTask);
         }
-        public void RegisterUserLinkedin(CreateUserData data)
+
+        public void RegisterUserLinkedin(CreateUserData data, String serverImagePath)
         {
             UserDialogs.Instance.ShowLoading(AppResources.LoadingCreatingUser);
 
@@ -855,3 +865,5 @@ namespace Conarh_2016.Application
         }
     }
 }
+ 
+ 

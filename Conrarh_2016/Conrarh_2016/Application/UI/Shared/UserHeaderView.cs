@@ -1,11 +1,24 @@
 ﻿using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.UI.Controls;
-using Conarh_2016.Core;
 using System;
+using System.Globalization;
 using Xamarin.Forms;
 
 namespace Conarh_2016.Application.UI.Shared
 {
+    public class IntDivByKDoubleConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (double)(((int)value) / 1000) + 0.02;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (int)(((double)value) * 1000);
+        }
+    }
+
     public sealed class UserHeaderView : ContentView
     {
         private const int ImageHeight = 80;
@@ -14,7 +27,7 @@ namespace Conarh_2016.Application.UI.Shared
 
         public event Action EditUserProfile;
 
-        public UserHeaderView(UserModel userModel, bool showContacts = false)
+        public UserHeaderView(UserModel userModel, bool showContacts = false, bool showButtonEdit = true)
         {
             Model = userModel;
 
@@ -24,7 +37,6 @@ namespace Conarh_2016.Application.UI.Shared
                 Orientation = StackOrientation.Vertical
             };
 
-
             /**
             Tirei o click do header inteiro e passei para o btEdit
             var tappableHeaderLayout = new StackLayout { Orientation = StackOrientation.Vertical };
@@ -32,8 +44,7 @@ namespace Conarh_2016.Application.UI.Shared
 
             var headerLayout = new StackLayout { Orientation = StackOrientation.Vertical };
 
-            var topLayout = new StackLayout { Orientation = StackOrientation.Horizontal, Padding = new  Thickness (20, 5, 5, 0) };
-
+            var topLayout = new StackLayout { Orientation = StackOrientation.Horizontal, Padding = new Thickness(20, 5, 5, 0) };
 
             var photoLayout = new AbsoluteLayout { };
             photoLayout.Children.Add(new BoxView
@@ -42,7 +53,6 @@ namespace Conarh_2016.Application.UI.Shared
                 HeightRequest = ImageHeight,
                 Color = AppResources.MenuColor
             });
-
 
             var userImage = new DownloadedImage(AppResources.DefaultUserImage)
             {
@@ -67,21 +77,22 @@ namespace Conarh_2016.Application.UI.Shared
             namesLayout.Children.Add(jobLabel);
 
             topLayout.Children.Add(namesLayout);
-            Image btEdit = new Image()
+
+            if (showButtonEdit)
             {
-                Source = ImageLoader.Instance.GetImage(AppResources.DefaultBtEdit, false),
-                HeightRequest = ImageHeight/2,
-                WidthRequest = ImageHeight/2,
-            };
+                Image btEdit = new Image()
+                {
+                    Source = ImageLoader.Instance.GetImage(AppResources.DefaultBtEdit, false),
+                    HeightRequest = ImageHeight / 2,
+                    WidthRequest = ImageHeight / 2,
+                };
 
-            TapGestureRecognizer tapRecognizer = new TapGestureRecognizer();
-            tapRecognizer.Tapped += OnEditUserTapped;
+                TapGestureRecognizer tapRecognizer = new TapGestureRecognizer();
+                tapRecognizer.Tapped += OnEditUserTapped;
 
-            btEdit.GestureRecognizers.Add(tapRecognizer);
-
-
-
-            topLayout.Children.Add(btEdit);
+                btEdit.GestureRecognizers.Add(tapRecognizer);
+                topLayout.Children.Add(btEdit);
+            }
 
             headerLayout.Children.Add(topLayout);
 
@@ -110,7 +121,6 @@ namespace Conarh_2016.Application.UI.Shared
 
             stackLayout.Children.Add(headerLayout);
 
-
             /* Implementação com Progressbar */
 
             var pointsLayout = new AbsoluteLayout
@@ -132,8 +142,7 @@ namespace Conarh_2016.Application.UI.Shared
                 HeightRequest = pointsCountBoxHeigth - 12,
                 WidthRequest = pointsCountBoxHeigth - 2,
             };
-            
-            //pointsCountLabel.SetBinding(Label.TextProperty, User.ScorePointsPropertyName);
+
             pointsCountLabel.SetBinding(Label.TextProperty, User.ScorePointsProperty);
 
             var pointsCountText = new Label
@@ -164,15 +173,17 @@ namespace Conarh_2016.Application.UI.Shared
                 HeightRequest = 17,
                 //BackgroundColor = AppResources.ProfilePointsColor,
                 WidthRequest = 300,
-                Progress = AppModel.Instance.CurrentUser.User.ScorePointsProgression
+                //  Progress = 0.3
             };
+            //IntDivByKDoubleConverter iDkC = new IntDivByKDoubleConverter();
+            //progbar.BindingContextChanged
+            progbar.SetBinding(ProgressBar.ProgressProperty, User.ScorePointsProperty, BindingMode.Default, new IntDivByKDoubleConverter(), null);
 
             Image progbarImageLabel = new Image()
             {
                 Source = ImageLoader.Instance.GetImage(AppResources.ProfileLevelProgressBarImageLabel, false),
                 HeightRequest = pgImagelabelHeigth,
                 WidthRequest = 300,
-
             };
 
             pointsLayout.Children.Add(progbar, new Point(pointsCountBoxHeigth, pgImagelabelHeigth));
@@ -181,15 +192,15 @@ namespace Conarh_2016.Application.UI.Shared
 
             stackLayout.Children.Add(pointsLayout);
 
-/*
-            stackLayout.Children.Add(new BoxView
-            {
-                WidthRequest = AppProvider.Screen.Width,
-                HeightRequest = 1,
-                Color = Color.Gray
-            });
+            /*
+                        stackLayout.Children.Add(new BoxView
+                        {
+                            WidthRequest = AppProvider.Screen.Width,
+                            HeightRequest = 1,
+                            Color = Color.Gray
+                        });
 
-    */
+                */
 
             Content = stackLayout;
 

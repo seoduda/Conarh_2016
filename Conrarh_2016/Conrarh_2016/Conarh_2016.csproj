@@ -41,6 +41,7 @@
     <Compile Include="Application\BackgroundTasks\GetData\DownloadBadgesByUserBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadBadgesTypesBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadConnectRequestDataByUserBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadUserConnectRequestDataBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadEventsDataBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadEventUserVotesBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadExhibitorsBackgroundTask.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Application\BackgroundTasks\GetData\Kinvey\KinveyRootListData.cs" />
     <Compile Include="Application\BackgroundTasks\LoginBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\SendData\DeleteDataBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\SendData\Kinvey\PostImageKinveyBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\SendData\PostBadgeActionBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\SendData\PostDataBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\SendData\PostEventVoteBackgroundTask.cs" />

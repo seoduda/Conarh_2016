@@ -216,87 +216,11 @@ namespace Conarh_2016.Application.UI.Login
         private void tapImage_Tapped(object sender, EventArgs e)
         {
             signupLinkedin();
-            //DisplayAlert("Alert", "This is an image button", "OK");
         }
 
         private  void signupLinkedin()
         {
-            
              AppProvider.LinkedinLogin.createUserLinkedin();
-            //var l = udata.Name;
-            //AppProvider.LinkedinLogin.openPage();
-
-            /*
-            //Client kinveyClient = new Client.Builder(Config.KinveyKey, Config.KinveySecret).build();
-            //Client mKinveyClient = new Client.Builder(your_app_key, your_app_secret).build();
-            //User user = await kinveyClient.User().lin
-            //User user =  kinveyClient.User().LoginLinkedInAsync(AppResources.ApiLinkedinAccessTokenUrl,
-                                                                     AppResources.ApiLinkedinAuthorizeUrl,
-                                                                        AppResources.ApiLinkedinClientId,
-                                                                        AppResources.ApiLinkedinClientSecret);
-            /*
-            var auth = new OAuth2Authenticator(
-                       clientId: AppResources.ApiLinkedinClientId,
-                       clientSecret: AppResources.ApiLinkedinClientSecret,
-                       scope: AppResources.ApiLinkedinScope,
-                       authorizeUrl: new Uri(AppResources.ApiLinkedinAuthorizeUrl),
-                       redirectUrl: new Uri(AppResources.ApiLinkedinRedirectUrl),
-                       accessTokenUrl: new Uri(AppResources.ApiLinkedinAccessTokenUrl)
-                        );
-
-            //var se = sender;
-            // If authorization succeeds or is canceled, .Completed will be fired.
-            auth.AllowCancel = true;
-            #if __ANDROID__
-                StartActivity(auth.GetUI(this));
-			
-            #endif      
-
-
-
-            auth.Completed += async (sender2, eventArgs) =>
-            {
-                if (eventArgs.IsAuthenticated)
-                {
-                    string dd = eventArgs.Account.Username;
-                    var values = eventArgs.Account.Properties;
-
-                    var access_token = values["access_token"];
-                    try
-                    {
-                        var request = System.Net.HttpWebRequest.Create(string.Format(@"https://api.linkedin.com/v1/people/~:(firstName,lastName,headline,picture-url,positions,email-address )?oauth2_access_token=" + access_token + "&format=json", ""));
-                        request.ContentType = "application/json";
-                        request.Method = "GET";
-
-                        //using (HttpWebResponse response = await request.GetResponseAsync() request.GetResponse() as HttpWebResponse)
-                        using (HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse)
-                        {
-                            //System.Console.Out.WriteLine("Stautus Code is: {0}", response.StatusCode);
-
-                            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                            {
-                                var content = reader.ReadToEnd();
-                                if (!string.IsNullOrWhiteSpace(content))
-                                {
-                                    //System.Console.Out.WriteLine(content);
-                                }
-                                //infoText.Text = content.ToString();
-                                var result = JsonConvert.DeserializeObject<dynamic>(content);
-                                String info = (string)result["firstName"] + " " + (string)result["lastName"]
-                                + " " + (string)result["headline"] + "-" + (string)result["emailAddress"] + "X" + (string)result["positions"]["values"][0]["company"]["name"];
-
-                                
-                                //infoText.Text = content.ToString();
-                            }
-                        }
-                    }
-                    catch (Exception exx)
-                    {
-                       // System.Console.WriteLine(exx.ToString());
-                    }
-                }
-            };
-            */
         }
     }
 }

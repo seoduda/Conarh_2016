@@ -105,9 +105,9 @@ namespace Conarh_2016.Application.UI.Shared
 
 			var fs = new FormattedString ();
 
-			string firstPart = "Ao clicar em cadastrar, você está de acordo com os";
+			string firstPart = "Ao clicar em cadastrar, você confirma estar de acordo com nossos";
 			string secondPart = " Termos de Uso ";
-			string thirdPart = "e a";
+			string thirdPart = "e com a";
 			string fourthPart = " Política de Privacidade";
 
 			fs.Spans.Add (new Span { Text = firstPart, ForegroundColor = Color.Black, FontSize = 14});

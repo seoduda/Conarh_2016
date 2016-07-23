@@ -30,7 +30,11 @@ namespace Conarh_2016.Application.UI.Events
 				BackgroundColor = eventColor
 			});
 
-			var speecherImage = new DownloadedImage (AppResources.DefaultUserImage) {
+            String speecherImagePath = String.IsNullOrEmpty(Data.ProfileImagePath.Trim()) ?
+                AppResources.DefaultUserImage :
+                Data.ProfileImagePath.Trim();
+
+            var speecherImage = new DownloadedImage (speecherImagePath) {
 				HeightRequest = ItemHeight,
 				WidthRequest = ItemHeight,
 				Aspect = Aspect.AspectFill

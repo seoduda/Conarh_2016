@@ -54,16 +54,7 @@ namespace Conarh_2016.Application.BackgroundTasks.GetData.Kinvey
         private KinveyRootListData<T> DownloadPageData(int pageIndex)
         {
             string newQuery = TaskParameters.Query;
-            //newQuery = QueryBuilder.Instance.GetSponsorTypesKinveyQuery();
-            /*
-            if (newQuery.Contains("?"))
-                newQuery = string.Format("{0}&page={1}", newQuery, pageIndex);
-            else
-                newQuery = string.Format("{0}?page={1}", newQuery, pageIndex);
-             */
-            //String s = KinveyWebClient.GetStringAsync()
             List<T> _data = KinveyWebClient.GetObjectAsync<List<T>>(newQuery).Result;
-            //_data = setIds(_data);
             KinveyRootListData<T> krld = new KinveyRootListData<T>(_data);
 
             return krld;
@@ -134,18 +125,6 @@ namespace Conarh_2016.Application.BackgroundTasks.GetData.Kinvey
             return null;
             */
         }
-         /* TODO apagar setEventsIds
-        private List<T> setIds(List<T> result)
-        {
-            List<T> objList = new List<T>();
-            foreach (T obj in result)
-            {
-                obj.Id = obj.Xid;
-                objList.Add(obj);
-            }
-            return objList;
-        }
-        */
-
+ 
     }
 }

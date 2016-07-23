@@ -51,7 +51,7 @@ namespace Conarh_2016.Application.UI.Connect
 				TextColor = Color.White,
 				BackgroundColor = AppResources.AgendaExpoColor,
 				BorderRadius = 0,
-				FontSize = 13,
+				FontSize = 12,
 				Text = AppResources.ConnectRequestNotSent,
 				FontAttributes = FontAttributes.Bold
 			};
@@ -132,7 +132,7 @@ namespace Conarh_2016.Application.UI.Connect
 
 					_connectBtn.IsVisible = true;
 					_connectBtn.BackgroundColor = Model.BtnStateColor;
-					_connectBtn.TextColor = Model.State == ConnectState.RequestNotSent ? AppResources.AgendaCongressoColor : Color.White;
+					_connectBtn.TextColor = Model.State == ConnectState.RequestNotSent ? AppResources.MenuColor : Color.White;
 					_connectBtn.Text = Model.BtnStateHeader;
 				}
 			});

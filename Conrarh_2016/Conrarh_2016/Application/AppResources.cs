@@ -104,7 +104,8 @@ namespace Conarh_2016.Application
         public static string ProfileContactsHeader = "Meus contatos";
         public static string SaveProfileButton = "Salvar";
         public static string EditProfile = "Editar perfil";
-        public static string ConnectRequestNotSent = "Conecte-se";
+        //public static string ConnectRequestNotSent = "Conecte-se";
+        public static string ConnectRequestNotSent = "Conectar";
         public static string ConnectRequestSent = "Enviado";
         public static string ConnectAcceptRequest = "Aceitar";
         public static string LoadingSendingRequest = "Enviando solicitação…";
@@ -258,7 +259,7 @@ namespace Conarh_2016.Application
         public static string HowToPlayCarouselPageImage3 = "carousel_3.png";
         public static string HowToPlayCarouselPageImage4 = "carousel_4.png";
 
-        //public static string ProfileLevelProgressBar = "levelProgressBar.png";
+        
         public static string ProfileLevelProgressBarImageLabel = "levelProgressBarImageLabel.png";
         public static string DefaultBtEdit = "editBtImage.png";
 
@@ -315,12 +316,12 @@ namespace Conarh_2016.Application
 		};
 
         public static Dictionary<string, AppBadgeType> BadgeTypes = new Dictionary<string, AppBadgeType> {
-            { "559d1875657f6f052ffd70fa", AppBadgeType.ShareApp},
-            { "559d1576657f6f052ffd70e3", AppBadgeType.WallPost},
-            { "559d13dd657f6f052ffd70de", AppBadgeType.ConnectTo3Users},
-            { "559d136d657f6f052ffd70ce", AppBadgeType.ConnectToUncommonUser},
-            { "557746be657f6f66f9ee8a78", AppBadgeType.ConnectTo10Users},
-            { "557746b6657f6f66f9ee8a75", AppBadgeType.ConnectTo50Users},
+            { "578c5b08473a7545691bb87b", AppBadgeType.ShareApp},
+            { "578c5b08ca583eb4094819ca", AppBadgeType.WallPost},
+            { "578c5b09236eb67474c09025", AppBadgeType.ConnectTo3Users},
+            { "578c5b09473a7545691bb87c", AppBadgeType.ConnectToUncommonUser},
+            { "578c5b0a228ada731db736c4", AppBadgeType.ConnectTo10Users},
+            { "578c5b0c22cd80e204d99edf", AppBadgeType.ConnectTo50Users},
         };
 
         public static string GetBadgeIdByType(AppBadgeType type)
@@ -357,15 +358,15 @@ namespace Conarh_2016.Application
 
         public static string GetLocalizedError(string msg)
         {
-            if (msg.Equals("user not found"))
+            if (msg.Equals("InvalidCredentials"))
                 return "Usuário ou Senha incorretos";
-            else if (msg.Equals("username already in use"))
+            else if (msg.Equals("UserAlreadyExists"))
                 return "O Usuário ja está em uso";
 
             return msg;
         }
 
-        public static List<int> ScorePointsByLevel = new List<int> { 0, 99, 199, 399, 999 };
+        public static List<int> ScorePointsByLevel = new List<int> { 0, 199, 399, 399, 999 };
 
         public static string GetLevelImageByPoints(int points)
         {

@@ -3,6 +3,8 @@ using PushNotification.Plugin.Abstractions;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Conarh_2016.Application.Domain;
+using System.Text;
+using Conarh_2016.Application.Domain.PostData;
 
 namespace Conarh_2016.Application
 {
@@ -33,7 +35,14 @@ namespace Conarh_2016.Application
 			get;
 		}
 
-		public string PushNotificationPlatform
+        public string KinveyApiToken
+        {
+            set;
+            get;
+        }
+
+
+        public string PushNotificationPlatform
 		{
 			get {
 				return PlatformIds [PushNotificationDeviceType];
@@ -48,6 +57,24 @@ namespace Conarh_2016.Application
 
 			PushNotificationDeviceType = Device.OS == TargetPlatform.iOS ? DeviceType.iOS : DeviceType.Android;
 		}
-	}
+
+        /*
+        public static string SetAPiToken(LoginUserData data)
+        {
+            StringBuilder sb = new StringBuilder("Basic ");
+            sb.Append(getKinveyAuthString(data));
+            return sb.ToString();
+        }
+
+        private static string getKinveyAuthString(LoginUserData data)
+        {
+            StringBuilder sb = new StringBuilder(data.Email);
+            sb.Append(":");
+            sb.Append(data.Password);
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(sb.ToString());
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+        */
+    }
 }
 

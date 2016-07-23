@@ -63,21 +63,5 @@ namespace Conarh_2016.Application.BackgroundTasks
             return _data;
         }
 
-        /* TODO apagar setEventsIds
-        private List<EventData> setEventsIds(List<EventData> result)
-        {
-            List<EventData> objList = new List<EventData>();
-            foreach (EventData obj in result)
-            {
-                obj.Id = obj.Xid;
-                foreach (Speaker spk in obj.Speechers)
-                {
-                    spk.Id = spk.Xid;
-                }
-                objList.Add(obj);
-            }
-            return objList;
-        }
-        */
     }
 }

@@ -4,16 +4,16 @@ namespace Conarh_2016.Application.Domain.PostData
 {
 	public sealed class RequestConnectionData:UniqueItem
 	{
-		[JsonProperty(ConnectRequest.JsonKeys.Requester)]
-		public string Requester;
+		[JsonProperty(JsonKeys.RequesterId)]
+		public string RequesterId;
 
-		[JsonProperty(ConnectRequest.JsonKeys.Responder)]
-		public string Responder;
+		[JsonProperty(JsonKeys.ResponderId)]
+		public string ResponderId;
 
-		[JsonProperty(ConnectRequest.JsonKeys.Accepted)]
+		[JsonProperty(JsonKeys.Accepted)]
 		public bool Accepted;
 
-		[JsonProperty(ConnectRequest.JsonKeys.PointsEarned)]
+		[JsonProperty(JsonKeys.PointsEarned)]
 		public int PointsEarned;
 
 		public RequestConnectionData() 
@@ -22,10 +22,22 @@ namespace Conarh_2016.Application.Domain.PostData
 
 		public RequestConnectionData(string requesterId, string responderId, int points = 0, bool accepted = false) 
 		{
-			Requester = requesterId;
-			Responder = responderId;
+            RequesterId = requesterId;
+            ResponderId = responderId;
 			PointsEarned = points;
 			Accepted = accepted;
-		} 
-	}
+		}
+
+        public new static class JsonKeys
+        {
+            //public const string Responder = "responder";
+            //public const string Requester = "requester";
+            public const string ResponderId = "responderid";
+            public const string RequesterId = "requesterid";
+            public const string PointsEarned = "points_earned";
+            public const string Accepted = "accepted";
+        }
+
+
+    }
 }

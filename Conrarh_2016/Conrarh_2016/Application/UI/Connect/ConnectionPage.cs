@@ -87,9 +87,11 @@ namespace Conarh_2016.Application.UI.Connect
 			Title = AppResources.Connect;
 			BackgroundColor = Color.Transparent;
 
-			CurrentModel = AppModel.Instance.CurrentConnectionsWrapper;
+            CurrentModel = AppModel.Instance.CurrentConnectionsWrapper;
 
-			var searchBarView = new SearchBarView ();
+            UserController.Instance.UpdateProfileData(CurrentModel.LoginedUser);
+
+            var searchBarView = new SearchBarView ();
 			searchBarView.Clear += OnSearchClear;
 			searchBarView.Search += OnSearch;
 
@@ -109,7 +111,7 @@ namespace Conarh_2016.Application.UI.Connect
             {
                 Orientation = StackOrientation.Vertical,
                 Children = {
-                    new UserHeaderView (CurrentModel.LoginedUser, false),
+                    new UserHeaderView (CurrentModel.LoginedUser, false, false),
                     searchBarView,
                     UserListView
                 }

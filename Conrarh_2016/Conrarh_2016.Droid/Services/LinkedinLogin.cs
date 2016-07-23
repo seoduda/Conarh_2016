@@ -29,6 +29,7 @@ namespace Conarh_2016.Droid.Services
                 if (eventArgs.IsAuthenticated)
                 {
                     string dd = eventArgs.Account.Username;
+                    string imageServerPath;
                     var values = eventArgs.Account.Properties;
 
                     var access_token = values["access_token"];
@@ -50,21 +51,18 @@ namespace Conarh_2016.Droid.Services
                                     System.Console.Out.WriteLine(content);
                                 }
 
-                                //infoText.Text = content.ToString();
+
                                 var result = JsonConvert.DeserializeObject<dynamic>(content);
-                                String info = (string)result["firstName"] + " " + (string)result["lastName"]
-                                + " " + (string)result["headline"] + "-" + (string)result["emailAddress"] + "X" + (string)result["positions"]["values"][0]["company"]["name"];
                                 udata.Job = (string)result["headline"];
                                 udata.Email = (string)result["emailAddress"];
                                 udata.Name = (string)result["firstName"] + " " + (string)result["lastName"];
                                 udata.Password = access_token;
-                                udata.Phone = "00000000000";
-                                //udata.ServerImage = (string)result["pictureUrl"];
-                                udata.ScorePoints = 30;
+                                udata.Phone = " ";
+                                udata.ProfileImage = (string)result["pictureUrl"];
+                                imageServerPath = (string)result["pictureUrl"];
+                                udata.ScorePoints = 0;
 
-                                UserController.Instance.RegisterUserLinkedin(udata);
-                                //infoText.Text = result;
-                                //infoText.Text = content.ToString();
+                                UserController.Instance.RegisterUserLinkedin(udata, imageServerPath);
                             }
                         }
                     }

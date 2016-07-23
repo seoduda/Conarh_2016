@@ -89,7 +89,6 @@ namespace Conarh_2016.Application.UI.Main
                 {
                     Text = Data.Title,
                     HorizontalTextAlignment = TextAlignment.Start,
-                    //XAlign = TextAlignment.Start,
                     TextColor = Color.White,
                     FontSize = 18
                 }

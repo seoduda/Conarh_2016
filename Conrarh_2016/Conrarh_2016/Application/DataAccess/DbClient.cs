@@ -82,8 +82,10 @@ namespace Conarh_2016.Application.DataAccess
 				}
 				else if (data is ConnectRequest) {
 					var connectRequest = data as ConnectRequest;
+                    /* TODO validar
 					connectRequest.RequesterId = connectRequest.Requester.Id;
 					connectRequest.ResponderId = connectRequest.Responder.Id;
+                    */
 				}
 				else if (data is EventData) {
 					var eventData = data as EventData;

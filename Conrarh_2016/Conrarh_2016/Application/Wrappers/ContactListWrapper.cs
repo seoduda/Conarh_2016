@@ -32,6 +32,7 @@ namespace Conarh_2016.Application.Wrappers
 
 		private void OnConnectionsChanged (List<ConnectRequest> connections)
 		{
+
 			foreach (ConnectRequest connectRequest in connections) {
 				connectRequest.IsChanged -= OnConnectionStateChanged;
 
@@ -40,14 +41,23 @@ namespace Conarh_2016.Application.Wrappers
 				else
 					connectRequest.IsChanged += OnConnectionStateChanged;
 			}
+
 		}
 
 		private void RefreshUserModel(ConnectRequest request)
 		{
+            /* Todo Validar
 			User connectedUser = request.Requester.Id.Equals(LoginedUser.User.Id) ? 
 				request.Responder : request.Requester;
+                */
 
-			if (!DefinedItems.ContainsKey (connectedUser.Id)) 
+            User connectedUser = request.RequesterId.Equals(LoginedUser.User.Id) ?
+                AppModel.Instance.Users.Find(request.ResponderId) :
+                AppModel.Instance.Users.Find(request.RequesterId);
+                 
+
+
+            if (!DefinedItems.ContainsKey (connectedUser.Id)) 
 			{
 				Device.BeginInvokeOnMainThread (() => {
 
@@ -70,6 +80,7 @@ namespace Conarh_2016.Application.Wrappers
 			if (request.Accepted)
 				RefreshUserModel (request);
 			request.IsChanged -= OnConnectionStateChanged;
+
 		}
 	}
 }

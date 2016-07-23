@@ -25,7 +25,7 @@ namespace Conarh_2016.Application.BackgroundTasks
 		{
 			try
 			{
-				Result = WebClient.GetObjectAsync<T>(Query).Result;
+				Result = KinveyWebClient.GetObjectAsync<T>(Query).Result;
 
 				if(DynamicList != null)
 					DynamicList.AddOne(Result);

@@ -17,7 +17,7 @@ namespace Conarh_2016.Application.Domain
         public const string ScorePointsProgressionProperty = "ScorePointsProgression";
         public const string PhonePropertyName = "Phone";
         public const string LevelImagePathPropertyName = "LevelImagePath";
-        public const string KinveyMetaDataPropertyName = "KinveyMeta";
+        //public const string KinveyMetaDataPropertyName = "KinveyMeta";
 
         [JsonProperty(JsonKeys.UserName)]
         public string Email

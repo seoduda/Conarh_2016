@@ -12,8 +12,8 @@ namespace Conarh_2016.Application.UI.Connect
 
         public event Action PrevPage;
 
-        private Image iconNext;
-        private Image iconPrev;
+        //private Image iconNext;
+        //private Image iconPrev;
         private Image iconClose;
         private Image img;
 
@@ -57,6 +57,7 @@ namespace Conarh_2016.Application.UI.Connect
             iconClose.GestureRecognizers.Add(closeIconLinkedInRecognizer);
             */
 
+            /*
             if (!last)
             {
                 iconNext = new Image()
@@ -93,7 +94,7 @@ namespace Conarh_2016.Application.UI.Connect
                 //Associating tap events to the image buttons
                 iconPrev.GestureRecognizers.Add(iconPrevLinkedInRecognizer);
             }
-
+            */
             layout.Children.Add(innerLayout);
             Content = layout;
         }

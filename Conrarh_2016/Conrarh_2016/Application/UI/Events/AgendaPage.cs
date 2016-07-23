@@ -106,7 +106,7 @@ namespace Conarh_2016.Application.UI.Events
 		{
 			base.OnAppearing ();
 
-			_eventListView.BeginRefresh ();
+            _eventListView.BeginRefresh ();
 		}
 			
 		private EventsDataWrapper GetItemSource()
