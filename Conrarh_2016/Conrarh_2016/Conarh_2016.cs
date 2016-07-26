@@ -7,7 +7,6 @@ namespace Conarh_2016
         public App()
         {
             MainPage = new RootPage();
-
         }
 
         protected override void OnStart()

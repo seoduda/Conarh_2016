@@ -132,7 +132,9 @@ namespace Conarh_2016.Application.UI.Events
         private SpeecherView GetSpeecherItem(Speaker speecherData)
         {
             var item = new SpeecherView(speecherData, Data.BackgroundColorNonOpacity);
-            item.SelectItem += OnSpeecherSelected;
+            /* TODO - Speeker bio Desabilitado SpeecherView EventDetailView
+           item.SelectItem += OnSpeecherSelected;
+           */
             return item;
         }
 

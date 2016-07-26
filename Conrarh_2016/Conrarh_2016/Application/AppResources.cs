@@ -247,7 +247,7 @@ namespace Conarh_2016.Application
         public static string InteractBgImage = "InteractBgImage.png";
 
 
-        public static string LoginBgImage = "login_bg_image.png";
+        public static string LoginBgImage = "defaultBgImage.png";
         public static string LoginBtLinkedin = "login_bt_linkedin";
         
 

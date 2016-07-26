@@ -44,10 +44,6 @@ namespace Conarh_2016.Application.UI.Main
             layout.Children.Add(GetMenuButton(MainMenuItemData.ProfilePage));
             layout.Children.Add(GetMenuButton(MainMenuItemData.HowtoPlayPage));
             layout.Children.Add(GetMenuButton(MainMenuItemData.ConnectPage));
-            if (AppModel.Instance.CurrentUser == null)
-                layout.Children.Add(GetMenuButton(MainMenuItemData.LoginPage));
-            else
-                AddLogout(layout);
             layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
             layout.Children.Add(new Label { Text = "Agendas", TextColor = AppResources.MenuTitleTextColor, FontSize = 18 });
             layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
@@ -59,28 +55,16 @@ namespace Conarh_2016.Application.UI.Main
 
             layout.Children.Add(GetMenuButton(MainMenuItemData.ExhibitorsPage));
             layout.Children.Add(GetMenuButton(MainMenuItemData.MapPage));
-            layout.Children.Add(GetMenuButton(MainMenuItemData.WallPage));
+            //            layout.Children.Add(GetMenuButton(MainMenuItemData.WallPage));
 
             layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
-            BoxView trasnpSpace = new BoxView()
-            {
-                BackgroundColor = Color.Transparent,
-                WidthRequest = 1,
-                HeightRequest = 50
 
-            };
-            
-            layout.Children.Add(trasnpSpace);
-            var logoI9acao = new Image()
-            {
-                HeightRequest = 100,
-                HorizontalOptions = LayoutOptions.End,
-                
-            };
-            logoI9acao.Source = ImageLoader.Instance.GetImage(AppResources.I9acaoLogo, false);
+            if (AppModel.Instance.CurrentUser == null)
+                layout.Children.Add(GetMenuButton(MainMenuItemData.LoginPage));
+            else
+                AddLogout(layout);
+            AddI9Logo(layout);
 
-            layout.Children.Add(logoI9acao);
-            
             AppModel.Instance.UserChanged += OnUserChanged;
 
             Content = layout;
@@ -93,6 +77,22 @@ namespace Conarh_2016.Application.UI.Main
             layout.Children.Add(logOutBtn);
         }
 
+        private void AddI9Logo(StackLayout layout)
+        {
+            layout.Children.Add(new ContentView
+            {
+                Padding = new Thickness(20, 10, 10, 20),
+                Content = new Image()
+                {
+                    HeightRequest = 70,
+                    HorizontalOptions = LayoutOptions.End,
+                    Source = ImageLoader.Instance.GetImage(AppResources.I9acaoLogo, false)
+                }
+            });
+        }
+
+
+
         private void OnUserChanged(UserModel previous, UserModel current)
         {
             Device.BeginInvokeOnMainThread(() =>
@@ -104,14 +104,18 @@ namespace Conarh_2016.Application.UI.Main
                     if (AppModel.Instance.CurrentUser != null)
                     {
                         layout.Children.RemoveAt(layout.Children.Count - 1);
+                        layout.Children.RemoveAt(layout.Children.Count - 1);
                         AddLogout(layout);
+                        AddI9Logo(layout);
                     }
                 }
                 else
                 {
                     StackLayout layout = (StackLayout)Content;
                     layout.Children.RemoveAt(layout.Children.Count - 1);
+                    layout.Children.RemoveAt(layout.Children.Count - 1);
                     layout.Children.Add(GetMenuButton(MainMenuItemData.LoginPage));
+                    AddI9Logo(layout);
                 }
             });
         }

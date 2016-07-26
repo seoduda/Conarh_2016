@@ -1,8 +1,10 @@
-﻿using System;
+﻿
+using System;
 using Conarh_2016.Core.Services;
-using System.IO;
+
 using System.Drawing;
 using Android.Graphics;
+using System.IO;
 
 namespace Conarh_2016.Android.Services
 {
@@ -20,9 +22,10 @@ namespace Conarh_2016.Android.Services
 				};
 
 				using (var sourceImage = BitmapFactory.DecodeFile(sourceFile, options))
-				{  
-					Bitmap newImage = ScaleAndCropImage (sourceImage, new SizeF (size, size));
-					SaveImage (targetFile, newImage);
+				{
+                    //Bitmap newImage = ScaleAndCropImage (sourceImage, new SizeF (size, size));
+                    Bitmap newImage = ScaleImage(sourceImage, new SizeF(size, size));
+                    SaveImage (targetFile, newImage);
 				}
 			}
 		}
@@ -43,9 +46,10 @@ namespace Conarh_2016.Android.Services
 			{
 				float widthFactor = targetWidth * 1.0f / width;
 				float heightFactor = targetHeight * 1.0f / height;
-				if (widthFactor > heightFactor)
-				{
-					scaleFactor = widthFactor;// scale to fit height
+
+                if (widthFactor > heightFactor)  
+                {
+                    scaleFactor = widthFactor;// scale to fit height
 				}
 				else
 				{
@@ -58,27 +62,79 @@ namespace Conarh_2016.Android.Services
 			using (var scaledBitmap = Bitmap.CreateScaledBitmap (sourceImage, (int)scaledWidth, (int)scaledHeight, true))
 			{
 				int size = Math.Min (scaledBitmap.Width, scaledBitmap.Height);
-				var image = Bitmap.CreateBitmap (scaledBitmap, 0, 0, size, size);
-				scaledBitmap.Recycle ();
-				return image;
+                
+                var image = Bitmap.CreateBitmap (scaledBitmap, 0, 0, size, size);
+                 scaledBitmap.Recycle ();
+                return scaledBitmap;
 			}
 		}
-			
-		private void SaveImage(string targetFile, Bitmap resultImage)
+        private Bitmap ScaleImage(Bitmap sourceImage, SizeF targetSize)
+        {
+            var width = sourceImage.GetBitmapInfo().Width;
+            var height = sourceImage.GetBitmapInfo().Height;
+
+            var targetWidth = (int)targetSize.Width;
+            var targetHeight = (int)targetSize.Height;
+
+            var scaleFactor = 0.0f;
+            float scaledWidth = targetWidth;
+            float scaledHeight = targetHeight;
+
+            if (width != targetWidth)
+            {
+                float widthFactor = targetWidth * 1.0f / width;
+                float heightFactor = targetHeight * 1.0f / height;
+                //if (widthFactor > heightFactor)
+                /* TODO - Mudei para ficar proporcional*/
+                if (widthFactor < heightFactor)
+                {
+                    scaleFactor = widthFactor;// scale to fit height
+                }
+                else
+                {
+                    scaleFactor = heightFactor;// scale to fit width
+                }
+                scaledWidth = width * scaleFactor;
+                scaledHeight = height * scaleFactor;
+            }
+
+            using (var scaledBitmap = Bitmap.CreateScaledBitmap(sourceImage, (int)scaledWidth, (int)scaledHeight, true))
+            {   /* TODO - Mudei para ficar proporcional*/
+                int size = Math.Min(scaledBitmap.Width, scaledBitmap.Height);
+                
+                var image = Bitmap.CreateBitmap (scaledBitmap, 0, 0, scaledBitmap.Width, scaledBitmap.Height);
+                scaledBitmap.Recycle ();
+                return image;
+            }
+        }
+
+
+        private void SaveImage(string targetFile, Bitmap resultImage)
 		{
 			if (!Directory.Exists(System.IO.Path.GetDirectoryName(targetFile)))
 				Directory.CreateDirectory(System.IO.Path.GetDirectoryName(targetFile));
+          //  int bc = resultImage.ByteCount;
 
-			using (resultImage) {
-				using (Stream outStream = File.Create (targetFile)) {
-					if (targetFile.ToLower ().EndsWith ("png"))
-						resultImage.Compress (Bitmap.CompressFormat.Png, 100, outStream);
-					else
-						resultImage.Compress (Bitmap.CompressFormat.Jpeg, 95, outStream);
 
-					resultImage.Recycle ();
-				}
-			}
+            using (resultImage)
+            {
+                using (Stream outStream = File.Create(targetFile))
+                {
+                    resultImage.Compress(Bitmap.CompressFormat.Jpeg, 90, outStream);
+                    /*
+                    if (targetFile.ToLower().EndsWith("png"))
+                    {
+                        resultImage.Compress(Bitmap.CompressFormat.Png, 100, outStream);
+                    }
+                    else
+                        resultImage.Compress(Bitmap.CompressFormat.Jpeg, 95, outStream);
+                        */
+                    resultImage.Recycle();
+
+                }
+            }
+
+
 		}
 
 		public void ResizeImage(string sourceFile, string targetFile, float maxWidth, float maxHeight)

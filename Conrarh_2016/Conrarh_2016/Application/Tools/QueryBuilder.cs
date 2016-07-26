@@ -39,7 +39,7 @@ namespace Conarh_2016.Application.Tools
             String _sFree = isFree.ToString().ToLower();
             StringBuilder MyStringBuilder = new StringBuilder("events?query={\"free_attending\":");
             MyStringBuilder.Append(_sFree);
-            MyStringBuilder.Append("}&sort={\"date\": 1}");
+            MyStringBuilder.Append("}&sort={\"date\": 1,\"time_schedule\":1}");
 
             return GetKinveyQuery(MyStringBuilder.ToString()); ;
         }
@@ -245,17 +245,7 @@ namespace Conarh_2016.Application.Tools
 
             return GetKinveyQuery(sBuilder.ToString());
         }
-        /* consegui fazer o or funcionar na query anterior - não tem  dunção
-        public string GetConnectRequestedToUserKinveyQuery(string userId)
-        {
-            StringBuilder sBuilder = new StringBuilder("connections?query ={\"responder\":\"");
-            sBuilder.Append(userId);
-            sBuilder.Append("\"}&sort={\"updated_at\":-1, \"accepted\": -1}");
-
-            return GetKinveyQuery(sBuilder.ToString());
-        }
-        */
-
+        
 
 
         /* não é usado.. não migrei
@@ -309,7 +299,7 @@ namespace Conarh_2016.Application.Tools
             StringBuilder sb = new StringBuilder(KinveyApiUserUrl);
             sb.Append("/?query={\"name\":{\"$regex\":\"^");
             sb.Append(pattern);
-            sb.Append("}}");
+            sb.Append("\"}}");
             return sb.ToString();
         }
 

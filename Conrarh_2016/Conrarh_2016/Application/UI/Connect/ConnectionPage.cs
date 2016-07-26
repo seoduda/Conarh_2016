@@ -117,7 +117,8 @@ namespace Conarh_2016.Application.UI.Connect
                 }
             };
 
-            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
+            //BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, false, true);
 
             Content = bgLayout;
 

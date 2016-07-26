@@ -60,12 +60,14 @@ namespace Conarh_2016.Application.UI.Events
 
 
 			Content = absoluteLayout;
+            /* TODO - Speeker bio Desabilitado SpeecherView
 			TapGestureRecognizer tapRecognizer = new TapGestureRecognizer ();
 			tapRecognizer.Tapped += OnViewTapped;
 			Content.GestureRecognizers.Add (tapRecognizer);
-		}
+            */
+        }
 
-		void OnViewTapped (object sender, EventArgs e)
+        void OnViewTapped (object sender, EventArgs e)
 		{
 			if (SelectItem != null)
 				SelectItem (Data);

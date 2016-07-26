@@ -21,7 +21,7 @@ using SQLite.Net.Platform.XamarinAndroid;
 namespace Conarh_2016.Droid
 {
 
-    [Activity(Label = "CONARH 2016", Icon = "@drawable/icon", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "Conarh 2016", Icon = "@drawable/icon", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -89,29 +89,7 @@ namespace Conarh_2016.Droid
 
         }
 
-        /*
-        [Activity (Label = "CONARH 2016", Icon = "@drawable/icon", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait)]
-        public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
-        {
-            int count = 1;
-
-            protected override void OnCreate (Bundle bundle)
-            {
-                base.OnCreate (bundle);
-
-                // Set our view from the "main" layout resource
-                SetContentView (Resource.Layout.Main);
-
-                // Get our button from the layout resource,
-                // and attach an event to it
-                Button button = FindViewById<Button> (Resource.Id.myButton);
-
-                button.Click += delegate {
-                    button.Text = string.Format ("{0} clicks!", count++);
-                };
-            }
-        }
-        */
+   
     }
 
 

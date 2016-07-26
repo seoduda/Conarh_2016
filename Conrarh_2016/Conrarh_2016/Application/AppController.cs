@@ -169,9 +169,10 @@ namespace Conarh_2016.Application
 
         public void SearchUsers(DynamicListData<User> dataModel, string pattern, Action onFinish)
         {
-             //TODO reativar Search user AppController
-             var parameters = new KinveyDownloadListParameters(KinveyDownloadCountType.All,
-                 QueryBuilder.Instance.GetSearchUsersKinveyQuery(pattern));
+            String searchPatern = FirstCharToUpper(pattern);
+            //TODO reativar Search user AppController
+            var parameters = new KinveyDownloadListParameters(KinveyDownloadCountType.All,
+                 QueryBuilder.Instance.GetSearchUsersKinveyQuery(searchPatern));
 
              var searchTask = new DownloadUsersBackgroundTask(dataModel, parameters);
              searchTask.ContinueWith((task, result) =>
@@ -306,9 +307,18 @@ namespace Conarh_2016.Application
             Task<MediaFile> imageTask = null;
             var options = new CameraMediaStorageOptions
             {
-                DefaultCamera = CameraDevice.Rear,
+                DefaultCamera = CameraDevice.Front,
                 MaxPixelDimension = 400,
+                PercentQuality = 80,
+
             };
+
+            if (!AppProvider.MediaPicker.IsCameraAvailable)
+            {
+                throw new Exception("Camera não disponível");
+            }
+
+
 
             if (isMakePhoto && AppProvider.MediaPicker.IsCameraAvailable)
                 imageTask = AppProvider.MediaPicker.TakePhotoAsync(options);
@@ -334,6 +344,7 @@ namespace Conarh_2016.Application
             AppProvider.PopUpFactory.ShowMessage(AppResources.FailedServer, AppResources.Error);
         }
 
+        
         public void UpdatePushNotifications(string deviceToken, DeviceType deviceType)
         {
             if (string.IsNullOrEmpty(AppModel.Instance.AppInformation.PushNotificationToken))
@@ -373,6 +384,21 @@ namespace Conarh_2016.Application
                 });
                 _backgroundWorkers[AppBackgroundWorkerType.DefaultApp].Add(updatingPushNotificationTask);
             }
+
+
         }
+        
+
+        public static string FirstCharToUpper(string input)
+        {
+            String result = " ";
+            if (!String.IsNullOrEmpty(input))
+            {
+                result = input.Substring(0, 1).ToUpper() + input.Substring(1);
+            }
+
+            return result;
+        }
+
     }
 }

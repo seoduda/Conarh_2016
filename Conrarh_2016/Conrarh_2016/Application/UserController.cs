@@ -159,7 +159,7 @@ namespace Conarh_2016.Application
                         UserDialogs.Instance.HideLoading();
                         Device.BeginInvokeOnMainThread(() => AppModel.Instance.LoginUser(result, data.Password));
 
-                        /* TODO Ativar Push notification -  UserController - Login
+                        /* TODO Ativar Push notification -  UserController - Login*/
                         var getUserPushNotificationData = new DownloadPushNotificationsByUserBackgroundTask(
                             result.Id, AppModel.Instance.AppInformation.PushNotificationPlatform);
 
@@ -226,7 +226,7 @@ namespace Conarh_2016.Application
                             }
                         });
                         _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(getUserPushNotificationData);
-                        */
+                        
                     }
                 }
             });

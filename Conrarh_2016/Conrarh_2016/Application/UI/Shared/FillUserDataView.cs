@@ -161,7 +161,7 @@ namespace Conarh_2016.Application.UI.Shared
 			{
 				if (AppModel.Instance.IsEmail (_emailEntry.Text)) {
 					if (Apply != null) {
-						Model.Name = string.Format ("{0} {1}", _nameEntry.Text, _surnameEntry.Text);
+						Model.Name = FirstCharToUpper (string.Format ("{0} {1}", _nameEntry.Text, _surnameEntry.Text));
 						Model.Email = _emailEntry.Text;
 						Model.Job = _jobEntry.Text;
 						Model.Phone = _phoneEntry.Text;
@@ -216,8 +216,19 @@ namespace Conarh_2016.Application.UI.Shared
 			}
 		}
 
+        public static string FirstCharToUpper(string input)
+        {
+            String result = " ";
+            if (!String.IsNullOrEmpty(input))
+            {
+                result = input.Substring(0, 1).ToUpper() + input.Substring(1);
+            }
 
-		private View GetEntry(Keyboard keyBoard, string currentValue, string placeholdertValue, int topPadding, bool isPassword, out InputFieldView textEntry, float addionalBorder = 0, float leftBorder =  20)
+            return result;
+        }
+
+
+        private View GetEntry(Keyboard keyBoard, string currentValue, string placeholdertValue, int topPadding, bool isPassword, out InputFieldView textEntry, float addionalBorder = 0, float leftBorder =  20)
 		{
 			textEntry = new InputFieldView (new InputFieldView.Parameters {
 				Keyboard = keyBoard,
