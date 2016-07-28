@@ -306,7 +306,6 @@
     <AndroidResource Include="Resources\drawable\settings.png" />
     <AndroidResource Include="Resources\drawable\shareBtn.png" />
     <AndroidResource Include="Resources\drawable\signUpButtonImage.png" />
-    <AndroidResource Include="Resources\drawable\signUpHeaderImage.png" />
     <AndroidResource Include="Resources\drawable\wallPostLikeImage.png" />
   </ItemGroup>
   <ItemGroup>
@@ -315,7 +314,6 @@
     <AndroidResource Include="Resources\drawable\i9acao_logo.png" />
     <AndroidResource Include="Resources\drawable\login_bt_linkedin.png" />
     <AndroidResource Include="Resources\drawable\healthways.png" />
-    <AndroidResource Include="Resources\drawable\signupBgImage.png" />
     <AndroidResource Include="Resources\drawable\defaultBgImage.png" />
     <AndroidResource Include="Resources\drawable\editBtImage.png" />
     <AndroidResource Include="Resources\drawable\levelProgressBarImageLabel.png" />

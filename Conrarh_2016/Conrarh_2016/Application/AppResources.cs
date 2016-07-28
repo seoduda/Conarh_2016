@@ -36,6 +36,7 @@ namespace Conarh_2016.Application
         public static string Agenda = "Eventos";
         public static string AgendaCongresso = "Agenda Congresso";
         public static string AgendaExpo = "Agenda Expo";
+        public static string FavoriteEvents = "Minha Agenda";
         public static string Exhibitors = "Expositores";
         public static string Map = "Mapa";
         public static string Wall = "Mural";
@@ -164,7 +165,7 @@ namespace Conarh_2016.Application
         public static Color LikedItemTextColor = Color.FromHex("567675");
 
         public static Color EventActionsTextColor = Color.FromHex("567675");
-        public static Color EventActionsQuestionsBlockColor = Color.FromHex("B0D5E1");
+        public static Color EventActionsQuestionsBlockColor = Color.FromHex("AAB9B8");
         public static Color EventActionsQuestionsBlockTitleColor = Color.FromHex("4398B6");
         public static Color EventActionsQuestionsBlockTitleTextColor = Color.White;
         public static Color EventActionsQuestionsBlockBtnBgColor = Color.FromHex("567675");
@@ -172,6 +173,7 @@ namespace Conarh_2016.Application
 
 
         public static Color AgendaPageBackgroundColor = Color.White;
+       
         public static Color AgendaExpoColor = Color.FromHex("AAB9B8");
         public static Color AgendaCongressoColor = Color.FromHex("B8CA4F");
         public static Color AgendaDataBGColor = Color.FromHex("E2EAB7");
@@ -247,7 +249,7 @@ namespace Conarh_2016.Application
         public static string InteractBgImage = "InteractBgImage.png";
 
 
-        public static string LoginBgImage = "defaultBgImage.png";
+        public static string LoginBgImage = "login_bg_image.png";
         public static string LoginBtLinkedin = "login_bt_linkedin";
         
 
@@ -367,6 +369,8 @@ namespace Conarh_2016.Application
         }
 
         public static List<int> ScorePointsByLevel = new List<int> { 0, 199, 399, 399, 999 };
+
+        
 
         public static string GetLevelImageByPoints(int points)
         {

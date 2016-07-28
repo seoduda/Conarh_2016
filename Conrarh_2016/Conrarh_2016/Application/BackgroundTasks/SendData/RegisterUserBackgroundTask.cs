@@ -31,7 +31,7 @@ namespace Conarh_2016.Application.BackgroundTasks
                 if (IsCreateNew)
                     Data.ScorePoints = 0;
                 string imagePath = " ";
-                if (!Data.ProfileImage.ToLower().StartsWith("http"))
+                if (Data.ProfileImage !=null && !Data.ProfileImage.ToLower().StartsWith("http"))
                 {
                     imagePath = Data.ProfileImage;
                     Data.ProfileImage = null;

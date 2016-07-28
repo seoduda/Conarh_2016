@@ -11,6 +11,7 @@ namespace Conarh_2016.Application.Tools
         internal string KinveyApiUrl = "https://baas.kinvey.com/appdata/kid_S1uMVFSv";
         internal string KinveyApiUserUrl = "https://baas.kinvey.com/user/kid_S1uMVFSv";
         internal string KinveyApiBlobUrl = "https://baas.kinvey.com/blob/kid_S1uMVFSv";
+        internal string KinveyApiResetEmailbUrl = "https://baas.kinvey.com/rpc/kid_S1uMVFSv";
 
         public static string CombinePath(params string[] segments)
         {
@@ -74,11 +75,11 @@ namespace Conarh_2016.Application.Tools
             return GetQuery("badges_list");
         }
         */
+
         public string GetBadgeTypesKinveyQuery()
         {
             return GetKinveyQuery("badges");
         }
-
 
         /*
         public string GetUsersQuery()
@@ -94,12 +95,10 @@ namespace Conarh_2016.Application.Tools
             return sb.ToString();
         }
 
-
         public string GetUsersKinveyQuery()
         {
             return KinveyApiUserUrl;
         }
-
 
         /*
         public string GetUsersSortByNameQuery()
@@ -107,13 +106,13 @@ namespace Conarh_2016.Application.Tools
             return GetQuery("users?sort_by=name:asc");
         }
         */
+
         public string GetUsersSortByNameKinveyQuery()
         {
             StringBuilder sb = new StringBuilder(KinveyApiUserUrl);
             sb.Append("?&sort={\"name\": 1}");
             return sb.ToString();
         }
-
 
         /*
         public string GetLoginUserSessionQuery()
@@ -141,22 +140,59 @@ namespace Conarh_2016.Application.Tools
         {
             return GetQuery(string.Format("wall_likes?post={0}&user={1}", wallPostId, userId));
         }
-
+        /*
         public string GetPostUserVotesQuery()
         {
             return GetQuery("user_votes");
         }
+        */
 
+        public string GetPostSpeakersKinveyQuery()
+        {
+            return GetKinveyQuery("speechers");
+        }
+
+
+
+        public string GetPostUserVotesKinveyQuery()
+        {
+            return GetKinveyQuery("user-votes");
+        }
+        /*
         public string GetPostUserVotesQuery(string voteId)
         {
             return GetQuery(string.Format("user_votes/{0}", voteId));
         }
+        */
+        public string GetPostUserVotesKinveyQuery(string voteId)
+        {
+            return GetKinveyQuery(string.Format("user-votes/{0}", voteId));
+        }
+        /*
+        public string GetEventVotesByUserQuery(string eventId, string userId)
+        {
+            return GetQuery(string.Format("user_votes?event={0}&user={1}", eventId, userId));
+        }
+        */
+        public string GetEventVotesByUserKinveyQuery(string eventId, string userId)
+        {
+            StringBuilder sb = new StringBuilder("user-votes?query={\"event\":\"");
+            sb.Append(eventId);
+            sb.Append("\", \"user\":\"");
+            sb.Append(userId);
+            sb.Append("\"}");
+            return GetKinveyQuery(sb.ToString());
+        }
+    
+
+
         /*
         public string GetUserByUsernameQuery(string username)
         {
             return GetQuery(string.Format("users?username={0}", username));
         }
         */
+
         public string GetUserByEmailKinveyQuery(string _email)
         {
             StringBuilder sb = new StringBuilder(KinveyApiUserUrl);
@@ -165,7 +201,6 @@ namespace Conarh_2016.Application.Tools
             sb.Append("\"}");
             return sb.ToString();
         }
-
 
         public string GetPostQuestionOnEventQuery()
         {
@@ -216,6 +251,7 @@ namespace Conarh_2016.Application.Tools
         {
             return GetKinveyQuery(string.Format("exhibitors? query = { \"title\":{ \"$regex\":\" ^{0}\" } }", pattern));
         }
+
         /*
         public string GetUploadUserImageQuery(string wallPostId)
         {
@@ -223,10 +259,6 @@ namespace Conarh_2016.Application.Tools
         }
         */
 
-        public string GetEventVotesByUserQuery(string eventId, string userId)
-        {
-            return GetQuery(string.Format("user_votes?event={0}&user={1}", eventId, userId));
-        }
 
         /*
         public string GetConnectRequestByUserQuery(string userId)
@@ -245,8 +277,6 @@ namespace Conarh_2016.Application.Tools
 
             return GetKinveyQuery(sBuilder.ToString());
         }
-        
-
 
         /* não é usado.. não migrei
         public string GetAcceptedConnectRequestByUserQuery(string userId)
@@ -261,19 +291,18 @@ namespace Conarh_2016.Application.Tools
             return GetQuery(string.Format("connections?requester={0}&responder={1}", requesterId, responderId));
         }
         */
+
         public string GetConnectRequestByUsersKimveyQuery(string requesterId, string responderId)
         {
             StringBuilder sBuilder = new StringBuilder("connections/?query={\"requesterid\":\"");
             sBuilder.Append(requesterId);
-                        sBuilder.Append("\", \"responderid\":\"");
+            sBuilder.Append("\", \"responderid\":\"");
             sBuilder.Append(responderId);
             sBuilder.Append("\" }");
 
-
             return GetKinveyQuery(sBuilder.ToString());
-            
         }
-        
+
         /*
         public string GetConnectionRequestByIdQuery(string id)
         {
@@ -285,7 +314,6 @@ namespace Conarh_2016.Application.Tools
         {
             return GetKinveyQuery(string.Format("connections/{0}", id));
         }
-
 
         /*
         public string GetSearchUsersQuery(string pattern)
@@ -302,7 +330,6 @@ namespace Conarh_2016.Application.Tools
             sb.Append("\"}}");
             return sb.ToString();
         }
-
 
         /*
         public string GetPostRequestConnectionQuery(string requestId = null)
@@ -322,38 +349,80 @@ namespace Conarh_2016.Application.Tools
             return GetKinveyQuery("connections");
         }
 
-
-
-
         public string GetRankingQuery()
         {
             return GetQuery("users?per_page=20&order_by=points:desc");
         }
 
+        /*
         public string GetResetPasswordQuery()
         {
             return GetQuery("users/reset-password");
         }
+        */
 
+        public string GetPostResetPasswordKinveyQuery(String email)
+        {
+            StringBuilder sb = new StringBuilder(KinveyApiResetEmailbUrl);
+            sb.Append("/");
+            sb.Append(email);
+            sb.Append("/user-password-reset-initiate");
+            return sb.ToString();
+        }
+
+        /*
         public string GetPostFavouriteEventQuery()
         {
             return GetQuery("favorites_actions");
         }
+        */
 
-        public string GetDeleteFavEventsQuery(string id)
+        public string GetPostFavouriteEventKinveyQuery()
         {
+            return GetKinveyQuery("favorites-actions");
+        }
+
+        /*
+            public string GetDeleteFavEventsQuery(string id)
+            {
             return GetQuery(string.Format("favorites_actions/{0}", id));
         }
 
-        public string GetUserFavouriteEventQuery(string userId)
+            public string GetUserFavouriteEventQuery(string userId)
         {
             return GetQuery(string.Format("favorites_actions?user={0}", userId));
         }
 
         public string GetIsFavouriteEventByUserQuery(string userId, string eventId)
-        {
-            return GetQuery(string.Format("favorites_actions?user={0}&event={1}", userId, eventId));
+            {
+       return GetQuery(string.Format("favorites_actions?user={0}&event={1}", userId, eventId));
         }
+        */
+
+        public string GetDeleteFavEventsKinveyQuery(string id)
+        {
+            return GetKinveyQuery(string.Format("favorites-actions/{0}", id));
+        }
+
+        public string GetUserFavouriteEventKinveyQuery(string userId)
+        {
+            StringBuilder sb = new StringBuilder("favorites-actions?query={\"user\":\"");
+            sb.Append(userId);
+            sb.Append("\"}");
+
+            return GetKinveyQuery(sb.ToString());
+        }
+
+        public string GetIsFavouriteEventByUserKinveyQuery(string userId, string eventId)
+        {
+            StringBuilder sb = new StringBuilder("favorites-actions?query={\"userid\":\"");
+            sb.Append(userId);
+            sb.Append("\", \"eventid\":\"");
+            sb.Append(eventId);
+            sb.Append("\"}");
+            return GetKinveyQuery(sb.ToString());
+        }
+
         /*
         public string GetBadgesActionsByUserQuery(string userId)
         {
@@ -370,13 +439,13 @@ namespace Conarh_2016.Application.Tools
             return GetKinveyQuery(MyStringBuilder.ToString());
         }
 
-
         /*
         public string GetPostBadgesActionQuery()
         {
             return GetQuery("badges_actions");
         }
         */
+
         public string GetPostBadgesActionKinveyQuery()
         {
             return GetKinveyQuery("badges-actions");
@@ -397,14 +466,11 @@ namespace Conarh_2016.Application.Tools
             return sb.ToString();
         }
 
-
         public string GetPostLoginUserKinveyQuery()
         {
             StringBuilder sb = new StringBuilder(KinveyApiUserUrl);
             sb.Append("/login");
             return sb.ToString();
         }
-
-
     }
 }

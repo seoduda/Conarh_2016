@@ -30,6 +30,7 @@ namespace Conarh_2016.Application
         #endregion IDisposable implementation
 
         private readonly Dictionary<AppBackgroundWorkerType, BackgroundWorker> _backgroundWorkers;
+        
 
         public RootPage AppRootPage;
 
@@ -159,7 +160,7 @@ namespace Conarh_2016.Application
                         UserDialogs.Instance.HideLoading();
                         Device.BeginInvokeOnMainThread(() => AppModel.Instance.LoginUser(result, data.Password));
 
-                        /* TODO Ativar Push notification -  UserController - Login*/
+                        /* TODO Ativar Push notification -  UserController - Login
                         var getUserPushNotificationData = new DownloadPushNotificationsByUserBackgroundTask(
                             result.Id, AppModel.Instance.AppInformation.PushNotificationPlatform);
 
@@ -226,7 +227,7 @@ namespace Conarh_2016.Application
                             }
                         });
                         _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(getUserPushNotificationData);
-                        
+                        */
                     }
                 }
             });
@@ -448,11 +449,12 @@ namespace Conarh_2016.Application
             }
 
             UserDialogs.Instance.ShowLoading(AppResources.LoadingFavouriteActions);
-            FavouriteEventData favData = AppModel.Instance.CurrentUser.FavouriteActions.Items.Find(temp => temp.Event.Equals(eventData.Id));
+            FavouriteEventData favData = AppModel.Instance.CurrentUser.FavouriteActions.Items.Find(temp => temp.EventId.Equals(eventData.Id));
+            
 
             if (favData != null)
             {
-                string query = QueryBuilder.Instance.GetDeleteFavEventsQuery(favData.Id);
+                string query = QueryBuilder.Instance.GetDeleteFavEventsKinveyQuery(favData.Id);
                 var deleteFavEventTask = new DeleteDataBackgroundTask<FavouriteEventData>(AppModel.Instance.CurrentUser.FavouriteActions, favData, query);
                 deleteFavEventTask.ContinueWith((task, result) => UserDialogs.Instance.HideLoading());
                 _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(deleteFavEventTask);
@@ -469,7 +471,7 @@ namespace Conarh_2016.Application
                         UserDialogs.Instance.HideLoading();
                         AppProvider.PopUpFactory.ShowMessage(AppResources.AlreadyLikePostMessage, string.Empty);
 
-                        string query = QueryBuilder.Instance.GetDeleteFavEventsQuery(favData.Id);
+                        string query = QueryBuilder.Instance.GetDeleteFavEventsKinveyQuery(favData.Id);
                         var deleteFavEventTask = new DeleteDataBackgroundTask<FavouriteEventData>(AppModel.Instance.CurrentUser.FavouriteActions, favData, query);
                         deleteFavEventTask.ContinueWith((task, result) => UserDialogs.Instance.HideLoading());
                         _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(deleteFavEventTask);

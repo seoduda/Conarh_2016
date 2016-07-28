@@ -2662,8 +2662,8 @@ namespace Conrarh_2016.Droid
 			// aapt resource value: 0x7f020105
 			public const int mr_ic_play_light = 2130837765;
 			
-			// aapt resource value: 0x7f02010f
-			public const int notification_template_icon_bg = 2130837775;
+			// aapt resource value: 0x7f02010d
+			public const int notification_template_icon_bg = 2130837773;
 			
 			// aapt resource value: 0x7f020106
 			public const int roundedbg = 2130837766;
@@ -2678,19 +2678,13 @@ namespace Conrarh_2016.Droid
 			public const int shareBtn = 2130837769;
 			
 			// aapt resource value: 0x7f02010a
-			public const int signupBgImage = 2130837770;
+			public const int signUpButtonImage = 2130837770;
 			
 			// aapt resource value: 0x7f02010b
-			public const int signUpButtonImage = 2130837771;
+			public const int splash = 2130837771;
 			
 			// aapt resource value: 0x7f02010c
-			public const int signUpHeaderImage = 2130837772;
-			
-			// aapt resource value: 0x7f02010d
-			public const int splash = 2130837773;
-			
-			// aapt resource value: 0x7f02010e
-			public const int wallPostLikeImage = 2130837774;
+			public const int wallPostLikeImage = 2130837772;
 			
 			static Drawable()
 			{

@@ -16,7 +16,8 @@ namespace Conarh_2016.Application.UI.Events
             Data = data;
 
             Title = AppResources.EventDetailsHeader.ToUpper();
-            BackgroundColor = AppResources.AgendaPageBackgroundColor;
+            //BackgroundColor = AppResources.AgendaPageBackgroundColor;
+            BackgroundColor = Color.Transparent;
 
             StackLayout layout = new StackLayout() { VerticalOptions = LayoutOptions.StartAndExpand };
 
@@ -98,17 +99,17 @@ namespace Conarh_2016.Application.UI.Events
                     WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width * 3) / 4),
                     BackgroundColor = AppResources.SpeecherBgColor
                 };
-              //  absoluteBtnLayout.Children.Add(eventsActionBtn);
+                absoluteBtnLayout.Children.Add(eventsActionBtn);
 
                 var btnLabel = new Label
                 {
                     WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width * 3) / 4) - 20,
                     Text = AppResources.EventsActionBtnHeader,
-                    TextColor = AppResources.SpeecherTextColor,
+                    TextColor = AppResources.MenuColor,
                     FontSize = 15,
 
                     // TODO : habilitar comentários e editar tela de comentarios
-                    IsEnabled = false,
+                    IsEnabled = true,
                 };
                 absoluteBtnLayout.Children.Add(btnLabel, new Point(50, 6));
 
@@ -132,9 +133,9 @@ namespace Conarh_2016.Application.UI.Events
         private SpeecherView GetSpeecherItem(Speaker speecherData)
         {
             var item = new SpeecherView(speecherData, Data.BackgroundColorNonOpacity);
-            /* TODO - Speeker bio Desabilitado SpeecherView EventDetailView
+
            item.SelectItem += OnSpeecherSelected;
-           */
+
             return item;
         }
 

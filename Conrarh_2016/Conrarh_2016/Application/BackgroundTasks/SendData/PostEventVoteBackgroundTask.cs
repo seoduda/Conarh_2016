@@ -34,9 +34,9 @@ namespace Conarh_2016.Application.BackgroundTasks
 		public static string GetQuery(UserVoteData voteData)
 		{
 			if (string.IsNullOrEmpty(voteData.Id))
-				return QueryBuilder.Instance.GetPostUserVotesQuery ();
+				return QueryBuilder.Instance.GetPostUserVotesKinveyQuery();
 			
-			return QueryBuilder.Instance.GetPostUserVotesQuery (voteData.Id);
+			return QueryBuilder.Instance.GetPostUserVotesKinveyQuery(voteData.Id);
 		}
 
 		public static UserVoteData GetPutData(UserVoteData voteData)

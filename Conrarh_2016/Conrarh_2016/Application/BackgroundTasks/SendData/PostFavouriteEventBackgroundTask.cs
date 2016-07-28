@@ -11,7 +11,7 @@ namespace Conarh_2016.Application.BackgroundTasks
 		public readonly DynamicListData<FavouriteEventData> ListData;
 
 		public PostFavouriteEventBackgroundTask(User user, EventData eventData, DynamicListData<FavouriteEventData> listData):
-		base(QueryBuilder.Instance.GetPostFavouriteEventQuery (), new FavouriteEventData (user.Id, eventData.Id),true)
+		base(QueryBuilder.Instance.GetPostFavouriteEventKinveyQuery (), new FavouriteEventData (user.Id, eventData.Id),true)
 
 		{
 			ListData = listData;

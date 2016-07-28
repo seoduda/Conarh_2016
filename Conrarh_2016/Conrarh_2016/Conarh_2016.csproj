@@ -41,6 +41,7 @@
     <Compile Include="Application\BackgroundTasks\GetData\DownloadBadgesByUserBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadBadgesTypesBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadConnectRequestDataByUserBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadSpeakersBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadUserConnectRequestDataBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadEventsDataBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadEventUserVotesBackgroundTask.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Application\UI\Events\EventDetailView.cs" />
     <Compile Include="Application\UI\Events\EventGroupItem.cs" />
     <Compile Include="Application\UI\Events\EventView.cs" />
+    <Compile Include="Application\UI\Events\FavoriteEventsPage.cs" />
     <Compile Include="Application\UI\Events\LikedItemView.cs" />
     <Compile Include="Application\UI\Events\SpeecherDetailView.cs" />
     <Compile Include="Application\UI\Events\SpeecherView.cs" />

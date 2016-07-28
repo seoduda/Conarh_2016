@@ -72,13 +72,9 @@ namespace Conarh_2016.Application.UI.Events
             var questionBoxLayout = new StackLayout
             {
                 Padding = new Thickness(15, 5, 15, 5),
-                //Orientation = StackOrientation.Vertical,
-                //WidthRequest = AppProvider.Screen.Width - 80,
                 BackgroundColor = AppResources.EventActionsQuestionsBlockColor,
-                Opacity = 0.75,
+                Opacity = 0.45,
                 Spacing =0,
-                //HorizontalOptions = LayoutOptions.Fill,
-                //HeightRequest = 80
             };
             /*
             Button questionsBlockTitle = new Button
@@ -120,87 +116,7 @@ namespace Conarh_2016.Application.UI.Events
             btnEnviar.Clicked += OnSendQuestionClicked;
 
             questionBoxLayout.Children.Add(btnEnviar);
-            //btnLayout.Children.Add(trasnpSpace);
-            //btnLayout.Children.Add(btnEnviar);
-
-
-
-
-
-
-
-            /*
             
-
-            var questionBoxLayout = new StackLayout {
-                //Padding = new Thickness(15, 0, 0, 15),
-                WidthRequest = AppProvider.Screen.Width - 80,
-                BackgroundColor = AppResources.EventActionsQuestionsBlockColor,
-                Opacity = 0.75,
-                HorizontalOptions = LayoutOptions.Fill,
-            };
-            
-            Label questionsBlockTitle = new Label
-            {
-                Text = AppResources.EventsQuestionHeader,
-                FontSize = 20,
-                HeightRequest = 25,
-                WidthRequest = AppProvider.Screen.Width - 100,
-                BackgroundColor = AppResources.EventActionsQuestionsBlockTitleColor,
-                TextColor = AppResources.EventActionsCreateQuestionsBlockTitleTextColor
-            };
-            questionBoxLayout.Children.Add(questionsBlockTitle);
-            
-            StackLayout innerQuestionBoxLayout = new StackLayout()
-            {
-                Spacing = 0
-            };
-
-            _questionItem = new EditorControl(AppResources.EventsQuestionDefaultAnswer) {
-				HeightRequest = EditorHeight,
-				//WidthRequest = AppProvider.Screen.Width - 60,
-                WidthRequest = AppProvider.Screen.Width - 50,
-            };
-
-            */
-
-            /*StackLayout btnLayout = new StackLayout()
-            {
-                Orientation = StackOrientation.Horizontal,
-                Spacing = 0
-            };
-            BoxView trasnpSpace = new BoxView()
-            {
-                BackgroundColor = Color.Teal,
-                HeightRequest = 20,
-                //WidthRequest = ((AppProvider.Screen.Width - 50)/2)
-                WidthRequest = 40
-            };
-            */
-            /*
-            Button btnEnviar = new Button
-            {
-                BackgroundColor = AppResources.EventActionsQuestionsBlockBtnBgColor,
-                HeightRequest = 20,
-                //WidthRequest = (AppProvider.Screen.Width - 50)/ 2,
-                WidthRequest = AppProvider.Screen.Width - 50,
-                Text = AppResources.EventsActionPostQuestion,
-                TextColor = Color.White,
-                BorderRadius = 0
-            };
-            btnEnviar.Clicked += OnSendQuestionClicked;
-            //btnLayout.Children.Add(trasnpSpace);
-            //btnLayout.Children.Add(btnEnviar);
-
-
-            innerQuestionBoxLayout.Children.Add(_questionItem);
-            innerQuestionBoxLayout.Children.Add(btnEnviar);
-
-            questionBoxLayout.Children.Add (innerQuestionBoxLayout);
-            outerLayout.Children.Add(questionBoxLayout);
-            outerLayout.Children.Add(new BoxView { WidthRequest = 15 });
-
-            */
 
 
             return questionBoxLayout;
@@ -208,10 +124,12 @@ namespace Conarh_2016.Application.UI.Events
 			
 		private void OnSendQuestionClicked (object sender, System.EventArgs e)
 		{
+            /**TODO Ativar envio de pergunta OnSendQuestionClicked  EventActionsView
 			UserController.Instance.PostQuestion (Model.Data, _questionItem.Text, OnSentDone);
-		}
+            */
+        }
 
-		private void OnSentDone()
+        private void OnSentDone()
 		{
 			_questionItem.Text = _questionItem.PlaceHolderText;
 		}

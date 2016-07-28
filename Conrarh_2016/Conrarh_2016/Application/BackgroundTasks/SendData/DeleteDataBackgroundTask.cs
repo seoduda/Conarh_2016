@@ -27,7 +27,7 @@ namespace Conarh_2016.Application.BackgroundTasks
 		{
 			try
 			{
-				string result = WebClient.DeleteStringAsync(Query).Result;
+				string result = KinveyWebClient.DeleteStringAsync(Query).Result;
 
 				AppProvider.Log.WriteLine (LogChannel.All, result);
 

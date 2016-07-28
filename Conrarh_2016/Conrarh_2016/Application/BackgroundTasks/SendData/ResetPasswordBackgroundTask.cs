@@ -18,12 +18,12 @@ namespace Conarh_2016.Application.BackgroundTasks
 
 		public override string Execute ()
 		{
-			string dataToSerialize = JsonConvert.SerializeObject (new ResetPasswordData(Email));
-			string sessionUri = QueryBuilder.Instance.GetResetPasswordQuery ();
+			string sessionUri = QueryBuilder.Instance.GetPostResetPasswordKinveyQuery(Email);
 			try
 			{
-				string result = WebClient.PutStringAsync(sessionUri, dataToSerialize).Result;
-				return result;
+                string result = KinveyWebClient.PostSignUpStringAsync(sessionUri, "").Result;
+
+                return result;
 			}
 			catch(Exception ex)
 			{

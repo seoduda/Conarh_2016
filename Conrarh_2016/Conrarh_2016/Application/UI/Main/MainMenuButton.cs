@@ -24,6 +24,7 @@ namespace Conarh_2016.Application.UI.Main
 #endif
         public static MainMenuItemData AgendaCongressoPage = new MainMenuItemData(false, AppResources.AgendaCongresso, typeof(Events.AgendaPage), false, false);
         public static MainMenuItemData AgendaExpoPage = new MainMenuItemData(false, AppResources.AgendaExpo, typeof(Events.AgendaExpoPage), false, false);
+        public static MainMenuItemData FavoriteEventsPage = new MainMenuItemData(true, AppResources.FavoriteEvents, typeof(Events.FavoriteEventsPage), false, false);
 
         public static MainMenuItemData ExhibitorsPage = new MainMenuItemData(false, AppResources.Exhibitors, typeof(Exhibitors.ExhibitorsDynamicPage), false, false);
         public static MainMenuItemData MapPage = new MainMenuItemData(false, AppResources.Map, typeof(Map.MapPage), false, false);

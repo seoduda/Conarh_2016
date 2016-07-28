@@ -2,15 +2,16 @@
 using Conarh_2016.Application.Domain;
 using Conarh_2016.Core;
 using Conarh_2016.Application.UI.Controls;
+using Conrarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Events
 {
 	public sealed class SpeecherDetailView:ContentPage
 	{
 		public readonly Speaker Data;
-		const int FirstItemHeight = 120;
-		const int SecondItemHeight = 80;
-		const int PaddingTopFisrtLabel = 20;
+		const int FirstItemHeight = 100;
+		const int SecondItemHeight = 60;
+		const int PaddingTopFisrtLabel = 10;
 		const int PaddingLeftFisrtLabel = 25;
 
 		private DownloadedImage _speecherImage;
@@ -44,7 +45,7 @@ namespace Conarh_2016.Application.UI.Events
 				FontSize = 80,
 				Text = AppResources.BioHeader,
 				TextColor = AppResources.SpeecherTextColor
-			}, new Point(125, 46));
+			}, new Point(150, 23));
 
 			_speecherImage = new DownloadedImage (AppResources.DefaultUserImage) {
 				HeightRequest = FirstItemHeight,
@@ -76,7 +77,7 @@ namespace Conarh_2016.Application.UI.Events
 			var descriptionContent = new ContentView {
 				Content = new ContentView {
 					Content = new Label {
-						FontSize = 13,
+						FontSize = 11,
 						XAlign = TextAlignment.Start,
 						Text = Data.Bio,
 						TextColor = Color.Black},
@@ -89,10 +90,14 @@ namespace Conarh_2016.Application.UI.Events
 			stackLayout.Children.Add (absoluteLayout);
 			stackLayout.Children.Add (descriptionContent);
 
-			Content = new ScrollView {Content = stackLayout};
-		}
 
-		protected override void OnAppearing ()
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, stackLayout, true, true);
+
+            //Content = new ScrollView {Content = stackLayout};
+            Content = new ScrollView {Content = bgLayout };
+        }
+
+        protected override void OnAppearing ()
 		{
 			base.OnAppearing ();
 

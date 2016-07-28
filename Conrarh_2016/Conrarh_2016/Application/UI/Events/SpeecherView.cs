@@ -43,7 +43,12 @@ namespace Conarh_2016.Application.UI.Events
 			speecherImage.ServerImagePath = Data.ProfileImagePath;
 			absoluteLayout.Children.Add (speecherImage, new Point(10, 0));
 
-			absoluteLayout.Children.Add (new Label {
+            TapGestureRecognizer imgRecognizer = new TapGestureRecognizer();
+            imgRecognizer.Tapped += OnViewTapped;
+            speecherImage.GestureRecognizers.Add(imgRecognizer);
+
+
+            absoluteLayout.Children.Add (new Label {
 				FontSize = 12,
 				HorizontalTextAlignment = TextAlignment.Start,
 				Text = AppResources.Speakers.ToUpper(),
@@ -60,11 +65,10 @@ namespace Conarh_2016.Application.UI.Events
 
 
 			Content = absoluteLayout;
-            /* TODO - Speeker bio Desabilitado SpeecherView
+
 			TapGestureRecognizer tapRecognizer = new TapGestureRecognizer ();
 			tapRecognizer.Tapped += OnViewTapped;
 			Content.GestureRecognizers.Add (tapRecognizer);
-            */
         }
 
         void OnViewTapped (object sender, EventArgs e)

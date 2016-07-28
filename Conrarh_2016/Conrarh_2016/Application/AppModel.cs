@@ -256,7 +256,7 @@ namespace Conarh_2016.Application
 
             if (CurrentUser != null)
             {
-                result = CurrentUser.FavouriteActions.Items.Find(temp => temp.Event.Equals(eventData.Id)) != null;
+                result = CurrentUser.FavouriteActions.Items.Find(temp => temp.EventId.Equals(eventData.Id)) != null;
             }
             return result;
         }

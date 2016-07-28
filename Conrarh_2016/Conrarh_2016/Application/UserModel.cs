@@ -18,7 +18,8 @@ namespace Conarh_2016.Application
 		public DynamicListData<ConnectRequest> Connections;
 		public DynamicListData<BadgeAction> BadgeActions;
 		public DynamicListData<FavouriteEventData> FavouriteActions;
-		public DynamicListData<UserVoteData> VoteData;
+        public DynamicListData<EventData> FavoriteEvents;
+        public DynamicListData<UserVoteData> VoteData;
 		public DynamicListData<ConnectRequest> AcceptedConnections;
 
 		public PushNotificationData PushNotificationData { private set; get;}
@@ -38,8 +39,9 @@ namespace Conarh_2016.Application
 			BadgeActions = new DynamicListData<BadgeAction> ();
 			FavouriteActions = new DynamicListData<FavouriteEventData> ();
 			VoteData = new DynamicListData<UserVoteData> ();
+            FavoriteEvents = new DynamicListData<EventData>();
 
-			AcceptedConnections = new DynamicListData<ConnectRequest> ();
+            AcceptedConnections = new DynamicListData<ConnectRequest> ();
 			Connections.CollectionChanged += OnConnectionsChanged;
 		}
 

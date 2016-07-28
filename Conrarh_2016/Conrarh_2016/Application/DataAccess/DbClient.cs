@@ -179,7 +179,7 @@ namespace Conarh_2016.Application.DataAccess
 			List<FavouriteEventData> data;
 			using (await mutex.LockAsync().ConfigureAwait(false))
 			{
-				data = await connection.Table<FavouriteEventData>().Where(temp => temp.User.Equals(userId)).ToListAsync().ConfigureAwait(false);
+				data = await connection.Table<FavouriteEventData>().Where(temp => temp.UserId.Equals(userId)).ToListAsync().ConfigureAwait(false);
 			}
 
 			return data;

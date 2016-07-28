@@ -49,6 +49,7 @@ namespace Conarh_2016.Application.UI.Main
             layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
             layout.Children.Add(GetMenuButton(MainMenuItemData.AgendaCongressoPage));
             layout.Children.Add(GetMenuButton(MainMenuItemData.AgendaExpoPage));
+            layout.Children.Add(GetMenuButton(MainMenuItemData.FavoriteEventsPage));
             layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
             layout.Children.Add(new Label { Text = "Evento", TextColor = AppResources.MenuTitleTextColor, FontSize = 18 });
             layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));

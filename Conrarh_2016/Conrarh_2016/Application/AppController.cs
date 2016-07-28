@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Conarh_2016.Application.BackgroundTasks;
+using Conarh_2016.Application.BackgroundTasks.GetData;
 using Conarh_2016.Application.BackgroundTasks.GetData.Kinvey;
 using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.Tools;
@@ -11,6 +12,7 @@ using Newtonsoft.Json;
 using PushNotification.Plugin.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using XLabs.Platform.Services.Media;
@@ -30,6 +32,7 @@ namespace Conarh_2016.Application
         SearchUsers = 8,
         DownloadRanking = 9,
         DownloadWallPostLikes = 10,
+        DownloadSpeakers = 11,
 
         DefaultApp = 20,
 
@@ -115,7 +118,6 @@ namespace Conarh_2016.Application
                         var parameters = new KinveyDownloadListParameters(KinveyDownloadCountType.All,
                            QueryBuilder.Instance.GetExhibitorsKinveyQuery());
 
-
                         var downloadTask = new DownloadExhibitorsBackgroundTask(AppModel.Instance.Exhibitors, parameters);
                         downloadTask.ContinueWith((ttask, tresult) => Device.BeginInvokeOnMainThread(onFinish));
                         _backgroundWorkers[AppBackgroundWorkerType.DownloadExhibitors].Add(downloadTask);
@@ -128,6 +130,15 @@ namespace Conarh_2016.Application
                 });
             _backgroundWorkers[AppBackgroundWorkerType.DownloadSponsorTypes].Add(downloadSponsorsTask);
         }
+
+
+        public void DownloadSpeakersData(Action onFinish)
+        {
+            var downloadSpeakersTask = new DownloadSpeakersBackgroundTask();
+            downloadSpeakersTask.ContinueWith((task, result) => Device.BeginInvokeOnMainThread(onFinish));
+            _backgroundWorkers[AppBackgroundWorkerType.DownloadSpeakers].Add(downloadSpeakersTask);
+        }
+
 
         public void DownloadWallData(Action doneAction)
         {
@@ -174,15 +185,14 @@ namespace Conarh_2016.Application
             var parameters = new KinveyDownloadListParameters(KinveyDownloadCountType.All,
                  QueryBuilder.Instance.GetSearchUsersKinveyQuery(searchPatern));
 
-             var searchTask = new DownloadUsersBackgroundTask(dataModel, parameters);
-             searchTask.ContinueWith((task, result) =>
-             {
-                 Device.BeginInvokeOnMainThread(onFinish);
-                 if (result == null)
-                     AppProvider.PopUpFactory.ShowMessage(AppResources.FailedServer, AppResources.Error);
-             });
-             _backgroundWorkers[AppBackgroundWorkerType.SearchUsers].Add(searchTask);
-             
+            var searchTask = new DownloadUsersBackgroundTask(dataModel, parameters);
+            searchTask.ContinueWith((task, result) =>
+            {
+                Device.BeginInvokeOnMainThread(onFinish);
+                if (result == null)
+                    AppProvider.PopUpFactory.ShowMessage(AppResources.FailedServer, AppResources.Error);
+            });
+            _backgroundWorkers[AppBackgroundWorkerType.SearchUsers].Add(searchTask);
         }
 
         public void UpdateRating(DynamicListData<User> users, Action onFinish)
@@ -296,37 +306,86 @@ namespace Conarh_2016.Application
         public void AddImage(string fakeImagePath, Action onExecuted, int cropSize)
         {
             var config = new ActionSheetConfig();
-            config.Add(AppResources.TakePicture, () => AddImageAction(fakeImagePath, onExecuted, cropSize, true));
+//            config.Add(AppResources.TakePicture, () => AddImageAction(fakeImagePath, onExecuted, cropSize, true));
             config.Add(AppResources.UploadImageFromGallery, () => AddImageAction(fakeImagePath, onExecuted, cropSize, false));
             config.Add(AppResources.Cancel);
             UserDialogs.Instance.ActionSheet(config);
         }
+        /*
+        private void stopForMilliSeconds(int millisecondsToWait)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            while (true)
+            {
+                //some other processing to do possible
+                if (stopwatch.ElapsedMilliseconds >= millisecondsToWait)
+                {
+                    break;
+                }
+            }
+        }
+
+        private void testPath(String foto)
+        {
+            AppProvider.PopUpFactory.ShowMessage(foto, "teste");
+            if (AppProvider.IOManager.FileExists(foto))
+            {
+                AppProvider.PopUpFactory.ShowMessage(foto, "ok");
+            }
+            else
+            {
+                AppProvider.PopUpFactory.ShowMessage("merde2", "arf");
+            }
+        }
+
+        private void SavePhoto(CameraMediaStorageOptions cmso, string fakeImagePath, Action onExecuted, int cropSize)
+        {
+            //ImageSource imgSource = null;
+            String imgpath = "";
+
+            Task<MediaFile> imageTask = AppProvider.MediaPicker.TakePhotoAsync(cmso);
+
+            imageTask.ContinueWith(t =>
+             {
+                 if (t.IsFaulted)
+                 {
+                     var s = t.Exception.InnerException.ToString();
+                 }
+                 else
+                 {
+                     var mediaFile = t.Result;
+                     imgpath = mediaFile.Path;
+                     if (AppProvider.IOManager.FileExists(imgpath))
+                     {
+                         AppProvider.PopUpFactory.ShowMessage(mediaFile.Path, "ok");
+                         AppProvider.IOManager.DeleteFile(fakeImagePath);
+                         AppProvider.ImageService.CropAndResizeImage(imgpath, fakeImagePath, cropSize);
+                         onExecuted.Invoke();
+                     }
+                     else
+                     {
+                         AppProvider.PopUpFactory.ShowMessage("merde1", "ok");
+                     }
+                 }
+             });
+        }
+        */
 
         private void AddImageAction(string fakeImagePath, Action onExecuted, int cropSize, bool isMakePhoto)
         {
             Task<MediaFile> imageTask = null;
             var options = new CameraMediaStorageOptions
             {
-                DefaultCamera = CameraDevice.Front,
+                DefaultCamera = CameraDevice.Rear,
                 MaxPixelDimension = 400,
-                PercentQuality = 80,
-
             };
-
-            if (!AppProvider.MediaPicker.IsCameraAvailable)
-            {
-                throw new Exception("Camera não disponível");
-            }
-
-
 
             if (isMakePhoto && AppProvider.MediaPicker.IsCameraAvailable)
                 imageTask = AppProvider.MediaPicker.TakePhotoAsync(options);
             else
                 imageTask = AppProvider.MediaPicker.SelectPhotoAsync(options);
 
-            imageTask.ContinueWith(delegate (Task<MediaFile> arg)
-            {
+            imageTask.ContinueWith(delegate (Task<MediaFile> arg) {
                 MediaFile file = arg.Result;
 
                 if (file != null)
@@ -339,12 +398,12 @@ namespace Conarh_2016.Application
             });
         }
 
+
         private void ShowServerError()
         {
             AppProvider.PopUpFactory.ShowMessage(AppResources.FailedServer, AppResources.Error);
         }
 
-        
         public void UpdatePushNotifications(string deviceToken, DeviceType deviceType)
         {
             if (string.IsNullOrEmpty(AppModel.Instance.AppInformation.PushNotificationToken))
@@ -384,10 +443,7 @@ namespace Conarh_2016.Application
                 });
                 _backgroundWorkers[AppBackgroundWorkerType.DefaultApp].Add(updatingPushNotificationTask);
             }
-
-
         }
-        
 
         public static string FirstCharToUpper(string input)
         {
@@ -399,6 +455,5 @@ namespace Conarh_2016.Application
 
             return result;
         }
-
     }
 }

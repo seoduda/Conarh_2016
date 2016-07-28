@@ -27,7 +27,7 @@ namespace Conarh_2016.Application.UI.Login
 			fillDataView.Apply += OnApplyData;
 			layout.Children.Add (fillDataView);
 
-            BGLayoutView bgLayout = new BGLayoutView(AppResources.SignUpBgImage, layout, false, true);
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, false, true);
             //Content = new ScrollView {Content = bgLayout };
             Content = new ContentView { Content = bgLayout };
         }
