@@ -4,6 +4,7 @@ using System;
 using Conarh_2016.Application.UI.Controls;
 using Conarh_2016.Application.Domain;
 using XLabs.Forms.Controls;
+using Conarh_2016.Core.Services;
 
 namespace Conarh_2016.Application.UI.Wall
 {
@@ -14,8 +15,8 @@ namespace Conarh_2016.Application.UI.Wall
 
 		private DownloadedImage _postDataImage;
 
-		private Label _likeLabel;
-		private WallPost Model;
+        //private Label _likeLabel; TODO reativar  _likeLabel
+        private WallPost Model;
 
 		private DownloadedImage _creatorUserImage;
 		private Label _postDateLabel;
@@ -67,7 +68,7 @@ namespace Conarh_2016.Application.UI.Wall
 				Color = Color.Transparent, 
 				HeightRequest = 1
 			};
-
+            /* TODO reativar like no wall post
 			var likeImage = new Image 
 			{
 				WidthRequest = 30,
@@ -90,7 +91,7 @@ namespace Conarh_2016.Application.UI.Wall
 			TapGestureRecognizer tapOnLikeLabel = new TapGestureRecognizer ();
 			tapOnLikeLabel.Tapped += OnLikeLabelTapped;
 			_likeLabel.GestureRecognizers.Add (tapOnLikeLabel);
-
+            */
 			View = new ContentView {
 				Padding = new Thickness(0, 0, 0, 20),
 				Content = new StackLayout { 
@@ -124,13 +125,17 @@ namespace Conarh_2016.Application.UI.Wall
 							Padding = new Thickness (LeftBorder, 5, LeftBorder, 0),
 							Children = { _postInfoLabel, _postDataImage, emptyBox }
 						},
+                        /* TODO Reativar like
 						new StackLayout { //like
 							Orientation = StackOrientation.Horizontal, 
 							HorizontalOptions = LayoutOptions.EndAndExpand, 
 							Padding = new Thickness (0, 5, 0, 5),
 							Children = { likeImage, _likeLabel }
+                    
 						}
-					}
+                        */
+
+                    }
 				}
 			};
 		}
@@ -147,16 +152,30 @@ namespace Conarh_2016.Application.UI.Wall
 			if (Model != null) {
 
 				_creatorUserImage.UpdateAtTime = Model.UpdatedAtTime;
-				_creatorUserImage.ServerImagePath = Model.CreatorImage;
+                if (Model.CreatedUser == null)
+                {
+                    Model.CreatedUser = AppModel.Instance.Users.Find(Model.CreatedUserId);
+                }
+                try
+                {
+                    _creatorUserImage.ServerImagePath = Model.CreatorImage;
+                    _creatorNameLabel.Text = Model.CreatorName;
+                }catch (Exception ex)
+                {
+                    AppProvider.Log.WriteLine(LogChannel.Exception, ex);
+                    _creatorUserImage.ServerImagePath = AppResources.DefaultUserImage;
+                    _creatorNameLabel.Text = " ";
 
-				_postDataImage.UpdateAtTime = Model.UpdatedAtTime;
+                }
+
+                _postDataImage.UpdateAtTime = Model.UpdatedAtTime;
 				_postDataImage.ServerImagePath = Model.Image;
 
 				_postDateLabel.Text = Model.PostDate;
 				_postInfoLabel.Text = Model.Text;
 
-				_creatorNameLabel.Text = Model.CreatorName;
-				_likeLabel.Text = Model.PostLikes;
+				
+				
 
 				Model.IsChanged += OnModelChanged;
 				OnModelChanged ();
@@ -165,10 +184,12 @@ namespace Conarh_2016.Application.UI.Wall
 
 		void OnModelChanged ()
 		{
+            /* TODO reativar  _likeLabel 2
 			Device.BeginInvokeOnMainThread (() => {
 				if(Model != null)
 					_likeLabel.Text = Model.PostLikes;
 			});
+            */
 		}
 
 		void OnLikeImageTapped (object sender, EventArgs e)

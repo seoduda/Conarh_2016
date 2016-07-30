@@ -90,7 +90,17 @@ namespace Conarh_2016.Application.UI.Wall
 		{
 			base.OnAppearing ();
 
-			_wallPostListView.BeginRefresh();
+            /*
+            for (int i=0; i< AppModel.Instance.WallPostsWrapper.Count; i++)
+            {
+                AppModel.Instance.WallPostsWrapper[i].CreatedUser = AppModel.Instance.Users.Find(AppModel.Instance.WallPostsWrapper[i].CreatedUserId);
+            }
+            */
+            
+
+
+
+            _wallPostListView.BeginRefresh();
 		}
 			
 		private void OnPostClicked (object sender, System.EventArgs e)
@@ -101,7 +111,7 @@ namespace Conarh_2016.Application.UI.Wall
 				return;
 			}
 
-			//Navigation.PushAsync (new WallCreatePostPage (), false);
+		    Navigation.PushAsync (new WallCreatePostPage (), false);
 		}
 	}
 }

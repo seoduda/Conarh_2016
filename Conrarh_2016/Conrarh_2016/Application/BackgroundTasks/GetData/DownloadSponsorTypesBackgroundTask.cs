@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Conarh_2016.Application.BackgroundTasks
 {
     //public sealed class DownloadSponsorTypesBackgroundTask : DownloadListBackgroundTask<SponsorType, RootListData<SponsorType>>
-    public sealed class DownloadSponsorTypesBackgroundTask : DownloadListKinveyBackgroundTask<SponsorType, KinveyRootListData<SponsorType>>
+    public sealed class DownloadSponsorTypesBackgroundTask : GetData.Kinvey.DownloadListKinveyBackgroundTask<SponsorType, KinveyRootListData<SponsorType>>
     {
         public DownloadSponsorTypesBackgroundTask() : base(new KinveyDownloadListParameters(KinveyDownloadCountType.All,
             QueryBuilder.Instance.GetSponsorTypesKinveyQuery()))

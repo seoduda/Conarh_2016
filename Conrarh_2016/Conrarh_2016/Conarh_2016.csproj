@@ -41,6 +41,7 @@
     <Compile Include="Application\BackgroundTasks\GetData\DownloadBadgesByUserBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadBadgesTypesBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadConnectRequestDataByUserBackgroundTask.cs" />
+    <Compile Include="Application\BackgroundTasks\GetData\DownloadListBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadSpeakersBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadUserConnectRequestDataBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadEventsDataBackgroundTask.cs" />
@@ -48,7 +49,6 @@
     <Compile Include="Application\BackgroundTasks\GetData\DownloadExhibitorsBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadFavouriteEventsBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadImageBackgroundTask.cs" />
-    <Compile Include="Application\BackgroundTasks\GetData\DownloadListBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadPushNotificationsByTokenBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadPushNotificationsByUserBackgroundTask.cs" />
     <Compile Include="Application\BackgroundTasks\GetData\DownloadSponsorTypesBackgroundTask.cs" />
@@ -140,6 +140,7 @@
     <Compile Include="Application\UI\Main\MainMenuPage.cs" />
     <Compile Include="Application\UI\Main\RootPage.cs" />
     <Compile Include="Application\UI\Map\MapPage.cs" />
+    <Compile Include="Application\UI\Midia\MidiaPage.cs" />
     <Compile Include="Application\UI\PopUpFactory.cs" />
     <Compile Include="Application\UI\Profile\Android\ContactListGridPage.cs" />
     <Compile Include="Application\UI\Profile\Android\ProfileGridPage.cs" />

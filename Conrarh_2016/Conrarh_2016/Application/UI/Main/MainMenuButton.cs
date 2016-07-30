@@ -31,7 +31,9 @@ namespace Conarh_2016.Application.UI.Main
         public static MainMenuItemData WallPage = new MainMenuItemData(false, AppResources.Wall, typeof(Wall.WallPage), false, false);
 
         public static MainMenuItemData HowtoPlayPage = new MainMenuItemData(false, AppResources.HowToPlay, typeof(Connect.HowToPlayPage), false, false);
+        public static MainMenuItemData MidiaPage = new MainMenuItemData(false, AppResources.Midia, typeof(Midia.MediaPage), false, false);
         public static MainMenuItemData LoginPage = new MainMenuItemData(false, AppResources.Login, typeof(Login.LoginPage), false, false);
+        public static MainMenuItemData TestPage = new MainMenuItemData(false, "TESTE", typeof(Connect.ConnectionGridPage), false, false);
         public static MainMenuItemData LogOutPage = new MainMenuItemData(false, AppResources.LogOut, null, false, false);
 
         public string Title { get; set; }

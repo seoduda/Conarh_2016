@@ -11,7 +11,7 @@ namespace Conarh_2016.Application.BackgroundTasks
 		public readonly WallPost WallPost;
 
 		public PostWallLikeBackgroundTask(User user, WallPost post):
-			base(QueryBuilder.Instance.GetPostWallPostLikeQuery (), 
+			base(QueryBuilder.Instance.GetPostWallPostLikeKinveyQuery(), 
 			new AddWallPostLike (user.Id, post.Id),
 				true)
 

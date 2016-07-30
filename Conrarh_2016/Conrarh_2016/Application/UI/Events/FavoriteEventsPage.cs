@@ -77,7 +77,7 @@ namespace Conarh_2016.Application.UI.Events
             
             pageLayout.Children.Add(_favEventListView);
             BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, pageLayout, true, true);
-            Content = bgLayout;-
+            Content = bgLayout;
             /*
             if (AppModel.Instance.CurrentUser != null)
                 UserController.Instance.DownloadFavouriteEvents();

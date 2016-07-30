@@ -3,25 +3,27 @@ using Conarh_2016.Application.Tools;
 using Conarh_2016.Application.DataAccess;
 using System.Collections.Generic;
 using System;
+using Conarh_2016.Application.BackgroundTasks.GetData.Kinvey;
 
 namespace Conarh_2016.Application.BackgroundTasks
 {
-	public sealed class DownloadWallPostLikesBackgroundTask : DownloadListBackgroundTask<WallPostLike, RootListData<WallPostLike>>
-	{
+    //public sealed class DownloadWallPostLikesBackgroundTask : DownloadListBackgroundTask<WallPostLike, RootListData<WallPostLike>>
+    public sealed class DownloadWallPostLikesBackgroundTask : DownloadListKinveyBackgroundTask<WallPostLike, KinveyRootListData<WallPostLike>>
+    {
 		public readonly WallPost Post;
 		public readonly DateTime LastUpdatedTime;
 
 		public DownloadWallPostLikesBackgroundTask(WallPost wallPost, DynamicListData<WallPostLike> data): base(data,
-			new DownloadListParameters( DownloadCountType.All, 
-				QueryBuilder.Instance.GetWallPostsLikesQuery (wallPost.Id)))
+			new KinveyDownloadListParameters( KinveyDownloadCountType.All, 
+				QueryBuilder.Instance.GetWallPostsLikesKinveyQuery(wallPost.Id)))
 		{
 			Post = wallPost;
 			LastUpdatedTime = DateTime.Now;
 		}
 
 		public DownloadWallPostLikesBackgroundTask(WallPost wallPost, string userId): base(null,
-			new DownloadListParameters( DownloadCountType.FirstPage, 
-				QueryBuilder.Instance.GetWallPostsLikesQuery (wallPost.Id, userId)))
+			new KinveyDownloadListParameters(KinveyDownloadCountType.FirstPage, 
+				QueryBuilder.Instance.GetWallPostsLikesKinveyQuery(wallPost.Id, userId)))
 		{
 			Post = wallPost;
 		}
@@ -33,7 +35,7 @@ namespace Conarh_2016.Application.BackgroundTasks
 				DbClient.Instance.SaveItemData<User> (wallPostLike.User).ConfigureAwait(false);
 			}
 
-			if (TaskParameters.DownloadCountType == DownloadCountType.All) {
+			if (TaskParameters.DownloadCountType == KinveyDownloadCountType.All) {
 				Post.LastUpdatedLikesTime = LastUpdatedTime;
 				DbClient.Instance.SaveItemData<WallPost> (Post).ConfigureAwait (false);
 			}

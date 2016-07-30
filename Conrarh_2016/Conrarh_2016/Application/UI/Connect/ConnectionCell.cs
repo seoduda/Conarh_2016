@@ -42,11 +42,13 @@ namespace Conarh_2016.Application.UI.Connect
 
 			userChooseLayout.Children.Add (namesLayout, new Point(ImageWidth * 1.2f, 0));
 
+            /* TODO validar se precisa do TapOnUser Connection cell
 			TapGestureRecognizer tapOnUser = new TapGestureRecognizer ();
 			tapOnUser.Tapped += TapOnUser;
 			userChooseLayout.GestureRecognizers.Add (tapOnUser);
+            */
 
-			_connectBtn = new Button () {
+            _connectBtn = new Button () {
 				WidthRequest = ButtonWidth,
 				TextColor = Color.White,
 				BackgroundColor = AppResources.AgendaExpoColor,
@@ -76,7 +78,10 @@ namespace Conarh_2016.Application.UI.Connect
 			grid.Children.Add (userChooseLayout, 0, 0);
 			grid.Children.Add (_connectBtn, 1, 0);
 
-			this.View = grid;
+
+            OnModelChanged();
+
+            this.View = grid;
 		}
 
 		void TapOnUser (object sender, EventArgs e)

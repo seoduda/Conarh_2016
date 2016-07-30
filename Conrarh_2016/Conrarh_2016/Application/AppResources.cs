@@ -39,6 +39,7 @@ namespace Conarh_2016.Application
         public static string FavoriteEvents = "Minha Agenda";
         public static string Exhibitors = "Expositores";
         public static string Map = "Mapa";
+        public static string Midia = "Mídia";
         public static string Wall = "Mural";
         public static string Connect = "Conecte-se!";
         public static string Profile = "Perfil";
@@ -113,6 +114,8 @@ namespace Conarh_2016.Application
         public static string LoadingSendingAcceptRequest = "Enviando…";
         public static string SuccessfulRequestConnection = "Solicitação enviada!";
         public static string SuccessfulAcceptRequestConnection = "Contato adicionado!";
+        public static string ProfilePendingContacsBtnHeader = "Pendentes";
+        public static string ProfileAllContacsBtnHeader = "Contatos";
         public static string ProfileRatingBtnHeader = "Ranking";
         public static string ProfileContactListBtnHeader = "Contatos";
         public static string LoadingRanking = "Carregando o Ranking…";
@@ -261,7 +264,12 @@ namespace Conarh_2016.Application
         public static string HowToPlayCarouselPageImage3 = "carousel_3.png";
         public static string HowToPlayCarouselPageImage4 = "carousel_4.png";
 
-        
+
+        public static string MidiaImage1 = "media_1.png";
+        public static string MidiaImage2 = "media_2.png";
+        public static string MidiaImage3 = "media_3.png";
+
+
         public static string ProfileLevelProgressBarImageLabel = "levelProgressBarImageLabel.png";
         public static string DefaultBtEdit = "editBtImage.png";
 

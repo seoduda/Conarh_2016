@@ -14,7 +14,8 @@ namespace Conarh_2016.Application.Domain
 		public const string ImagePropertyName = "Image";
 		public const string PostDatePropertyName = "PostDate";
 		public const string CreatorNamePropertyName = "CreatorName";
-		public const string CreatorImagePropertyName = "CreatorImage";
+        public const string CreatorIdPropertyName = "CreatorId";
+        public const string CreatorImagePropertyName = "CreatorImage";
 		public const string PostLikesPropertyName = "PostLikes";
 
 		[JsonProperty(JsonKeys.Text)]
@@ -38,15 +39,17 @@ namespace Conarh_2016.Application.Domain
 			get;
 		}
 
-		[JsonProperty(JsonKeys.CreatedUser)]
-		[Ignore]
+        //[JsonProperty(JsonKeys.CreatedUser)]
+        [JsonIgnore]
+        [Ignore]
 		public User CreatedUser
 		{
 			set;
 			get;
 		}
-
-		public string CreatedUserId
+        
+        [JsonProperty(JsonKeys.CreatedUserId)]
+        public string CreatedUserId
 		{
 			set;
 			get;
@@ -73,8 +76,9 @@ namespace Conarh_2016.Application.Domain
 			public const string LikeList = "like_list";
 			public const string Likes = "likes";
 			public const string Image = "image";
-			public const string CreatedUser = "user";
-			public const string CreatedDate = "created_at";
+			public const string CreatedUserId = "userid";
+            public const string CreatedUser = "user";
+            public const string CreatedDate = "created_at";
 		}
 
 		public override string ToString ()
@@ -99,12 +103,15 @@ namespace Conarh_2016.Application.Domain
 		}
 
 		public string CreatorImage
-		{
-			get 
-			{
-				return CreatedUser.ProfileImagePath;
-			}
-		}
+        {
+            get
+            {
+                return CreatedUser.ProfileImagePath;
+            }
+        }
+            
+
+            
 
 		public string PostLikes 
 		{

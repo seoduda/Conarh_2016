@@ -27,7 +27,7 @@ namespace Conarh_2016.Application.UI.Shared
 
         public event Action EditUserProfile;
 
-        public UserHeaderView(UserModel userModel, bool showContacts = false, bool showButtonEdit = true)
+        public UserHeaderView(UserModel userModel, bool showContacts = false, bool showButtonEdit = true, bool showPointsLayout = true)
         {
             Model = userModel;
 
@@ -122,88 +122,80 @@ namespace Conarh_2016.Application.UI.Shared
             stackLayout.Children.Add(headerLayout);
 
             /* Implementação com Progressbar */
-
-            var pointsLayout = new AbsoluteLayout
+            if (showPointsLayout)
             {
-                Padding = new Thickness(10, 5),
-            };
-            int pgImagelabelHeigth = 69;
-            int pointsCountBoxHeigth = 51;
-            int boxYpos = pgImagelabelHeigth - (pointsCountBoxHeigth / 3);
 
-            var pointsCountLabel = new Label
-            {
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-                TextColor = AppResources.ProfilePointsColor,
-                FontSize = 18,
-                //FontAttributes = FontAttributes.Bold,
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Start,
-                HeightRequest = pointsCountBoxHeigth - 12,
-                WidthRequest = pointsCountBoxHeigth - 2,
-            };
+                var pointsLayout = new AbsoluteLayout
+                {
+                    Padding = new Thickness(10, 5),
+                };
+                int pgImagelabelHeigth = 69;
+                int pointsCountBoxHeigth = 51;
+                int boxYpos = pgImagelabelHeigth - (pointsCountBoxHeigth / 3);
 
-            pointsCountLabel.SetBinding(Label.TextProperty, User.ScorePointsProperty);
+                var pointsCountLabel = new Label
+                {
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    TextColor = AppResources.ProfilePointsColor,
+                    FontSize = 18,
+                    //FontAttributes = FontAttributes.Bold,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    VerticalTextAlignment = TextAlignment.Start,
+                    HeightRequest = pointsCountBoxHeigth - 12,
+                    WidthRequest = pointsCountBoxHeigth - 2,
+                };
 
-            var pointsCountText = new Label
-            {
-                Text = AppResources.ProfilePointsLabelText,
-                TextColor = AppResources.ProfilePointsColor,
-                FontSize = 9,
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Start,
-                //HeightRequest = 10,
-                WidthRequest = pointsCountBoxHeigth - 2,
-            };
+                pointsCountLabel.SetBinding(Label.TextProperty, User.ScorePointsProperty);
 
-            var pointsCountBox = new Button
-            {
-                BackgroundColor = AppResources.UserHeaderNameTextColor,
-                IsEnabled = false,
-                BorderRadius = 25,
-                HeightRequest = pointsCountBoxHeigth,
-                WidthRequest = pointsCountBoxHeigth
-            };
-            pointsLayout.Children.Add(pointsCountBox, new Point(0, boxYpos));
-            pointsLayout.Children.Add(pointsCountLabel, new Point(2, boxYpos + 8));
-            pointsLayout.Children.Add(pointsCountText, new Point(2, boxYpos + 30));
+                var pointsCountText = new Label
+                {
+                    Text = AppResources.ProfilePointsLabelText,
+                    TextColor = AppResources.ProfilePointsColor,
+                    FontSize = 9,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    VerticalTextAlignment = TextAlignment.Start,
+                    //HeightRequest = 10,
+                    WidthRequest = pointsCountBoxHeigth - 2,
+                };
 
-            var progbar = new ProgressBar()
-            {
-                HeightRequest = 17,
-                //BackgroundColor = AppResources.ProfilePointsColor,
-                WidthRequest = 300,
-                //  Progress = 0.3
-            };
-            //IntDivByKDoubleConverter iDkC = new IntDivByKDoubleConverter();
-            //progbar.BindingContextChanged
-            progbar.SetBinding(ProgressBar.ProgressProperty, User.ScorePointsProperty, BindingMode.Default, new IntDivByKDoubleConverter(), null);
+                var pointsCountBox = new Button
+                {
+                    BackgroundColor = AppResources.UserHeaderNameTextColor,
+                    IsEnabled = false,
+                    BorderRadius = 25,
+                    HeightRequest = pointsCountBoxHeigth,
+                    WidthRequest = pointsCountBoxHeigth
+                };
+                pointsLayout.Children.Add(pointsCountBox, new Point(0, boxYpos));
+                pointsLayout.Children.Add(pointsCountLabel, new Point(2, boxYpos + 8));
+                pointsLayout.Children.Add(pointsCountText, new Point(2, boxYpos + 30));
 
-            Image progbarImageLabel = new Image()
-            {
-                Source = ImageLoader.Instance.GetImage(AppResources.ProfileLevelProgressBarImageLabel, false),
-                HeightRequest = pgImagelabelHeigth,
-                WidthRequest = 300,
-            };
+                var progbar = new ProgressBar()
+                {
+                    HeightRequest = 17,
+                    //BackgroundColor = AppResources.ProfilePointsColor,
+                    WidthRequest = 300,
+                    //  Progress = 0.3
+                };
+                //IntDivByKDoubleConverter iDkC = new IntDivByKDoubleConverter();
+                //progbar.BindingContextChanged
+                progbar.SetBinding(ProgressBar.ProgressProperty, User.ScorePointsProperty, BindingMode.OneWay, new IntDivByKDoubleConverter(), null);
 
-            pointsLayout.Children.Add(progbar, new Point(pointsCountBoxHeigth, pgImagelabelHeigth));
-            pointsLayout.Children.Add(progbarImageLabel, new Point(pointsCountBoxHeigth, 0));
-            // progbar.SetBinding(ProgressBar.ProgressProperty, User.ScorePointsProgressionProperty);
+                Image progbarImageLabel = new Image()
+                {
+                    Source = ImageLoader.Instance.GetImage(AppResources.ProfileLevelProgressBarImageLabel, false),
+                    HeightRequest = pgImagelabelHeigth,
+                    WidthRequest = 300,
+                };
 
-            stackLayout.Children.Add(pointsLayout);
+                pointsLayout.Children.Add(progbar, new Point(pointsCountBoxHeigth, pgImagelabelHeigth));
+                pointsLayout.Children.Add(progbarImageLabel, new Point(pointsCountBoxHeigth, 0));
+                // progbar.SetBinding(ProgressBar.ProgressProperty, User.ScorePointsProgressionProperty);
 
-            /*
-                        stackLayout.Children.Add(new BoxView
-                        {
-                            WidthRequest = AppProvider.Screen.Width,
-                            HeightRequest = 1,
-                            Color = Color.Gray
-                        });
-
-                */
+                stackLayout.Children.Add(pointsLayout);
+            }
 
             Content = stackLayout;
-
             BindingContext = Model.User;
             Model.IsChanged += OnUserModelChanged;
         }

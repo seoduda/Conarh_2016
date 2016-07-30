@@ -4,13 +4,14 @@ using Conarh_2016.Application.UI.Controls;
 using Conarh_2016.Core;
 using System.IO;
 using Conarh_2016.Application.UI.Shared;
+using Conrarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Wall
 {
 	public sealed class WallCreatePostPage : ContentPage
 	{
 		private readonly EditorControl _postTextField;
-		private const int EditorHeight = 100;
+		private const int EditorHeight = 200;
 		private const int Border = 20;
 
 		private Image _postImage;
@@ -24,11 +25,12 @@ namespace Conarh_2016.Application.UI.Wall
 
 			Title = AppResources.WallCreatePost;
 
-			BackgroundColor = AppResources.WallPageBackgroundColor;
+			BackgroundColor = Color.Transparent;
 
-			var layout = new StackLayout  { Orientation = StackOrientation.Vertical, 
-				BackgroundColor = AppResources.WallPostBackgroundColor, 
-				Padding = new Thickness(Border),
+			var layout = new StackLayout  { Orientation = StackOrientation.Vertical,
+                BackgroundColor = AppResources.AgendaExpoColor, 
+                //BackgroundColor = Color.Transparent,
+                Padding = new Thickness(Border),
 				Spacing = 5};
 
 			var topLayout = new StackLayout  { Orientation = StackOrientation.Horizontal };
@@ -42,7 +44,7 @@ namespace Conarh_2016.Application.UI.Wall
 
 			topLayout.Children.Add (userImage);
 
-			var userNameLabel = new Label { TextColor = AppResources.AgendaCongressoColor, FontSize = 15, XAlign = TextAlignment.Start};
+			var userNameLabel = new Label { TextColor = Color.White, FontSize = 15, XAlign = TextAlignment.Start};
 			userNameLabel.Text = AppModel.Instance.CurrentUser.User.Name;
 		
 			topLayout.Children.Add (userNameLabel);
@@ -53,27 +55,29 @@ namespace Conarh_2016.Application.UI.Wall
 			layout.Children.Add (_postImage);
 
 			float btnWidth = (AppProvider.Screen.Width - Border) / 2;
-			var btnUpload = new Button { 
-				BackgroundColor = AppResources.AgendaPageBackgroundColor,
+
+            var btnUpload = new Button { 
+				BackgroundColor = AppResources.MenuColor,
 				WidthRequest = btnWidth,
 				HeightRequest = 40,
 				Text = AppResources.WallPostButtonUpload,
 				TextColor = Color.White,
 				BorderRadius = 0
 			};
-			btnUpload.Clicked += OnUploadClicked;;
-			layout.Children.Add (btnUpload);
+			//btnUpload.Clicked += OnUploadClicked;;
+			//layout.Children.Add (btnUpload);
 
 			_postTextField = new EditorControl(string.Empty) {
 				HeightRequest = EditorHeight,
 				WidthRequest = AppProvider.Screen.Width - Border * 2,
 				BackgroundColor = Color.White
-			};
+        
+            };
 
 			layout.Children.Add (_postTextField);
 
 			var btnPost = new Button { 
-				BackgroundColor = AppResources.AgendaPageBackgroundColor,
+				BackgroundColor = AppResources.MenuColor,
 				WidthRequest = btnWidth,
 				Text = AppResources.WallPostButtonPost,
 				TextColor = Color.White,
@@ -82,7 +86,11 @@ namespace Conarh_2016.Application.UI.Wall
 			btnPost.Clicked += OnPostClicked;;
 			layout.Children.Add (btnPost);
 
-			Content = new ScrollView() {Content = layout};
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
+            Content = new ContentView { Content = bgLayout };
+
+
+//            Content = new ScrollView() {Content = layout};
 		}
 
 		void OnUploadClicked (object sender, System.EventArgs e)

@@ -5,7 +5,7 @@ using Conarh_2016.Application.Tools;
 namespace Conarh_2016.Application.BackgroundTasks
 {
 	public sealed class DownloadFavouriteEventsBackgroundTask :
-    DownloadListKinveyBackgroundTask<FavouriteEventData, KinveyRootListData<FavouriteEventData>>
+    GetData.Kinvey.DownloadListKinveyBackgroundTask<FavouriteEventData, KinveyRootListData<FavouriteEventData>>
 
     //	DownloadListBackgroundTask<FavouriteEventData, RootListData<FavouriteEventData>>
     {

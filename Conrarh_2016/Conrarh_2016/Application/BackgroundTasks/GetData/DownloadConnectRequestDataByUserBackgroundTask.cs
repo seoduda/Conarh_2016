@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Conarh_2016.Application.BackgroundTasks
 {
     //public sealed class DownloadConnectRequestDataByUserBackgroundTask : DownloadListBackgroundTask<ConnectRequest, RootListData<ConnectRequest>>
-    public sealed class DownloadConnectRequestDataByUserBackgroundTask : DownloadListKinveyBackgroundTask<ConnectRequest, KinveyRootListData<ConnectRequest>>
+    public sealed class DownloadConnectRequestDataByUserBackgroundTask : GetData.Kinvey.DownloadListKinveyBackgroundTask<ConnectRequest, KinveyRootListData<ConnectRequest>>
     {
         public DownloadConnectRequestDataByUserBackgroundTask(DynamicListData<ConnectRequest> data, string query) : base(data,
                 new KinveyDownloadListParameters(KinveyDownloadCountType.All, query))

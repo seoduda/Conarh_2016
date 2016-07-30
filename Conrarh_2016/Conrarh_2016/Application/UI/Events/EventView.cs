@@ -15,6 +15,7 @@ namespace Conarh_2016.Application.UI.Events
         private Image _eventImage;
         private Label _nameLabel;
         private Label _locationLabel;
+        private Label _SponsorLabel;
         private StackLayout _nameLocationLayout;
 
         private Label _timeLabel;
@@ -51,12 +52,22 @@ namespace Conarh_2016.Application.UI.Events
                 HorizontalTextAlignment = TextAlignment.Start
             };
 
+            _SponsorLabel = new Label()
+            {
+                FontSize = 11,
+                TextColor = Color.White,
+                FontAttributes = FontAttributes.Bold,
+                HorizontalTextAlignment = TextAlignment.Start
+            };
+
+
             _nameLocationLayout = new StackLayout()
             {
                 Orientation = StackOrientation.Vertical,
                 Children = {
                     _nameLabel,
-                    _locationLabel
+                    _locationLabel,
+                    _SponsorLabel
                 },
                 Padding = new Thickness(10, 4, 0, 10),
                 Spacing = 5,
@@ -157,7 +168,8 @@ namespace Conarh_2016.Application.UI.Events
             {
                 _favEventBoxView.BackgroundColor = Model.BackgroundColor;
                 _timeLabel.Text = Model.TimeDuration.Replace("-", "\n");
- 
+                _SponsorLabel.Text = string.IsNullOrEmpty(Model.PointsImagePath.Trim()) ? "": string.Format("Patrocínio {0}", Model.PointsImagePath.Trim());
+
                 //_timeBoxView.BackgroundColor = Model.BackgroundColorNonOpacity;
                 _nameLocationLayout.BackgroundColor = Model.BackgroundColorNonOpacity;
                 _nameLocationLayout.Opacity = 0.95;

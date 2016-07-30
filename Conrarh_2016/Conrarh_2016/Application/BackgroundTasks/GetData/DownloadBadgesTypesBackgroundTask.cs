@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Conarh_2016.Application.BackgroundTasks
 {
 	//public sealed class DownloadBadgesTypesBackgroundTask : DownloadListBackgroundTask<BadgeType, RootListData<BadgeType>>
-    public sealed class DownloadBadgesTypesBackgroundTask : DownloadListKinveyBackgroundTask<BadgeType, KinveyRootListData<BadgeType>>
+    public sealed class DownloadBadgesTypesBackgroundTask : GetData.Kinvey.DownloadListKinveyBackgroundTask<BadgeType, KinveyRootListData<BadgeType>>
     {
 		public DownloadBadgesTypesBackgroundTask(): base(new KinveyDownloadListParameters(KinveyDownloadCountType.All,
 			QueryBuilder.Instance.GetBadgeTypesKinveyQuery()))

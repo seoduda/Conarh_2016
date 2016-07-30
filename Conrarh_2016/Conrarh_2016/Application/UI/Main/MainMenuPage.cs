@@ -56,9 +56,11 @@ namespace Conarh_2016.Application.UI.Main
 
             layout.Children.Add(GetMenuButton(MainMenuItemData.ExhibitorsPage));
             layout.Children.Add(GetMenuButton(MainMenuItemData.MapPage));
-            //            layout.Children.Add(GetMenuButton(MainMenuItemData.WallPage));
+            layout.Children.Add(GetMenuButton(MainMenuItemData.WallPage));
+            layout.Children.Add(GetMenuButton(MainMenuItemData.MidiaPage));
 
             layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
+            //layout.Children.Add(GetMenuButton(MainMenuItemData.TestPage));
 
             if (AppModel.Instance.CurrentUser == null)
                 layout.Children.Add(GetMenuButton(MainMenuItemData.LoginPage));

@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using Conarh_2016.Application.Wrappers;
 using System.Collections.Generic;
+using Conrarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Profile
 {
@@ -33,7 +34,7 @@ namespace Conarh_2016.Application.UI.Profile
 			Model = new RatingListModel ();
 			Model.ItemsChanged += OnItemsChanged;
 
-			BackgroundColor = Color.White;
+			BackgroundColor = Color.Transparent;
 
 			Title = AppResources.ProfileRatingBtnHeader;
 
@@ -53,7 +54,15 @@ namespace Conarh_2016.Application.UI.Profile
 			};
 			_listView.SetBinding<RatingListWrapper> (ListView.IsRefreshingProperty, vm => vm.IsBusy, BindingMode.OneWay);
 
-			Content = new ContentView { Content = _listView, Padding = new Thickness(10)};
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, new ContentView { Content = _listView }, true, true);
+            //, Padding = new Thickness(10)
+            // BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, false, true);
+
+            //Content = layout;
+            Content = bgLayout;
+
+
+            Content = new ContentView { Content = bgLayout};
 		}
 
 		void OnItemsChanged ()

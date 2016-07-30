@@ -121,25 +121,58 @@ namespace Conarh_2016.Application.Tools
         }
         */
 
-        public string GetWallPostsQuery()
+        /*public string GetWallPostsQuery()
         {
             return GetQuery("wall");
+        }*/
+
+        public string GetWallPostskinveyQuery()
+        {
+            return GetKinveyQuery("wall");
         }
 
+        /*
         public string GetWallPostByIdQuery(string wallPostId)
         {
             return GetQuery(string.Format("wall/{0}", wallPostId));
         }
+        */
+        public string GetWallPostByIdKinveyQuery(string wallPostId)
+        {
+            return GetKinveyQuery(string.Format("wall/{0}", wallPostId));
+        }
 
+        /*
         public string GetWallPostsLikesQuery(string wallPostId)
         {
             return GetQuery(string.Format("wall_likes?post={0}", wallPostId));
         }
+        */
+        public string GetWallPostsLikesKinveyQuery(string wallPostId)
+        {
+            StringBuilder sb = new StringBuilder("wall-likes?query ={\"post\":\"");
+            sb.Append(wallPostId);
+            sb.Append("\" }");
+            return GetKinveyQuery(sb.ToString());
+        }
 
+        /*
         public string GetWallPostsLikesQuery(string wallPostId, string userId)
         {
             return GetQuery(string.Format("wall_likes?post={0}&user={1}", wallPostId, userId));
         }
+        */
+
+        public string GetWallPostsLikesKinveyQuery(string wallPostId, string userId)
+        {
+            StringBuilder sb = new StringBuilder("wall-likes?query={\"post\":\"");
+            sb.Append(wallPostId);
+            sb.Append("\", \"user\":\"");
+            sb.Append(userId);
+            sb.Append("\"}");
+            return GetKinveyQuery(sb.ToString());
+        }
+
         /*
         public string GetPostUserVotesQuery()
         {
@@ -152,28 +185,30 @@ namespace Conarh_2016.Application.Tools
             return GetKinveyQuery("speechers");
         }
 
-
-
         public string GetPostUserVotesKinveyQuery()
         {
             return GetKinveyQuery("user-votes");
         }
+
         /*
         public string GetPostUserVotesQuery(string voteId)
         {
             return GetQuery(string.Format("user_votes/{0}", voteId));
         }
         */
+
         public string GetPostUserVotesKinveyQuery(string voteId)
         {
             return GetKinveyQuery(string.Format("user-votes/{0}", voteId));
         }
+
         /*
         public string GetEventVotesByUserQuery(string eventId, string userId)
         {
             return GetQuery(string.Format("user_votes?event={0}&user={1}", eventId, userId));
         }
         */
+
         public string GetEventVotesByUserKinveyQuery(string eventId, string userId)
         {
             StringBuilder sb = new StringBuilder("user-votes?query={\"event\":\"");
@@ -183,8 +218,6 @@ namespace Conarh_2016.Application.Tools
             sb.Append("\"}");
             return GetKinveyQuery(sb.ToString());
         }
-    
-
 
         /*
         public string GetUserByUsernameQuery(string username)
@@ -207,10 +240,17 @@ namespace Conarh_2016.Application.Tools
             return GetQuery("questions_events");
         }
 
+        /*
         public string GetPostWallPostLikeQuery()
         {
             return GetQuery("wall_likes");
         }
+        */
+        public string GetPostWallPostLikeKinveyQuery()
+        {
+            return GetKinveyQuery("wall-likes");
+        }
+
 
         public string GetPostPushNotificationsQuery()
         {
@@ -236,12 +276,12 @@ namespace Conarh_2016.Application.Tools
         {
             return GetQuery(string.Format("push/devices/{0}", id));
         }
-
+        /* no kynvey é por outro método, usa PostImageKinveyBackgroundTask 
         public string GetPostWallPostImageQuery(string wallPostId)
         {
             return GetQuery(string.Format("wall/{0}/image", wallPostId));
         }
-
+        */
         public string GetSearchExhibitorsQuery(string pattern)
         {
             return GetQuery(string.Format("exhibitors?per_page=5&title=$iregex:{0}", pattern));
@@ -258,7 +298,6 @@ namespace Conarh_2016.Application.Tools
             return GetQuery(string.Format("users/{0}/profile_image", wallPostId));
         }
         */
-
 
         /*
         public string GetConnectRequestByUserQuery(string userId)
@@ -349,9 +388,18 @@ namespace Conarh_2016.Application.Tools
             return GetKinveyQuery("connections");
         }
 
+        /*
         public string GetRankingQuery()
         {
             return GetQuery("users?per_page=20&order_by=points:desc");
+        }
+        */
+
+        public string GetRankingKinveyQuery()
+        {
+            StringBuilder sb = new StringBuilder(KinveyApiUserUrl);
+            sb.Append("?&sort={\"points\": -1}&limit=10");
+            return sb.ToString();
         }
 
         /*

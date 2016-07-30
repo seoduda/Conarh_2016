@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Conarh_2016.Application.BackgroundTasks
 {
     //public sealed class DownloadExhibitorsBackgroundTask : DownloadListBackgroundTask<Exhibitor, RootListData<Exhibitor>>
-    public sealed class DownloadExhibitorsBackgroundTask : DownloadListKinveyBackgroundTask<Exhibitor, KinveyRootListData<Exhibitor>>
+    public sealed class DownloadExhibitorsBackgroundTask : GetData.Kinvey.DownloadListKinveyBackgroundTask<Exhibitor, KinveyRootListData<Exhibitor>>
     {
         public readonly DynamicListData<Exhibitor> DList;
 

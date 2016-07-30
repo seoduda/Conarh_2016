@@ -197,11 +197,12 @@ namespace Conarh_2016.Application
 
         public void UpdateRating(DynamicListData<User> users, Action onFinish)
         {
-            /* TODO reativar ranking AppController
+            /* TODO reativar ranking AppController */
+
             UserDialogs.Instance.ShowLoading(AppResources.LoadingRanking);
 
-            var parameters = new DownloadListParameters(DownloadCountType.FirstPage,
-                                 QueryBuilder.Instance.GetRankingQuery());
+            var parameters = new KinveyDownloadListParameters(KinveyDownloadCountType.FirstPage,
+                                 QueryBuilder.Instance.GetRankingKinveyQuery());
 
             var requestTask = new DownloadUsersBackgroundTask(AppModel.Instance.Users, parameters);
             requestTask.ContinueWith((task, result) =>
@@ -219,7 +220,6 @@ namespace Conarh_2016.Application
                 }
             });
             _backgroundWorkers[AppBackgroundWorkerType.DownloadRanking].Add(requestTask);
-            */
         }
 
         public void TryResetPassword()

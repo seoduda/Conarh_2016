@@ -2,6 +2,7 @@
 using Conarh_2016.Application;
 using Conarh_2016.Application.BackgroundTasks;
 using Conarh_2016.Application.BackgroundTasks.GetData.Kinvey;
+using Conarh_2016.Application.BackgroundTasks.SendData.Kinvey;
 using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.Domain.PostData;
 using Conarh_2016.Application.Tools;
@@ -344,7 +345,7 @@ namespace Conarh_2016.Application
                         }
                         else
                         {
-                            string query = QueryBuilder.Instance.GetWallPostByIdQuery(post.Id);
+                            string query = QueryBuilder.Instance.GetWallPostByIdKinveyQuery(post.Id);
                             var getNewWallPostData = new GetItemByIdBackgroundTask<WallPost>(query, AppModel.Instance.WallPosts);
                             getNewWallPostData.ContinueWith((getTask, getResult) =>
                             {
@@ -367,7 +368,7 @@ namespace Conarh_2016.Application
         {
             UserDialogs.Instance.ShowLoading(AppResources.LoadingSendingWallPost);
             var data = new CreateWallPostData { UserId = AppModel.Instance.CurrentUser.User.Id, Text = text };
-            string query = QueryBuilder.Instance.GetWallPostsQuery();
+            string query = QueryBuilder.Instance.GetWallPostskinveyQuery();
 
             var createWallPostTask = new PostDataBackgroundTask<CreateWallPostData>(query, data);
             createWallPostTask.ContinueWith((task, result) =>
@@ -394,7 +395,15 @@ namespace Conarh_2016.Application
                     }
                     else
                     {
-                        var postImageToPost = new PostImageBackgroundTask(QueryBuilder.Instance.GetPostWallPostImageQuery(result.Id), imagePath);
+                        // var postImageToPost = new PostImageBackgroundTask(QueryBuilder.Instance.GetPostWallPostImageQuery(result.Id), imagePath);
+                        var postImageToPost = new PostImageKinveyBackgroundTask(imagePath, result.Id, KinveyImageType.WallPost);
+                        postImageToPost.Execute();
+                        UserDialogs.Instance.ShowSuccess(AppResources.SuccessfulCreateWallPost, 1);
+                        AppController.Instance.AppRootPage.Detail.Navigation.PopAsync();//
+                        
+                        AppController.Instance.DownloadWallData(null);
+                        AppController.Instance.AppRootPage.Detail.Navigation.PopAsync();
+                        /*
                         postImageToPost.ContinueWith((pItask, pIresult) =>
                         {
                             if (pIresult == null)
@@ -417,6 +426,7 @@ namespace Conarh_2016.Application
                             }
                         });
                         _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(postImageToPost);
+                        */
                     }
                 }
             });
@@ -819,11 +829,10 @@ namespace Conarh_2016.Application
 
                                 if (badgesUserResult == null)
                                     AppProvider.PopUpFactory.ShowMessage(AppResources.FailedServer, AppResources.Error);
-                                /* TODO - reativar DownloadConnections USERCONTROLLER:UpdateProfileData - validar se necessário
+                                /* TODO - reativar DownloadConnections USERCONTROLLER:UpdateProfileData - validar se necessário*/
                                 else if (downloadConnections)
                                     DownloadConnections(onFinish: onFinish);
                                 else
-                                */
                                 Device.BeginInvokeOnMainThread(onFinish);
                             });
                             _backgroundWorkers[AppBackgroundWorkerType.UserDefault].Add(downloadBadgesByUserTask);

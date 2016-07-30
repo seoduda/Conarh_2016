@@ -5,8 +5,6 @@ using Conarh_2016.Application.Wrappers;
 using Conarh_2016.Core;
 using Conrarh_2016.Application.UI.Shared;
 using System;
-using System.Collections;
-using Conarh_2016.Application.UI.Profile;
 
 namespace Conarh_2016.Application.UI.Connect
 {
@@ -14,7 +12,8 @@ namespace Conarh_2016.Application.UI.Connect
     public enum ContactListType
     {
         All,
-        Pending
+        Pending,
+        Ranking
     }
 
     public sealed class ConnectListWrapper: PullRefreshListWrapper
@@ -25,9 +24,8 @@ namespace Conarh_2016.Application.UI.Connect
 		private bool IsSearching = false;
 		private ConnectionsDataWrapper SearchDataWrapper;
 		private string Pattern = string.Empty;
-        
 
-        public ConnectListWrapper(ConnectionsDataWrapper currentModel)
+		public ConnectListWrapper(ConnectionsDataWrapper currentModel)
 		{
 			CurrentModel = currentModel;
 		}
@@ -46,8 +44,7 @@ namespace Conarh_2016.Application.UI.Connect
 				AppController.Instance.DownloadAllUsers (Increase);
 
 			UserController.Instance.UpdateProfileData (CurrentModel.LoginedUser, true, Increase);
-
-        }
+		}
 
 		public void Increase()
 		{
@@ -78,16 +75,11 @@ namespace Conarh_2016.Application.UI.Connect
 
 	public sealed class ConnectionPage : ContentPage
 	{
-        private  ContactListType selectedContactedList = ContactListType.All;
+        public ContactListType selectedContactedList = ContactListType.All;
         public ConnectionsDataWrapper CurrentModel { private set; get; }
-        public ConnectionsDataWrapper PendingConnectionsDataWrapper { private set; get; }
-        public readonly ListView UserListView;
-        StackLayout layout;
-        private StackLayout lowerLayout;
-        private SearchBarView searchBarView;
+		public readonly ListView UserListView;
 
-
-        private readonly ConnectListWrapper _wrapper;
+		private readonly ConnectListWrapper _wrapper;
 
 		protected override void OnDisappearing ()
 		{
@@ -106,10 +98,10 @@ namespace Conarh_2016.Application.UI.Connect
 			BackgroundColor = Color.Transparent;
 
             CurrentModel = AppModel.Instance.CurrentConnectionsWrapper;
-            PendingConnectionsDataWrapper = GetPendingConnectionsDataWrapper();
+
             UserController.Instance.UpdateProfileData(CurrentModel.LoginedUser);
 
-            searchBarView = new SearchBarView ();
+            var searchBarView = new SearchBarView ();
 			searchBarView.Clear += OnSearchClear;
 			searchBarView.Search += OnSearch;
 
@@ -119,10 +111,9 @@ namespace Conarh_2016.Application.UI.Connect
 				HasUnevenRows = true,
 				ItemTemplate = new DataTemplate (typeof(ConnectionCell)),
 				SeparatorVisibility = SeparatorVisibility.None,
-				IsPullToRefreshEnabled = false,
-                ItemsSource = GetItemsSource(),
-                //ItemsSource = CurrentModel,
-                BindingContext = _wrapper
+				IsPullToRefreshEnabled = true,
+				ItemsSource = CurrentModel,
+				BindingContext = _wrapper
 			};
 			UserListView.SetBinding<ConnectListWrapper> (ListView.IsRefreshingProperty, vm => vm.IsBusy, BindingMode.OneWay);
 
@@ -133,88 +124,38 @@ namespace Conarh_2016.Application.UI.Connect
                 Spacing = 0,
                 HorizontalOptions = LayoutOptions.Fill,
                 Children =  {
-                    new ContentView {Content = GetButton(AppResources.ProfileAllContacsBtnHeader, AppResources.MenuColor, OnAllContactsClicked), WidthRequest = AppProvider.Screen.Width / 2},
-                    new ContentView {Content = GetButton (AppResources.ProfilePendingContacsBtnHeader, AppResources.AgendaCongressoColor, OnPendingContactsClicked), WidthRequest = AppProvider.Screen.Width / 2},
+                    new ContentView {Content = GetButton(AppResources.ProfileAllContacsBtnHeader, AppResources.MenuColor, OnAllContactsClicked), WidthRequest = AppProvider.Screen.Width / 3},
+                    new ContentView {Content = GetButton (AppResources.ProfilePendingContacsBtnHeader, AppResources.AgendaCongressoColor, OnPendingContactsClicked), WidthRequest = AppProvider.Screen.Width / 3},
                     new ContentView {Content = GetButton(AppResources.ProfileRatingBtnHeader, AppResources.AgendaExpoColor, OnRankingClicked), WidthRequest = AppProvider.Screen.Width / 3},
                 },
                 Padding = new Thickness(0)
             };
 
 
-            lowerLayout = new StackLayout
-            {
-                Orientation = StackOrientation.Vertical,
-            };
-            GetLowerLayoutChidren(selectedContactedList);
-
-            StackLayout layout = new StackLayout
+            var layout = new StackLayout
             {
                 Orientation = StackOrientation.Vertical,
                 Children = {
                     new UserHeaderView (CurrentModel.LoginedUser, false, false),
                     buttonLayout,
-                    lowerLayout
+                    searchBarView,
+                    UserListView
                 }
             };
 
-            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
-            // BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, false, true);
+            //BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, false, true);
 
-            //Content = layout;
             Content = bgLayout;
 
         }
 
-        private ConnectionsDataWrapper GetPendingConnectionsDataWrapper()
-        {
-            ConnectionsDataWrapper PendingConnectionsDataWrapper = new ConnectionsDataWrapper();
-            
-            for (int i=0; i< CurrentModel.Count; i++)
-            {
-                if (CurrentModel[i].State == ConnectState.RequestedToAccept)
-                {
-                    PendingConnectionsDataWrapper.Add(CurrentModel[i]);
-                }
-            }
-            return PendingConnectionsDataWrapper;
-
-        }
-
-        private ConnectionsDataWrapper GetItemsSource()
-        {
-            switch (selectedContactedList)
-            {
-                case ContactListType.All:
-                    {
-                        return CurrentModel;
-                        
-                        break;
-                    }
-                case ContactListType.Pending:
-                    {
-                        return PendingConnectionsDataWrapper;
-                        break;
-                    }
-            }
-            return null;
-        }
-
-
-        private void GetLowerLayoutChidren(ContactListType listType)
-        {
-            lowerLayout.Children.Clear();
-            if (listType == ContactListType.All)
-            {
-                lowerLayout.Children.Add(searchBarView);
-
-            }
-            lowerLayout.Children.Add(UserListView);
-        }
-
-
         private void OnRankingClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new RatingPage());
+            if (selectedContactedList == ContactListType.Ranking)
+                return;
+
+            selectedContactedList = ContactListType.Ranking;
         }
 
         private void OnPendingContactsClicked(object sender, EventArgs e)
@@ -223,8 +164,6 @@ namespace Conarh_2016.Application.UI.Connect
                 return;
 
             selectedContactedList = ContactListType.Pending;
-            GetLowerLayoutChidren(selectedContactedList);
-            UserListView.ItemsSource = GetItemsSource();
 
         }
 
@@ -234,8 +173,6 @@ namespace Conarh_2016.Application.UI.Connect
                 return;
 
             selectedContactedList = ContactListType.All;
-            GetLowerLayoutChidren(selectedContactedList);
-            UserListView.ItemsSource = GetItemsSource();
         }
 
         protected override void OnAppearing ()

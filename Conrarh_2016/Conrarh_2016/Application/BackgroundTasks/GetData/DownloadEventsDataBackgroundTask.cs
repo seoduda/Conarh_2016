@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Conarh_2016.Application.BackgroundTasks
 {
     //public sealed class DownloadEventsDataBackgroundTask : DownloadListBackgroundTask<EventData, RootListData<EventData>>
-    public sealed class DownloadEventsDataBackgroundTask : DownloadListKinveyBackgroundTask<EventData, KinveyRootListData<EventData>>
+    public sealed class DownloadEventsDataBackgroundTask : GetData.Kinvey.DownloadListKinveyBackgroundTask<EventData, KinveyRootListData<EventData>>
     {
         private bool _isFree;
 

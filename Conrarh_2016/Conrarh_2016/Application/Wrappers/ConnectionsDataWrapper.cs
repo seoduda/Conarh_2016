@@ -23,6 +23,10 @@ namespace Conarh_2016.Application.Wrappers
             if (SearchUsers != null)
                 SearchUsers.CollectionChanged -= OnSearchCollectionChanged;
         }
+        public ConnectionsDataWrapper():base (true)
+        {
+
+        }
 
         public ConnectionsDataWrapper(UserModel loginedUser, UserModelsWrapper usersWrapper) : base(true)
         {

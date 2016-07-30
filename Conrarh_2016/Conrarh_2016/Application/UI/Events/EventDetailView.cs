@@ -125,9 +125,12 @@ namespace Conarh_2016.Application.UI.Events
                 layout.Children.Add(absoluteBtnLayout);
             }
 
-            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
-            Content = new ScrollView {Content = bgLayout };
-            //Content = new ContentView { Content = bgLayout };
+            ScrollView sView = new ScrollView();
+            sView.Content = layout;
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, sView, true, true);
+            //Content = new ScrollView {Content = bgLayout };
+            Content = new ContentView { Content = bgLayout };
+            //Content = new ScrollView { Content = layout };
         }
 
         private SpeecherView GetSpeecherItem(Speaker speecherData)

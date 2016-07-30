@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Conarh_2016.Application.BackgroundTasks.GetData
 {
-    class DownloadSpeakersBackgroundTask : DownloadListKinveyBackgroundTask<Speaker, KinveyRootListData<Speaker>>
+    class DownloadSpeakersBackgroundTask : Kinvey.DownloadListKinveyBackgroundTask<Speaker, KinveyRootListData<Speaker>>
     {
         public DownloadSpeakersBackgroundTask() : base(new KinveyDownloadListParameters(KinveyDownloadCountType.All,
             QueryBuilder.Instance.GetPostSpeakersKinveyQuery()))
