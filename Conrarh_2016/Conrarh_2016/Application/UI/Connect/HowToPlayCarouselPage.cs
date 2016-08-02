@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Conarh_2016.Application.UI.Shared;
+using System;
 
 using Xamarin.Forms;
 
@@ -14,7 +15,7 @@ namespace Conarh_2016.Application.UI.Connect
 
         //private Image iconNext;
         //private Image iconPrev;
-        private Image iconClose;
+        //private Image iconClose;
         private Image img;
 
         public HowToPlayCarouselPage(string _image, bool first, bool last) : base()
@@ -57,7 +58,7 @@ namespace Conarh_2016.Application.UI.Connect
             iconClose.GestureRecognizers.Add(closeIconLinkedInRecognizer);
             */
 
-            /*
+          /*  
             if (!last)
             {
                 iconNext = new Image()
@@ -95,8 +96,13 @@ namespace Conarh_2016.Application.UI.Connect
                 iconPrev.GestureRecognizers.Add(iconPrevLinkedInRecognizer);
             }
             */
+            
             layout.Children.Add(innerLayout);
             Content = layout;
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBadgeImage, layout, true, true);
+            //Content = new ScrollView {Content = bgLayout };
+            Content = new ContentView { Content = bgLayout };
+
         }
 
         private void iconPrev_Tapped(object sender, EventArgs e)

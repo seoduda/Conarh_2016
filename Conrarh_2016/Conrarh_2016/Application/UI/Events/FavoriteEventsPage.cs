@@ -2,8 +2,7 @@
 using Conarh_2016.Application.BackgroundTasks;
 using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.Wrappers;
-using Conrarh_2016.Application.UI.Shared;
-using System.Collections.Generic;
+using Conarh_2016.Application.UI.Shared;
 using Xamarin.Forms;
 
 namespace Conarh_2016.Application.UI.Events
@@ -64,7 +63,7 @@ namespace Conarh_2016.Application.UI.Events
             {
                 HeightRequest = 40,
                 TextColor = Color.White,
-                Text = "Monte sua programação selecionando eventos \n das agendas do congresso e exposição",
+                Text = "Monte sua programação selecionando seus eventos favoritos.",
                 BackgroundColor = AppResources.MenuColor
             };
 

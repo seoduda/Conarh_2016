@@ -20,6 +20,7 @@ namespace Conarh_2016.Application.UI.Login
             LoginView loginView = new LoginView();
             loginView.SignUp += OpenSignUp;
             loginView.LogIn += OnLogIn;
+            loginView.ResetEmail += OpenResetEmail;
 
             loginView.InitWithData(email, password);
             Content = loginView;
@@ -39,6 +40,14 @@ namespace Conarh_2016.Application.UI.Login
             signUpView.SignUp += OnCreateUser;
             Navigation.PushAsync(signUpView);
         }
+
+        private void OpenResetEmail()
+        {
+            var resetEmailView = new ResetEmailView();
+           // resetEmailView.SignUp += OnCreateUser;
+            Navigation.PushAsync(resetEmailView);
+        }
+
 
         private void OnCreateUser(CreateUserData userData)
         {

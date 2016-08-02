@@ -2,7 +2,7 @@
 using Conarh_2016.Application.Domain;
 using Conarh_2016.Core;
 using Conarh_2016.Application.UI.Controls;
-using Conrarh_2016.Application.UI.Shared;
+using Conarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Events
 {
@@ -89,12 +89,12 @@ namespace Conarh_2016.Application.UI.Events
 			var stackLayout = new StackLayout { BackgroundColor = AppResources.AgendaPageBackgroundColor };
 			stackLayout.Children.Add (absoluteLayout);
 			stackLayout.Children.Add (descriptionContent);
+            ScrollView scrollView = new ScrollView() { Content = stackLayout };
 
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, scrollView , true, true);
 
-            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, stackLayout, true, true);
-
-            //Content = new ScrollView {Content = stackLayout};
-            Content = new ScrollView {Content = bgLayout };
+            //Content =  {Content = stackLayout};
+            Content = new ContentView {Content = bgLayout };
         }
 
         protected override void OnAppearing ()

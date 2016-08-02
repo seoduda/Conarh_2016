@@ -43,17 +43,24 @@ namespace Conarh_2016.Application.UI.Connect
 
         private void Prevpage()
         {
-            //TODO - implement this
-            //this.CurrentPage.
-            //Carrossel.nexr
-            //Navigation.PopModalAsync();
+            int index;
+            index = pages.IndexOf((ContentPage)this.CurrentPage);
+            if (index > 0)
+            {
+                this.SelectedItem = pages[index - 1];
+            }
         }
 
         private void Nextpage()
         {
-            //TODO - implement this
-            //Navigation.PopModalAsync();
+            int index;
+            index = pages.IndexOf((ContentPage)this.CurrentPage);
+            if (index < (pages.Count-1))
+            {
+                this.SelectedItem = pages[index + 1];
+            }
         }
-
     }
+
 }
+

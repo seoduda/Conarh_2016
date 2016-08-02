@@ -1,12 +1,9 @@
 ﻿using Conarh_2016.Application.Domain.PostData;
+using Conarh_2016.Application.UI.Shared;
 using Conarh_2016.Core;
-using Conrarh_2016.Application.UI.Shared;
-using Conrarh_2016.Core.DataAccess;
+
 //using KinveyXamarin;
-using Newtonsoft.Json;
 using System;
-using System.IO;
-using System.Net;
 using Xamarin.Forms;
 using XLabs.Forms.Controls;
 
@@ -22,6 +19,8 @@ namespace Conarh_2016.Application.UI.Login
 
         public event Action SignUp;
 
+        public event Action ResetEmail;
+
         public event Action<LoginUserData> LogIn;
 
         public LoginView() : base()
@@ -33,8 +32,8 @@ namespace Conarh_2016.Application.UI.Login
             BoxView transpSpace = new BoxView();
             transpSpace.Color = Color.Transparent;
             transpSpace.WidthRequest = 1;
-            transpSpace.HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height/4);
-            
+            transpSpace.HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height / 4);
+
             layout.Children.Add(transpSpace);
 
             layout.Children.Add(GetEntry(Keyboard.Email, AppResources.LoginEmailDefaultEntry, AppResources.LoginEmailImage, 15, false, 15, out _emailEntry));
@@ -44,7 +43,7 @@ namespace Conarh_2016.Application.UI.Login
             {
                 BorderRadius = 5,
                 //HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height/10),
-                WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width/4)*3),
+                WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width / 4) * 3),
                 HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height / 14),
                 TextColor = Color.White,
                 BackgroundColor = AppResources.MenuColor,
@@ -52,9 +51,9 @@ namespace Conarh_2016.Application.UI.Login
                 FontSize = 16
             };
             loginBtn.Clicked += OnLoginClicked;
-            layout.Children.Add(new ContentView { Padding = new Thickness(LeftBorder, 10, LeftBorder, 0), HorizontalOptions = LayoutOptions.Center, Content = loginBtn});
+            layout.Children.Add(new ContentView { Padding = new Thickness(LeftBorder, 10, LeftBorder, 0), HorizontalOptions = LayoutOptions.Center, Content = loginBtn });
 
-            /** 
+            /**
              * skipLoginBtn retirado e substituido por login Linkedin
              */
             Image loginLinkedInBtn = new Image()
@@ -72,7 +71,6 @@ namespace Conarh_2016.Application.UI.Login
             //Associating tap events to the image buttons
             loginLinkedInBtn.GestureRecognizers.Add(loginLinkedInRecognizer);
 
-            
             layout.Children.Add(loginLinkedInBtn);
 
             var stackLayout = new StackLayout { Spacing = 5, Orientation = StackOrientation.Horizontal, Padding = new Thickness(0, 30, 0, 0) };
@@ -132,7 +130,6 @@ namespace Conarh_2016.Application.UI.Login
 
             layout.Children.Add(stackLayout);
 
-
             BGLayoutView bgLayout = new BGLayoutView(AppResources.LoginBgImage, layout, true, true);
             //Content = new ScrollView { Content = layout };
             Content = new ScrollView { Content = bgLayout };
@@ -157,7 +154,15 @@ namespace Conarh_2016.Application.UI.Login
 
         private void OnForgetPasswordClicked(object sender, EventArgs e)
         {
-            AppController.Instance.TryResetPassword();
+            if (Device.OS == TargetPlatform.iOS)
+            {
+                if (ResetEmail != null)
+                    ResetEmail();
+            }
+            else
+            {
+                AppController.Instance.TryResetPassword();
+            }
         }
 
         private void OnSignUpClicked(object sender, EventArgs e)
@@ -210,7 +215,6 @@ namespace Conarh_2016.Application.UI.Login
             _passwordEntry.Text = password;
             _passwordEntry.TextColor = AppResources.LoginNormalTextColor;
             _passwordEntry.Font = Font.SystemFontOfSize(18, FontAttributes.Bold);
-
         }
 
         private void tapImage_Tapped(object sender, EventArgs e)
@@ -218,10 +222,25 @@ namespace Conarh_2016.Application.UI.Login
             signupLinkedin();
         }
 
-        private  void signupLinkedin()
+        private void signupLinkedin()
         {
-             AppProvider.LinkedinLogin.createUserLinkedin();
+            if (Device.OS == TargetPlatform.iOS)
+            {
+                LinkedInLoginPage LInLP = new LinkedInLoginPage();
+                LInLP.PostSignUp += postSignupLinkedin;
+                //Navigation.PushModalAsync(LInLP);
+                AppController.Instance.AppRootPage.CurrentPage.Navigation.PushModalAsync(LInLP);
+                //AppController.Instance.AppRootPage.CurrentPage.Navigation.PushAsync(LInLP);
+            }
+            else
+            {
+                AppProvider.LinkedinLogin.createUserLinkedin();
+            }
+        }
+
+        public void postSignupLinkedin()
+        {
+            AppController.Instance.AppRootPage.CurrentPage.Navigation.PopAsync();
         }
     }
 }
- 

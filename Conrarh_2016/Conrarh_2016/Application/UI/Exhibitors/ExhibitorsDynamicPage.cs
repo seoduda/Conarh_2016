@@ -1,12 +1,9 @@
 ﻿using Xamarin.Forms;
-using Conarh_2016.Application;
 using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.UI.Shared;
 using Conarh_2016.Application.Wrappers;
 using Conarh_2016.Core;
-using Conrarh_2016.Application.UI.Shared;
-using Conrarh_2016.Core.DataAccess.Local;
-using System.Threading;
+
 
 namespace Conarh_2016.Application.UI.Exhibitors
 {

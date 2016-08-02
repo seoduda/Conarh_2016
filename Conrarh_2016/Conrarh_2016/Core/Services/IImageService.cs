@@ -8,6 +8,7 @@
 	public interface IImageService
 	{
 		void CropAndResizeImage(string sourceFile, string targetFile, float size);
+        //void SelectImage(string filename, bool allowCamera, int size);
 	}
 }
 

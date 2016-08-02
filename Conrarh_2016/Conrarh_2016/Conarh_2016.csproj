@@ -132,8 +132,10 @@
     <Compile Include="Application\UI\Exhibitors\ExhibitorGroupItem.cs" />
     <Compile Include="Application\UI\Exhibitors\ExhibitorsDynamicPage.cs" />
     <Compile Include="Application\UI\Exhibitors\ExhibitorViewCell.cs" />
+    <Compile Include="Application\UI\Login\LinkedInLoginPage.cs" />
     <Compile Include="Application\UI\Login\LoginPage.cs" />
     <Compile Include="Application\UI\Login\LoginView.cs" />
+    <Compile Include="Application\UI\Login\ResetEmailView.cs" />
     <Compile Include="Application\UI\Login\SignUpView.cs" />
     <Compile Include="Application\UI\Login\TermsPage.cs" />
     <Compile Include="Application\UI\Main\MainMenuButton.cs" />
@@ -189,7 +191,6 @@
     <Compile Include="Application\Wrappers\WallPostsDataWrapper.cs" />
     <Compile Include="Conarh_2016.cs" />
     <Compile Include="Core\AppProvider.cs" />
-    <Compile Include="Core\DataAccess\Config.cs" />
     <Compile Include="Core\DataAccess\Local\LocalData.cs" />
     <Compile Include="Core\DataAccess\Local\LocalLists.cs" />
     <Compile Include="Core\DataAccess\SQLiteClient.cs" />
@@ -316,10 +317,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="docs\CONARH2015-APIDocumentation.docx" />
-    <None Include="docs\Ranking patrocínio CONARH.DOC" />
-    <None Include="docs\resmaterialappconarh2016.zip" />
-    <None Include="docs\STATUS PALESTRAS 24.06.xlsx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -327,7 +324,6 @@
     <Folder Include="Application\Commands\Server\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="docs\Novo Documento de Texto.txt" />
     <Content Include="Helpers\CrossPushNotificationListener.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

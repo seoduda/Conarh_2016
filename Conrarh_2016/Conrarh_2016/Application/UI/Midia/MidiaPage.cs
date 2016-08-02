@@ -1,7 +1,6 @@
-﻿using Conarh_2016.Core;
-using Conrarh_2016.Application.UI.Shared;
+﻿using Conarh_2016.Application.UI.Shared;
+using Conarh_2016.Core;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
@@ -25,7 +24,6 @@ namespace Conarh_2016.Application.UI.Midia
         {
             Title = title;
         }
-
     }
 
     public class MediaPage : ContentPage
@@ -37,7 +35,7 @@ namespace Conarh_2016.Application.UI.Midia
             Title = AppResources.Midia;
             layout = new StackLayout { BackgroundColor = Color.Transparent };
 
-           // _mediaList = GetMediaList();
+            // _mediaList = GetMediaList();
 
             MediaItem mi1 = new MediaItem("Cultura que inova e se transforma - Lilian Guimarães");
             mi1.MediaType = MediaType.Video;
@@ -49,48 +47,115 @@ namespace Conarh_2016.Application.UI.Midia
             mi2.ImagePath = AppResources.MidiaImage2;
             mi2.Url = "https://www.youtube.com/watch?v=5HgKtL3SEwY";
 
-
             MediaItem mi3 = new MediaItem("CONARH 2016 - O que faz a ética...E o que faz a falta dela");
             mi3.MediaType = MediaType.Video;
             mi3.ImagePath = AppResources.MidiaImage3;
             mi3.Url = "https://www.youtube.com/watch?v=ngN5CImS_bA";
- 
 
-            /*
-            layout.Children.Add(getMediaItemView(mi1));
-            layout.Children.Add(getMediaItemView(mi2));
-            layout.Children.Add(getMediaItemView(mi3));
-            */
+            StackLayout mdL1 = getMediaItemView(mi1.Title, mi1.ImagePath, mi1.Url);
+            var MediaClickRecognizer1 = new TapGestureRecognizer();
+            MediaClickRecognizer1.Tapped += OpenMedia1;
+            mdL1.GestureRecognizers.Add(MediaClickRecognizer1);
+
+            StackLayout mdL2 = getMediaItemView(mi2.Title, mi2.ImagePath, mi2.Url);
+            var MediaClickRecognizer2 = new TapGestureRecognizer();
+            MediaClickRecognizer2.Tapped += OpenMedia2;
+            mdL2.GestureRecognizers.Add(MediaClickRecognizer2);
+
+            StackLayout mdL3 = getMediaItemView(mi3.Title, mi3.ImagePath, mi3.Url);
+            var MediaClickRecognizer3 = new TapGestureRecognizer();
+            MediaClickRecognizer3.Tapped += OpenMedia3;
+            mdL3.GestureRecognizers.Add(MediaClickRecognizer3);
 
             var mediaLayout = new StackLayout
             {
                 Orientation = StackOrientation.Vertical,
                 Spacing = 5,
-                //HorizontalOptions = LayoutOptions.Fill,
-                Children =  {
-                    new ContentView {Content = getMediaItemView(mi1.Title,mi1.ImagePath,mi1.Url)}   ,
-                    new ContentView {Content = getMediaItemView(mi2.Title,mi2.ImagePath,mi2.Url)}   ,
-                    new ContentView {Content = getMediaItemView(mi3.Title,mi3.ImagePath,mi3.Url)}   ,
-                },
                 Padding = new Thickness(0)
             };
 
+            if (Device.OS != TargetPlatform.iOS)
+            {
+                mediaLayout.Children.Add(new ContentView { Content = mdL1 });
+                mediaLayout.Children.Add(new ContentView { Content = mdL2 });
+                mediaLayout.Children.Add(new ContentView { Content = mdL3 });
+            }
+            else
+            {
+                var MediaBtn1 = new Button
+                {
+                    BorderRadius = 5,
+                    //HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height/10),
+                    WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width / 4) * 3),
+                    HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height / 14),
+                    TextColor = Color.White,
+                    BackgroundColor = AppResources.MenuColor,
+                    Text = AppResources.OpenVideoMedia,
+                    FontSize = 16
+                };
+                MediaBtn1.Clicked += OpenMedia1;
+
+                var MediaBtn2 = new Button
+                {
+                    BorderRadius = 5,
+                    //HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height/10),
+                    WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width / 4) * 3),
+                    HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height / 14),
+                    TextColor = Color.White,
+                    BackgroundColor = AppResources.MenuColor,
+                    Text = AppResources.OpenVideoMedia,
+                    FontSize = 16
+                };
+                MediaBtn2.Clicked += OpenMedia2;
+
+                var MediaBtn3 = new Button
+                {
+                    BorderRadius = 5,
+                    //HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height/10),
+                    WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width / 4) * 3),
+                    HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height / 14),
+                    TextColor = Color.White,
+                    BackgroundColor = AppResources.MenuColor,
+                    Text = AppResources.OpenVideoMedia,
+                    FontSize = 16
+                };
+                MediaBtn3.Clicked += OpenMedia3;
+
+                mediaLayout.Children.Add(new ContentView { Content = mdL1 });
+               // mediaLayout.Children.Add(MediaBtn1);
+                mediaLayout.Children.Add(new ContentView { Content = mdL2 });
+               // mediaLayout.Children.Add(MediaBtn2);
+                mediaLayout.Children.Add(new ContentView { Content = mdL3 });
+                //mediaLayout.Children.Add(MediaBtn3);
+            }
             layout.Children.Add(mediaLayout);
-            Content = layout;
+
+            /*
+            Button testebtn = new Button()
+            {
+                Text = "vai lá",
+                TextColor = Color.White,
+                BackgroundColor = Color.Blue,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand
+            };
+
+            testebtn.Clicked += doShit;
+            layout.Children.Add(testebtn);
+            */
+            //Content = layout;
+
             BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
             Content = new ScrollView { Content = bgLayout };
         }
 
-        private List<MediaItem> GetMediaList()
-        {
-            throw new NotImplementedException();
-        }
 
-        private View getMediaItemView(String _title, String _imagePath, String _url)
+
+
+        private StackLayout getMediaItemView(String _title, String _imagePath, String _url)
         {
             StackLayout linearLayout = new StackLayout()
             {
-
                 Orientation = StackOrientation.Horizontal,
                 BackgroundColor = AppResources.AgendaExpoColor,
                 Padding = new Thickness(10, 1, 10, 1),
@@ -104,7 +169,6 @@ namespace Conarh_2016.Application.UI.Midia
             {
                 Color = AppResources.MenuColor,
                 WidthRequest = 10,
-
             };
             linearLayout.Children.Add(box);
             Image mediaImage = new Image
@@ -115,9 +179,14 @@ namespace Conarh_2016.Application.UI.Midia
                 //WidthRequest = AppProvider.Screen.ConvertPixelsToDp(100),
                 //HorizontalOptions = LayoutOptions.CenterAndExpand,
                 //VerticalOptions = LayoutOptions.CenterAndExpand
-
             };
             linearLayout.Children.Add(mediaImage);
+
+            /*
+            var MediaImageClick = new TapGestureRecognizer();
+            MediaImageClick.Tapped += OpenMedia2;
+            mediaImage.GestureRecognizers.Add(MediaImageClick);
+            */
 
             Label mediaLabel = new Label()
             {
@@ -128,37 +197,41 @@ namespace Conarh_2016.Application.UI.Midia
             };
             linearLayout.Children.Add(mediaLabel);
 
-            var MediaClickRecognizer = new TapGestureRecognizer();
-            MediaClickRecognizer.Tapped += (sender, EventArgs) => { OnButtonClicked(sender, EventArgs, _url); };
-            linearLayout.GestureRecognizers.Add(MediaClickRecognizer);
-
-
             return linearLayout;
         }
+        /*
+        private void OnButtonClicked(object sender, EventArgs e)
+        {
+            AppProvider.PopUpFactory.ShowMessage("clicou", AppResources.Warning);
+            //Device.OpenUri(new Uri(url));
+            // Device.OpenUri(new Uri("https://www.youtube.com/watch?v=Ec-drZPLRco"));
+        }
+
 
         private void OnButtonClicked(object sender, EventArgs e, String url)
         {
             Device.OpenUri(new Uri(url));
             // Device.OpenUri(new Uri("https://www.youtube.com/watch?v=Ec-drZPLRco"));
         }
-
-        
-        private static string addQuotes(string str)
+        */
+        private void OpenMedia1(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder("\"");
-            sb.Append(str);
-            sb.Append("\"");
-            return sb.ToString();
+            // Device.OpenUri(new Uri("https://www.youtube.com/watch?v=Ec-drZPLRco"));
+            //Device.
+            Device.OpenUri(new Uri("http://www.gamefaqs.com/3ds/183130-pokemon-picross/faqs"));
         }
 
-        private static string FnGetVideoID(string strVideoURL)
+        private void OpenMedia2(object sender, EventArgs e)
         {
-            const string regExpPattern = @"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)";
-            //for Vimeo: vimeo\.com/(?:.*#|.*/videos/)?([0-9]+)
-            var regEx = new Regex(regExpPattern);
-            var match = regEx.Match(strVideoURL);
-            return match.Success ? match.Groups[1].Value : null;
+            Device.OpenUri(new Uri("https://www.youtube.com/watch?v=5HgKtL3SEwY"));
         }
 
+        private void OpenMedia3(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri("https://www.youtube.com/watch?v=ngN5CImS_bA"));
+        }
+
+
+     
     }
 }

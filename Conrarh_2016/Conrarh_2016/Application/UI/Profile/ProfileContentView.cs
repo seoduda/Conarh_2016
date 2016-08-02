@@ -1,6 +1,5 @@
 ﻿using Conarh_2016.Application.UI.Shared;
 using Conarh_2016.Core;
-using Conrarh_2016.Application.UI.Shared;
 using System;
 using Xamarin.Forms;
 
@@ -29,22 +28,6 @@ namespace Conarh_2016.Application.UI.Profile
 			
 			layout.Children.Add (userHeaderView);
 
-            /*
-			if (parameters.IsBtnEnabled) {
-                
-				var btnLayout = new StackLayout { Padding = new Thickness (0),
-					Orientation = StackOrientation.Horizontal};
-
-				btnLayout.Children.Add (GetButton (AppResources.ProfileRatingBtnColor, 
-					AppResources.ProfileRatingBtnHeader, parameters.OnRating, new Thickness(20, 0, 10, 0)) );
-				
-				btnLayout.Children.Add (GetButton (AppResources.ProfileContactListBtnColor, 
-					AppResources.ProfileContactListBtnHeader, parameters.OnContactList, new Thickness(10, 0, 20, 0)));
-
-				layout.Children.Add (btnLayout);
-                
-             }
-             */
             var badgeView = new BadgeGridView(Model);
 			layout.Children.Add (badgeView);
 

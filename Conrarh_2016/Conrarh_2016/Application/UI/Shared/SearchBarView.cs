@@ -27,13 +27,13 @@ namespace Conarh_2016.Application.UI.Shared
 					new ColumnDefinition { Width = new GridLength(30, GridUnitType.Absolute) },
 					new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
 				},
-				Padding = new Thickness(10, 10),
+				Padding = new Thickness(10, 2),
 				BackgroundColor = AppResources.AgendaExpoColor
 			};
 
 			var searchIcon = new Image {
-				WidthRequest = 30,
-				HeightRequest = 30,
+				WidthRequest = 20,
+				HeightRequest = 20,
 				Source = ImageLoader.Instance.GetImage(AppResources.ExhibitorsSearchImage, true)
 			};
 
@@ -42,7 +42,7 @@ namespace Conarh_2016.Application.UI.Shared
 				Placeholder = AppResources.ExhibitorsSearchText, 
 				TextColor = AppResources.MenuColor, 
 				BackgroundColor = Color.Transparent, 
-				Font = Font.SystemFontOfSize(18),
+				Font = Font.SystemFontOfSize(16),
 				YAlign = TextAlignment.Center,
 
 			};

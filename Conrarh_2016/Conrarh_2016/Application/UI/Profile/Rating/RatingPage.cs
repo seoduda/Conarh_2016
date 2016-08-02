@@ -1,7 +1,6 @@
 ﻿using Xamarin.Forms;
 using Conarh_2016.Application.Wrappers;
-using System.Collections.Generic;
-using Conrarh_2016.Application.UI.Shared;
+using Conarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Profile
 {

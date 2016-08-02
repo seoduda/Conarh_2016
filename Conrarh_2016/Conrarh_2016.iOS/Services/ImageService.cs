@@ -4,6 +4,7 @@ using System.IO;
 using UIKit;
 using CoreGraphics;
 using System.Drawing;
+using Acr.UserDialogs;
 
 namespace Conarh_2016.iOS.Services
 {
@@ -74,12 +75,46 @@ namespace Conarh_2016.iOS.Services
 			return newImage;
 		}
 
-		private void SaveImage(string targetFile, UIImage resultImage)
+
+        private void SaveImage(string targetFile, UIImage resultImage)
 		{
 			if (!Directory.Exists(Path.GetDirectoryName(targetFile)))
 				Directory.CreateDirectory(Path.GetDirectoryName(targetFile));
 
 			resultImage.AsJPEG(0.75f).Save(targetFile, true);
 		}
-	}
+
+        /*
+        public void  SelectImage(string filename, bool allowCamera, int size)
+        {
+            
+            var ImageSource = null;
+            try
+            {
+                var mediaFile = await this._mediaPicker.SelectPhotoAsync(new CameraMediaStorageOptions
+                {
+                    DefaultCamera = CameraDevice.Front,
+                    MaxPixelDimension = 400
+                });
+                ImageSource = ImageSource.FromStream(() => mediaFile.Source);
+            }
+            catch (System.Exception ex)
+            {
+
+            }
+            
+
+            UIImagePickerController imagePicker = new UIImagePickerController();
+            imagePicker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+            imagePicker.MediaTypes = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary);
+            imagePicker.FinishedPickingMedia += Handle_FinishedPickingMedia;
+            imagePicker.Canceled += Handle_Canceled;
+            PresentViewController(imagePicker, true);
+          
+    }
+      */
+
+
+
+    }
 }

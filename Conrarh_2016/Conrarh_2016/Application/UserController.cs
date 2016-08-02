@@ -1,5 +1,4 @@
 ﻿using Acr.UserDialogs;
-using Conarh_2016.Application;
 using Conarh_2016.Application.BackgroundTasks;
 using Conarh_2016.Application.BackgroundTasks.GetData.Kinvey;
 using Conarh_2016.Application.BackgroundTasks.SendData.Kinvey;
@@ -34,6 +33,8 @@ namespace Conarh_2016.Application
         
 
         public RootPage AppRootPage;
+
+        public object Navigation { get; private set; }
 
         public UserController()
         {
@@ -250,7 +251,7 @@ namespace Conarh_2016.Application
                 EventId = data.Id,
                 Question = question
             };
-            var postQuestionTask = new PostDataBackgroundTask<QuestionData>(QueryBuilder.Instance.GetPostQuestionOnEventQuery(), questionData, true);
+            var postQuestionTask = new PostDataBackgroundTask<QuestionData>(QueryBuilder.Instance.GetPostQuestionOnEventKinveyQuery(), questionData, true);
             postQuestionTask.ContinueWith((task, result) =>
             {
                 UserDialogs.Instance.HideLoading();
@@ -773,7 +774,7 @@ namespace Conarh_2016.Application
             _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(saveProfileChanges);
         }
 
-        private void OnShareExecuted()
+        public void OnShareExecuted()
         {
             if (AppModel.Instance.CurrentUser != null)
             {
@@ -847,7 +848,16 @@ namespace Conarh_2016.Application
 
         public void RegisterUserLinkedin(CreateUserData data, String serverImagePath)
         {
+           
+           /*
+            if (Device.OS == TargetPlatform.iOS)
+                AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.LoginPage, true);
+                */
+                
+            
             UserDialogs.Instance.ShowLoading(AppResources.LoadingCreatingUser);
+
+            
 
             var registerTask = new RegisterUserBackgroundTask(data);
             registerTask.ContinueWith((task, result) =>

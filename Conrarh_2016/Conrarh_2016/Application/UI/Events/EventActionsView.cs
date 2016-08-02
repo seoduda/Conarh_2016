@@ -1,7 +1,6 @@
 ﻿using Xamarin.Forms;
 using Conarh_2016.Core;
 using Conarh_2016.Application.UI.Shared;
-using Conrarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Events
 {
@@ -124,9 +123,7 @@ namespace Conarh_2016.Application.UI.Events
 			
 		private void OnSendQuestionClicked (object sender, System.EventArgs e)
 		{
-            /**TODO Ativar envio de pergunta OnSendQuestionClicked  EventActionsView
 			UserController.Instance.PostQuestion (Model.Data, _questionItem.Text, OnSentDone);
-            */
         }
 
         private void OnSentDone()

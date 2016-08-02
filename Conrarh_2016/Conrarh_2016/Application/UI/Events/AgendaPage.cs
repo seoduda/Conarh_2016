@@ -160,6 +160,10 @@ namespace Conarh_2016.Application.UI.Events
 				_eventListView.ItemsSource = GetItemSource ();
 			}
 		}
+        public  void OnShare()
+        {
+            UserController.Instance.Share();
+        }
 
         public void SelectExpo()
         {

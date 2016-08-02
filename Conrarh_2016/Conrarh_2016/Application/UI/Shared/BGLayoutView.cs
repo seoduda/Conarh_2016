@@ -7,7 +7,7 @@ using Xamarin.Forms;
  * Envolve o layout com BG e banner
  */
 
-namespace Conrarh_2016.Application.UI.Shared
+namespace Conarh_2016.Application.UI.Shared
 {
     internal class BGLayoutView : RelativeLayout
     {

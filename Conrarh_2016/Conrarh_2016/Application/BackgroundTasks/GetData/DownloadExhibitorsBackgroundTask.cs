@@ -1,7 +1,5 @@
 ﻿using Conarh_2016.Application.BackgroundTasks.GetData.Kinvey;
-using Conarh_2016.Application.DataAccess;
 using Conarh_2016.Application.Domain;
-using Conrarh_2016.Core.DataAccess.Local;
 using System.Collections.Generic;
 
 namespace Conarh_2016.Application.BackgroundTasks

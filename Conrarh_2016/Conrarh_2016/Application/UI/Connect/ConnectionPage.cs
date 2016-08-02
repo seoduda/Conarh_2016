@@ -3,9 +3,7 @@ using Conarh_2016.Application.UI.Shared;
 using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.Wrappers;
 using Conarh_2016.Core;
-using Conrarh_2016.Application.UI.Shared;
 using System;
-using System.Collections;
 using Conarh_2016.Application.UI.Profile;
 
 namespace Conarh_2016.Application.UI.Connect
@@ -151,7 +149,7 @@ namespace Conarh_2016.Application.UI.Connect
             {
                 Orientation = StackOrientation.Vertical,
                 Children = {
-                    new UserHeaderView (CurrentModel.LoginedUser, false, false),
+                    new UserHeaderView (CurrentModel.LoginedUser, false, false, false),
                     buttonLayout,
                     lowerLayout
                 }

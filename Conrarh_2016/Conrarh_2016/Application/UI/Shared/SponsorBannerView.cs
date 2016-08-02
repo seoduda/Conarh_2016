@@ -1,9 +1,8 @@
-﻿using Conarh_2016.Application;
-using Conarh_2016.Core;
+﻿using Conarh_2016.Core;
 using System;
 using Xamarin.Forms;
 
-namespace Conrarh_2016.Application.UI.Shared
+namespace Conarh_2016.Application.UI.Shared
 {
     internal class SponsorBannerView : ContentView
     {

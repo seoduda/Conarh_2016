@@ -235,9 +235,15 @@ namespace Conarh_2016.Application.Tools
             return sb.ToString();
         }
 
+        /*
         public string GetPostQuestionOnEventQuery()
         {
             return GetQuery("questions_events");
+        }
+        */
+        public string GetPostQuestionOnEventKinveyQuery()
+        {
+            return GetKinveyQuery("questions-events");
         }
 
         /*

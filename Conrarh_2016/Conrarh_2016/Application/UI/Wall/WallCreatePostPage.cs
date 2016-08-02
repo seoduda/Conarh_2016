@@ -4,7 +4,8 @@ using Conarh_2016.Application.UI.Controls;
 using Conarh_2016.Core;
 using System.IO;
 using Conarh_2016.Application.UI.Shared;
-using Conrarh_2016.Application.UI.Shared;
+using XLabs.Platform.Services.Media;
+using System.Threading.Tasks;
 
 namespace Conarh_2016.Application.UI.Wall
 {
@@ -64,8 +65,8 @@ namespace Conarh_2016.Application.UI.Wall
 				TextColor = Color.White,
 				BorderRadius = 0
 			};
-			//btnUpload.Clicked += OnUploadClicked;;
-			//layout.Children.Add (btnUpload);
+			btnUpload.Clicked += OnUploadClicked;
+			layout.Children.Add (btnUpload);
 
 			_postTextField = new EditorControl(string.Empty) {
 				HeightRequest = EditorHeight,
@@ -86,7 +87,10 @@ namespace Conarh_2016.Application.UI.Wall
 			btnPost.Clicked += OnPostClicked;;
 			layout.Children.Add (btnPost);
 
-            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
+            ScrollView scrollView = new ScrollView() { Content = layout };
+
+
+            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, scrollView, true, true);
             Content = new ContentView { Content = bgLayout };
 
 
@@ -95,7 +99,23 @@ namespace Conarh_2016.Application.UI.Wall
 
 		void OnUploadClicked (object sender, System.EventArgs e)
 		{
-			AppController.Instance.AddImage (_fakeImagePath, OnAddImage, 350);
+            if (Device.OS == TargetPlatform.iOS)
+            {
+                AddImage(_fakeImagePath, 350);
+                /*
+                var config = new ActionSheetConfig();
+                //            config.Add(AppResources.TakePicture, () => AddImageAction(fakeImagePath, onExecuted, cropSize, true));
+                config.Add(AppResources.UploadImageFromGallery, () => AddImageAction(_fakeProfileImagePath, 100, false));
+                config.Add(AppResources.Cancel);
+                UserDialogs.Instance.ActionSheet(config);
+                */
+
+            }
+            else
+            {
+                AppController.Instance.AddImage(_fakeImagePath, OnAddImage, 350);
+            }
+            
 		}
 
 		private void OnAddImage()
@@ -114,5 +134,30 @@ namespace Conarh_2016.Application.UI.Wall
 			}
 			UserController.Instance.CreateWallPost (_postTextField.Text, _postImage.IsVisible ? _fakeImagePath : string.Empty);
 		}
-	}
+
+        public void AddImage(string fakeImagePath, int cropSize)
+        {
+            Task<MediaFile> imageTask = null;
+            var options = new CameraMediaStorageOptions
+            {
+                DefaultCamera = CameraDevice.Rear,
+                MaxPixelDimension = 400,
+            };
+
+            imageTask = AppProvider.MediaPicker.SelectPhotoAsync(options);
+
+            imageTask.ContinueWith(delegate (Task<MediaFile> arg) {
+                MediaFile file = arg.Result;
+
+                if (file != null)
+                {
+                    AppProvider.IOManager.DeleteFile(fakeImagePath);
+                    AppProvider.ImageService.CropAndResizeImage(file.Path, fakeImagePath, cropSize);
+                    OnAddImage();
+                }
+            });
+        }
+
+
+    }
 }

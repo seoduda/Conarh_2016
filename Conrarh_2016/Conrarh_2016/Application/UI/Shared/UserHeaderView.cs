@@ -10,7 +10,8 @@ namespace Conarh_2016.Application.UI.Shared
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (double)(((int)value) / 1000) + 0.02;
+            return ((double)((int)value) / 1000) + 0.01;
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -22,7 +23,7 @@ namespace Conarh_2016.Application.UI.Shared
     public sealed class UserHeaderView : ContentView
     {
         private const int ImageHeight = 80;
-
+        private ProgressBar progbar;
         public readonly UserModel Model;
 
         public event Action EditUserProfile;
@@ -127,7 +128,7 @@ namespace Conarh_2016.Application.UI.Shared
 
                 var pointsLayout = new AbsoluteLayout
                 {
-                    Padding = new Thickness(10, 5),
+                    Padding = new Thickness(5, 5),
                 };
                 int pgImagelabelHeigth = 69;
                 int pointsCountBoxHeigth = 51;
@@ -169,12 +170,11 @@ namespace Conarh_2016.Application.UI.Shared
                 pointsLayout.Children.Add(pointsCountBox, new Point(0, boxYpos));
                 pointsLayout.Children.Add(pointsCountLabel, new Point(2, boxYpos + 8));
                 pointsLayout.Children.Add(pointsCountText, new Point(2, boxYpos + 30));
-
-                var progbar = new ProgressBar()
+                progbar = new ProgressBar()
                 {
                     HeightRequest = 17,
                     //BackgroundColor = AppResources.ProfilePointsColor,
-                    WidthRequest = 300,
+                    
                     //  Progress = 0.3
                 };
                 //IntDivByKDoubleConverter iDkC = new IntDivByKDoubleConverter();
@@ -185,9 +185,24 @@ namespace Conarh_2016.Application.UI.Shared
                 {
                     Source = ImageLoader.Instance.GetImage(AppResources.ProfileLevelProgressBarImageLabel, false),
                     HeightRequest = pgImagelabelHeigth,
-                    WidthRequest = 300,
                 };
 
+
+
+
+                if (Device.OS == TargetPlatform.iOS)
+                {
+                    progbar.WidthRequest = (pointsCountBoxHeigth - 2) * 5;
+                    progbarImageLabel.WidthRequest = (pointsCountBoxHeigth - 2) * 5;
+
+                }
+                else
+                {
+                    progbar.WidthRequest = 300;
+                    progbarImageLabel.WidthRequest = 300;
+                }
+
+                    
                 pointsLayout.Children.Add(progbar, new Point(pointsCountBoxHeigth, pgImagelabelHeigth));
                 pointsLayout.Children.Add(progbarImageLabel, new Point(pointsCountBoxHeigth, 0));
                 // progbar.SetBinding(ProgressBar.ProgressProperty, User.ScorePointsProgressionProperty);

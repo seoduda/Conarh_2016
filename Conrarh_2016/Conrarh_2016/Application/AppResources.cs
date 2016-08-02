@@ -138,6 +138,7 @@ namespace Conarh_2016.Application
         public static string SignUpWrongEmailFormat = "Email inválido!";
         public static string SignUpWrongPhoneFormat = "Telefone inválido!";
         public static string UploadImageFromGallery = "Escolher da Galeria";
+        public static string OpenVideoMedia = "Abrir video";
         public static string TakePicture = "Tirar uma Foto";
         public static string Cancel = "Cancelar";
 

@@ -3,7 +3,6 @@ using Conarh_2016.Application.UI.Shared;
 using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.Wrappers;
 using Conarh_2016.Core;
-using Conrarh_2016.Application.UI.Shared;
 using System;
 
 namespace Conarh_2016.Application.UI.Connect

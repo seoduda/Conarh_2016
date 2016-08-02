@@ -303,6 +303,14 @@ namespace Conarh_2016.Application
         {
         }
 
+        public Action SuccessfulLinkedinLoginAction
+        {
+            get
+            {
+                return new Action(() => AppRootPage.CurrentPage.Navigation.PopModalAsync());
+            }
+        }
+
         public void AddImage(string fakeImagePath, Action onExecuted, int cropSize)
         {
             var config = new ActionSheetConfig();

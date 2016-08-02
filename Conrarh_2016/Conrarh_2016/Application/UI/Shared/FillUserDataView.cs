@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using Conarh_2016.Application.Domain.PostData;
 using System.IO;
 using Conarh_2016.Application.UI.Login;
+using Acr.UserDialogs;
+using System.Threading.Tasks;
+using XLabs.Platform.Services.Media;
 
 namespace Conarh_2016.Application.UI.Shared
 {
@@ -144,7 +147,23 @@ namespace Conarh_2016.Application.UI.Shared
 
 		void OnImageClicked (object sender, System.EventArgs e)
 		{
-			AppController.Instance.AddImage (_fakeProfileImagePath, OnImageChanged, 100);
+
+            if (Device.OS == TargetPlatform.iOS)
+            {
+                AddImage(_fakeProfileImagePath, 100);
+                /*
+                var config = new ActionSheetConfig();
+                //            config.Add(AppResources.TakePicture, () => AddImageAction(fakeImagePath, onExecuted, cropSize, true));
+                config.Add(AppResources.UploadImageFromGallery, () => AddImageAction(_fakeProfileImagePath, 100, false));
+                config.Add(AppResources.Cancel);
+                UserDialogs.Instance.ActionSheet(config);
+                */
+
+            }
+            else
+            {
+                AppController.Instance.AddImage(_fakeProfileImagePath, OnImageChanged, 100);
+            }
 		}
 
 		private void OnImageChanged()
@@ -241,6 +260,65 @@ namespace Conarh_2016.Application.UI.Shared
 			});
 			return textEntry;
 		}
-	}
+
+        
+        public void AddImage(string fakeImagePath, int cropSize)
+        {
+            Task<MediaFile> imageTask = null;
+            var options = new CameraMediaStorageOptions
+            {
+                DefaultCamera = CameraDevice.Rear,
+                MaxPixelDimension = 400,
+            };
+
+            imageTask = AppProvider.MediaPicker.SelectPhotoAsync(options);
+
+            imageTask.ContinueWith(delegate (Task<MediaFile> arg) {
+                MediaFile file = arg.Result;
+
+                if (file != null)
+                {
+                    AppProvider.IOManager.DeleteFile(fakeImagePath);
+                    AppProvider.ImageService.CropAndResizeImage(file.Path, fakeImagePath, cropSize);
+                    OnImageChanged();
+                }
+            });
+        }
+
+
+
+
+        private void AddImageAction(string fakeImagePath,  int cropSize, bool isMakePhoto)
+        {
+            Task<MediaFile> imageTask = null;
+            var options = new CameraMediaStorageOptions
+            {
+                DefaultCamera = CameraDevice.Rear,
+                MaxPixelDimension = 400,
+            };
+
+            if (isMakePhoto && AppProvider.MediaPicker.IsCameraAvailable)
+                imageTask = AppProvider.MediaPicker.TakePhotoAsync(options);
+            else
+                imageTask = AppProvider.MediaPicker.SelectPhotoAsync(options);
+
+            imageTask.ContinueWith(delegate (Task<MediaFile> arg) {
+                MediaFile file = arg.Result;
+
+                if (file != null)
+                {
+                    AppProvider.IOManager.DeleteFile(fakeImagePath);
+                    AppProvider.ImageService.CropAndResizeImage(file.Path, fakeImagePath, cropSize);
+                    OnImageChanged();
+
+                    //onExecuted.Invoke();
+                }
+            });
+        }
+
+
+
+
+    }
 
 }

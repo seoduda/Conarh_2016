@@ -29,8 +29,17 @@
 		<string>remote-notification</string>
 	</array>
 	<key>CFBundleIconFiles</key>
-	<array/>
+	<array>
+		<string>Icon@2x.png</string>
+		<string>Icon.png</string>
+		<string>Icon-60@2x.png</string>
+		<string>Icon-Small@2x.png</string>
+		<string>Icon-Small.png</string>
+		<string>Icon-Small-40@2x.png</string>
+	</array>
 	<key>CFBundleDisplayName</key>
 	<string>CONARH 2016</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 </dict>
 </plist>

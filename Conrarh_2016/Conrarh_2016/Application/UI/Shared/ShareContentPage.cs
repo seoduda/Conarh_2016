@@ -12,7 +12,11 @@ namespace Conarh_2016.Application.UI.Shared
 
 		protected ShareContentPage ():base()
 		{
-			ToolbarItems.Add (new ToolbarItem ("share", AppResources.ShareBtnImage, OnShare, ToolbarItemOrder.Default, 0));
+            /* TODO  - Reativar share no IOS* ShareContentPage */
+            if (Device.OS != TargetPlatform.iOS)
+            {
+                ToolbarItems.Add(new ToolbarItem("share", AppResources.ShareBtnImage, OnShare, ToolbarItemOrder.Default, 0));
+            }
 		}
 
 	}

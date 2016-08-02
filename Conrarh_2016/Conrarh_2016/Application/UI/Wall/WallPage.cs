@@ -2,7 +2,6 @@
 using Conarh_2016.Core;
 using Conarh_2016.Application.Wrappers;
 using Conarh_2016.Application.UI.Shared;
-using Conrarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Wall
 {

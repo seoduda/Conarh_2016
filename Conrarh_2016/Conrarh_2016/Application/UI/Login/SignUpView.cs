@@ -2,8 +2,6 @@
 using System;
 using Conarh_2016.Application.Domain.PostData;
 using Conarh_2016.Application.UI.Shared;
-using Conarh_2016.Core;
-using Conrarh_2016.Application.UI.Shared;
 
 namespace Conarh_2016.Application.UI.Login
 {
