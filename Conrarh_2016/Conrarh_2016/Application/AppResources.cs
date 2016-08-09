@@ -95,7 +95,7 @@ namespace Conarh_2016.Application
         public static string WallPostButtonUpload = "Adicionar foto";
         public static string LoadingSendingWallPost = "Publicando no Mural…";
         public static string SuccessfulCreateWallPost = "Publicado!";
-        public static string AlreadyLikePostMessage = "Você já curtiu esta publicação!";
+        public static string AlreadyLikePostMessage = "Você curtiu esta publicação!";
         public static string WallPostAddSomeTextMessage = "Você precisa adicionar algum texto na publicação.";
         public static string LikePostMessageQuestion = "Deseja curtir esta publicação?";
         public static string LoadingSearchExhibitors = "Procurando Expositores…";
@@ -228,6 +228,9 @@ namespace Conarh_2016.Application
         public static Color ProfileHistoryItemLightColor = Color.FromHex("d2b582");
         public static Color ProfileHistoryItemDarkColor = Color.FromHex("ca9e67");
 
+        public static Color HowToPlayCarouselPageFooterColor  = Color.FromHex("2C5454");
+        
+
         public static string DefaultUserImage = "defaultUserIcon.png";
         public static string DefaultEventImage = "defaultEventImage.png";
         public static string DefaultPostImage = "defaultPostImage.png";
@@ -296,7 +299,7 @@ namespace Conarh_2016.Application
 
         public static string ShareBtnImage = "shareBtn.png";
 
-        public static string ShareLink = "https://www.facebook.com/ABRHNacional";
+        public static string ShareLink = "http://www.conarh.com.br/";
         public static string ShareMessage = "Curta o #conarh2016 !";
         public static string ShareTitle = "CONARH 2016";
 

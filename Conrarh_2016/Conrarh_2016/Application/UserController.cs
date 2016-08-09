@@ -630,6 +630,7 @@ namespace Conarh_2016.Application
                 connectionModel.Request.ResponderId,
                 AppResources.GetPointsEarned(AppModel.Instance.Users.Find(connectionModel.Request.ResponderId).UserType),
                 true);
+            data.ConnectionRequestId = connectionModel.Request.Id;
 
 
 

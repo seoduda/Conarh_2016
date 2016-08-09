@@ -10,6 +10,11 @@ namespace Conarh_2016.Application.UI.Shared
 
         public SponsorBannerView()
         {
+            if (Device.OS == TargetPlatform.iOS)
+            {
+                ImageHeight = AppProvider.Screen.ConvertPixelsToDp(50);
+            }
+
             Image bannerImage = new Image();
             bannerImage.Source = ImageLoader.Instance.GetImage(AppResources.SponsorBanner, true);
             bannerImage.Aspect = Aspect.AspectFit;

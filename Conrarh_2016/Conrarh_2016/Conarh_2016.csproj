@@ -32,6 +32,14 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'iOS Build|AnyCPU'">
+    <OutputPath>bin\iOS Build\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Application\AppController.cs" />
     <Compile Include="Application\AppInformation.cs" />
@@ -135,6 +143,7 @@
     <Compile Include="Application\UI\Login\LinkedInLoginPage.cs" />
     <Compile Include="Application\UI\Login\LoginPage.cs" />
     <Compile Include="Application\UI\Login\LoginView.cs" />
+    <Compile Include="Application\UI\Login\PolicyPage.cs" />
     <Compile Include="Application\UI\Login\ResetEmailView.cs" />
     <Compile Include="Application\UI\Login\SignUpView.cs" />
     <Compile Include="Application\UI\Login\TermsPage.cs" />

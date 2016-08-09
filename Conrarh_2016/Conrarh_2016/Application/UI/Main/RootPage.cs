@@ -7,18 +7,7 @@ namespace Conarh_2016.Application.UI.Main
 {
     public sealed class RootPage : MasterDetailPage
     {
-        /*
-        public RootPage()
-        {
-            Content = new StackLayout
-            {
-                Children = {
-                    new Label { Text = "Hello ContentPage" }
-                }
-            };
-        }
-    }
-    */
+        
 		MainMenuPage menuPage;
 
 

@@ -216,9 +216,9 @@ namespace Conarh_2016.Application.UI.Midia
         */
         private void OpenMedia1(object sender, EventArgs e)
         {
-            // Device.OpenUri(new Uri("https://www.youtube.com/watch?v=Ec-drZPLRco"));
-            //Device.
-            Device.OpenUri(new Uri("http://www.gamefaqs.com/3ds/183130-pokemon-picross/faqs"));
+             Device.OpenUri(new Uri("https://www.youtube.com/watch?v=Ec-drZPLRco"));
+            
+            //Device.OpenUri(new Uri("http://www.gamefaqs.com/3ds/183130-pokemon-picross/faqs"));
         }
 
         private void OpenMedia2(object sender, EventArgs e)

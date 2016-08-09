@@ -26,7 +26,7 @@ namespace Conarh_2016.iOS
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
             
-            UserDialogs.Init();
+          //  UserDialogs.Init();
 
 
             AppProvider.Log = new Conarh_2016.iOS.Services.Log ();

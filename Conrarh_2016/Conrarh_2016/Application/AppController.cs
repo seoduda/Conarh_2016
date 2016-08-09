@@ -413,7 +413,8 @@ namespace Conarh_2016.Application
         }
 
         public void UpdatePushNotifications(string deviceToken, DeviceType deviceType)
-        {
+        {/* TODO  reativar UpdatePushNotifications AppControler
+            AppModel.Instance.AppInformation.PushNotificationToken = null
             if (string.IsNullOrEmpty(AppModel.Instance.AppInformation.PushNotificationToken))
             {
                 AppModel.Instance.UpdatePushNotificationToken(deviceToken, deviceType);
@@ -451,6 +452,7 @@ namespace Conarh_2016.Application
                 });
                 _backgroundWorkers[AppBackgroundWorkerType.DefaultApp].Add(updatingPushNotificationTask);
             }
+            */
         }
 
         public static string FirstCharToUpper(string input)

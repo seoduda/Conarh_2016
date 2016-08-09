@@ -108,7 +108,6 @@ namespace Conarh_2016.Application.UI.Events
                     TextColor = AppResources.MenuColor,
                     FontSize = 15,
 
-                    // TODO : habilitar comentários e editar tela de comentarios
                     IsEnabled = true,
                 };
                 absoluteBtnLayout.Children.Add(btnLabel, new Point(50, 6));
@@ -137,7 +136,10 @@ namespace Conarh_2016.Application.UI.Events
         {
             var item = new SpeecherView(speecherData, Data.BackgroundColorNonOpacity);
 
-           item.SelectItem += OnSpeecherSelected;
+            //só tem bio nos eventos do congresso
+            if (!Data.FreeAttending)
+            item.SelectItem += OnSpeecherSelected;
+
 
             return item;
         }

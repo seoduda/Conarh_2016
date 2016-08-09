@@ -57,7 +57,7 @@ namespace Conarh_2016.Application.Wrappers
                  
 
 
-            if (!DefinedItems.ContainsKey (connectedUser.Id)) 
+            if (connectedUser != null && !DefinedItems.ContainsKey (connectedUser.Id)) 
 			{
 				Device.BeginInvokeOnMainThread (() => {
 

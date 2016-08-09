@@ -58,6 +58,15 @@
     <DebugSymbols>False</DebugSymbols>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'iOS Build|AnyCPU'">
+    <OutputPath>bin\iOS Build\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Acr.Support.Android, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Acr.Support.2.1.0\lib\MonoAndroid10\Acr.Support.Android.dll</HintPath>
@@ -267,25 +276,6 @@
     <AndroidResource Include="Resources\drawable\defaultSponsorImage.png" />
     <AndroidResource Include="Resources\drawable\defaultUserIcon.png" />
     <AndroidResource Include="Resources\drawable\event_1.png" />
-    <AndroidResource Include="Resources\drawable\event_10.png" />
-    <AndroidResource Include="Resources\drawable\event_11.png" />
-    <AndroidResource Include="Resources\drawable\event_12.png" />
-    <AndroidResource Include="Resources\drawable\event_13.png" />
-    <AndroidResource Include="Resources\drawable\event_14.png" />
-    <AndroidResource Include="Resources\drawable\event_15.png" />
-    <AndroidResource Include="Resources\drawable\event_16.png" />
-    <AndroidResource Include="Resources\drawable\event_17.png" />
-    <AndroidResource Include="Resources\drawable\event_18.png" />
-    <AndroidResource Include="Resources\drawable\event_19.png" />
-    <AndroidResource Include="Resources\drawable\event_2.png" />
-    <AndroidResource Include="Resources\drawable\event_20.png" />
-    <AndroidResource Include="Resources\drawable\event_3.png" />
-    <AndroidResource Include="Resources\drawable\event_4.png" />
-    <AndroidResource Include="Resources\drawable\event_5.png" />
-    <AndroidResource Include="Resources\drawable\event_6.png" />
-    <AndroidResource Include="Resources\drawable\event_7.png" />
-    <AndroidResource Include="Resources\drawable\event_8.png" />
-    <AndroidResource Include="Resources\drawable\event_9.png" />
     <AndroidResource Include="Resources\drawable\eventButtonActionImage.png" />
     <AndroidResource Include="Resources\drawable\eventClockImage.png" />
     <AndroidResource Include="Resources\drawable\eventDislikeActiveImage.png" />

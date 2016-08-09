@@ -90,6 +90,7 @@ namespace Conarh_2016.Application.UI.Main
                 Padding = new Thickness(20, 10, 10, 20),
                 Content = new Image()
                 {
+                    Scale = (0.5),
                     HeightRequest = 70,
                     HorizontalOptions = LayoutOptions.End,
                     Source = ImageLoader.Instance.GetImage(AppResources.I9acaoLogo, false)

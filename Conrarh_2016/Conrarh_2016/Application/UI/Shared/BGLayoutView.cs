@@ -17,7 +17,12 @@ namespace Conarh_2016.Application.UI.Shared
         
         public BGLayoutView(String backgroundImage, Layout layout, bool showBanner, bool hasNavigationBar) : base()
         {
-            WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width);
+            if (Device.OS == TargetPlatform.iOS)
+            {
+                bannerHeight = AppProvider.Screen.ConvertPixelsToDp(50);
+            }
+
+                WidthRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Width);
             posY = hasNavigationBar ? 0 : 0;
             _backgroundImage = new Image()
             {

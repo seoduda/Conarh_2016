@@ -111,21 +111,36 @@ namespace Conarh_2016.Application.UI.Shared
 			string firstPart = "Ao clicar em cadastrar, você confirma estar de acordo com nossos";
 			string secondPart = " Termos de Uso ";
 			string thirdPart = "e com a";
-			string fourthPart = " Política de Privacidade";
+			
 
 			fs.Spans.Add (new Span { Text = firstPart, ForegroundColor = Color.Black, FontSize = 14});
 			fs.Spans.Add (new Span { Text= secondPart, ForegroundColor = Color.Blue, FontSize = 14});
 			fs.Spans.Add (new Span { Text= thirdPart, ForegroundColor = Color.Black, FontSize = 14 });
-			fs.Spans.Add (new Span { Text= fourthPart, ForegroundColor = Color.Blue, FontSize = 14});
+            string fourthPart = " Política de Privacidade";
 
-			var labelTerms = new Label {
+            var labelTerms = new Label {
 				FormattedText = fs
 			};
 			TapGestureRecognizer tap = new TapGestureRecognizer ();
 			tap.Tapped += OnClicked;
-			labelTerms.GestureRecognizers.Add (tap);
+            labelTerms.GestureRecognizers.Add (tap);
+            
+            var fs2 = new FormattedString();
+            
+            fs2.Spans.Add(new Span { Text = fourthPart, ForegroundColor = Color.Blue, FontSize = 14 });
 
-			layout.Children.Add (new ContentView { Content = labelTerms, Padding = new Thickness(10)});
+            var labelPrivaPol = new Label
+            {
+                FormattedText = fs2
+            };
+
+            TapGestureRecognizer tap2 = new TapGestureRecognizer();
+            tap2.Tapped += OnClicked2;
+            labelPrivaPol.GestureRecognizers.Add(tap);
+
+            
+
+            layout.Children.Add (new ContentView { Content = labelTerms, Padding = new Thickness(10)});
 
 			Content = new ScrollView {Content = layout};
 
@@ -144,8 +159,13 @@ namespace Conarh_2016.Application.UI.Shared
 			Navigation.PushAsync (new TermsPage ());
 		}
 
+        void OnClicked2(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new PolicyPage());
+        }
 
-		void OnImageClicked (object sender, System.EventArgs e)
+
+        void OnImageClicked (object sender, System.EventArgs e)
 		{
 
             if (Device.OS == TargetPlatform.iOS)

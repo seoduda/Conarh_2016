@@ -5,7 +5,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>br.com.i9acao.conarh2016</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.2</string>
+	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -28,15 +28,13 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>CFBundleIconFiles</key>
+	<array/>
 	<key>CFBundleDisplayName</key>
-    <string>Conarh 2016</string>
-    <key>UIPrerenderedIcon</key>
-    <false/>
-    <key>CFBundleName</key>
-    <string>Conarh 2016</string>
-    <key>XSLaunchImageAssets</key>
-    <string>Resources/Images.xcassets/LaunchImage.launchimage</string>
-    <key>XSAppIconAssets</key>
-    <string>Resources/Images.xcassets/AppIcons.appiconset</string>
+	<string>Conarh 2016</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>XSAppIconAssets</key>
+	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
 </dict>
 </plist>

@@ -131,8 +131,8 @@ namespace Conarh_2016.Application.UI.Connect
                 Spacing = 0,
                 HorizontalOptions = LayoutOptions.Fill,
                 Children =  {
-                    new ContentView {Content = GetButton(AppResources.ProfileAllContacsBtnHeader, AppResources.MenuColor, OnAllContactsClicked), WidthRequest = AppProvider.Screen.Width / 2},
-                    new ContentView {Content = GetButton (AppResources.ProfilePendingContacsBtnHeader, AppResources.AgendaCongressoColor, OnPendingContactsClicked), WidthRequest = AppProvider.Screen.Width / 2},
+                    new ContentView {Content = GetButton(AppResources.ProfileAllContacsBtnHeader, AppResources.MenuColor, OnAllContactsClicked), WidthRequest = AppProvider.Screen.Width / 3},
+                    new ContentView {Content = GetButton (AppResources.ProfilePendingContacsBtnHeader, AppResources.AgendaCongressoColor, OnPendingContactsClicked), WidthRequest = AppProvider.Screen.Width / 3},
                     new ContentView {Content = GetButton(AppResources.ProfileRatingBtnHeader, AppResources.AgendaExpoColor, OnRankingClicked), WidthRequest = AppProvider.Screen.Width / 3},
                 },
                 Padding = new Thickness(0)

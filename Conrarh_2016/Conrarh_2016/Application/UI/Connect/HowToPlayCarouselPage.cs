@@ -1,4 +1,5 @@
 ﻿using Conarh_2016.Application.UI.Shared;
+using Conarh_2016.Core;
 using System;
 
 using Xamarin.Forms;
@@ -15,16 +16,18 @@ namespace Conarh_2016.Application.UI.Connect
 
         //private Image iconNext;
         //private Image iconPrev;
+
         //private Image iconClose;
         private Image img;
+                
 
         public HowToPlayCarouselPage(string _image, bool first, bool last) : base()
         {
+
             var layout = new StackLayout()
             {
                 //Padding = new Thickness(0, 5, 5, 5),
-                BackgroundColor = Color.White,
-                Opacity = 0.6
+                BackgroundColor = AppResources.HowToPlayCarouselPageFooterColor
             };
             var innerLayout = new RelativeLayout()
             {
@@ -39,12 +42,11 @@ namespace Conarh_2016.Application.UI.Connect
             Constraint.Constant(0),
             Constraint.Constant(0),
             Constraint.RelativeToParent((parent) => { return parent.Width; }),
-            Constraint.RelativeToParent((parent) => { return (parent.Height); }));
+            Constraint.RelativeToParent((parent) => { return (parent.Height*188)/200; }));
             /*
             iconClose = new Image()
             {
                 Source = AppResources.CloseIcon,
-                
             };
             innerLayout.Children.Add(iconClose,
                 Constraint.RelativeToParent((parent) => { return parent.Width - 35; }),
@@ -57,8 +59,7 @@ namespace Conarh_2016.Application.UI.Connect
 
             iconClose.GestureRecognizers.Add(closeIconLinkedInRecognizer);
             */
-
-          /*  
+            /*
             if (!last)
             {
                 iconNext = new Image()
@@ -68,7 +69,7 @@ namespace Conarh_2016.Application.UI.Connect
 
                 innerLayout.Children.Add(iconNext,
                     Constraint.RelativeToParent((parent) => { return parent.Width - 30; }),
-                    Constraint.RelativeToParent((parent) => { return (parent.Height * 7) / 8; }),
+                    Constraint.RelativeToParent((parent) => { return (parent.Height * 5) / 8; }),
                     Constraint.Constant(25),
                     Constraint.Constant(25));
 
@@ -85,7 +86,7 @@ namespace Conarh_2016.Application.UI.Connect
 
                 innerLayout.Children.Add(iconPrev,
                     Constraint.Constant(5),
-                    Constraint.RelativeToParent((parent) => { return (parent.Height * 7) / 8; }),
+                    Constraint.RelativeToParent((parent) => { return (parent.Height * 5) / 8; }),
                     Constraint.Constant(25),
                     Constraint.Constant(25));
 
@@ -96,13 +97,45 @@ namespace Conarh_2016.Application.UI.Connect
                 iconPrev.GestureRecognizers.Add(iconPrevLinkedInRecognizer);
             }
             */
-            
             layout.Children.Add(innerLayout);
-            Content = layout;
-            BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBadgeImage, layout, true, true);
-            //Content = new ScrollView {Content = bgLayout };
-            Content = new ContentView { Content = bgLayout };
+            //Content = layout;
 
+            //BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBadgeImage, layout, true, true);
+            //Content = new ScrollView {Content = bgLayout };
+            //Content = new ContentView { Content = bgLayout };
+            RelativeLayout relLayout = new RelativeLayout();
+
+            relLayout.Children.Add(layout,
+                  Constraint.Constant(0),
+                  Constraint.Constant(0),
+                  Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                  Constraint.RelativeToParent((parent) => { return parent.Height; }));
+
+            /*
+            BoxView transpFooter = new BoxView()
+            {
+                Color = Color.Transparent,
+                HeightRequest = 20
+            };
+
+                        relLayout.Children.Add(transpFooter,
+                Constraint.Constant(0),
+                Constraint.RelativeToParent((parent) => { return parent.Height - 1; }),
+                Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                Constraint.Constant(20)
+            );
+
+            */
+            /*
+            relLayout. Children.Add(new SponsorBannerView(),
+                Constraint.Constant(0),
+                Constraint.RelativeToParent((parent) => { return parent.Height - bannerHeight; }),
+                 Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                 Constraint.Constant(bannerHeight)
+            );
+            */
+
+            Content = relLayout;
         }
 
         private void iconPrev_Tapped(object sender, EventArgs e)

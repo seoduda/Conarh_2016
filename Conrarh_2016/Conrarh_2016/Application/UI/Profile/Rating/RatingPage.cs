@@ -57,11 +57,8 @@ namespace Conarh_2016.Application.UI.Profile
             //, Padding = new Thickness(10)
             // BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, false, true);
 
-            //Content = layout;
-            Content = bgLayout;
 
-
-            Content = new ContentView { Content = bgLayout};
+            Content = new ScrollView { Content = bgLayout};
 		}
 
 		void OnItemsChanged ()
