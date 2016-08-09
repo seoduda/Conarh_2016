@@ -110,7 +110,7 @@ namespace Conarh_2016.Application.Tools
         public string GetUsersSortByNameKinveyQuery()
         {
             StringBuilder sb = new StringBuilder(KinveyApiUserUrl);
-            sb.Append("?&sort={\"name\": 1}");
+            sb.Append("?&sort={\"name\":1}");
             return sb.ToString();
         }
 

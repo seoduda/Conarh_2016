@@ -136,13 +136,15 @@ namespace Conarh_2016.Application.UI.Shared
 
             TapGestureRecognizer tap2 = new TapGestureRecognizer();
             tap2.Tapped += OnClicked2;
-            labelPrivaPol.GestureRecognizers.Add(tap);
+            labelPrivaPol.GestureRecognizers.Add(tap2);
 
             
 
-            layout.Children.Add (new ContentView { Content = labelTerms, Padding = new Thickness(10)});
+            layout.Children.Add (new ContentView { Content = labelTerms, Padding = new Thickness(10, 10,10,0)});
+            layout.Children.Add(new ContentView { Content = labelPrivaPol, Padding = new Thickness(10, 0, 10, 0) });
 
-			Content = new ScrollView {Content = layout};
+
+            Content = new ScrollView {Content = layout};
 
 			_requiredFields = new List<InputFieldView> {
 				_jobEntry,

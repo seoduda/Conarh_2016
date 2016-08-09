@@ -52,6 +52,13 @@ namespace Conarh_2016.Application.UI.Midia
             mi3.ImagePath = AppResources.MidiaImage3;
             mi3.Url = "https://www.youtube.com/watch?v=ngN5CImS_bA";
 
+            MediaItem mi4 = new MediaItem("Astrid Fontenelle convida você para o CONARH 2016!!");
+            mi4.MediaType = MediaType.Video;
+            mi4.ImagePath = AppResources.MidiaImage4;
+            mi4.Url = "https://www.youtube.com/watch?v=dMJhu-5GXdY";
+
+
+
             StackLayout mdL1 = getMediaItemView(mi1.Title, mi1.ImagePath, mi1.Url);
             var MediaClickRecognizer1 = new TapGestureRecognizer();
             MediaClickRecognizer1.Tapped += OpenMedia1;
@@ -67,19 +74,28 @@ namespace Conarh_2016.Application.UI.Midia
             MediaClickRecognizer3.Tapped += OpenMedia3;
             mdL3.GestureRecognizers.Add(MediaClickRecognizer3);
 
+            StackLayout mdL4 = getMediaItemView(mi4.Title, mi4.ImagePath, mi4.Url);
+            var MediaClickRecognizer4 = new TapGestureRecognizer();
+            MediaClickRecognizer4.Tapped += OpenMedia4;
+            mdL4.GestureRecognizers.Add(MediaClickRecognizer4);
+
+
             var mediaLayout = new StackLayout
             {
                 Orientation = StackOrientation.Vertical,
                 Spacing = 5,
                 Padding = new Thickness(0)
             };
-
-            if (Device.OS != TargetPlatform.iOS)
-            {
+            
+            //if (Device.OS != TargetPlatform.iOS)
+            //{
                 mediaLayout.Children.Add(new ContentView { Content = mdL1 });
                 mediaLayout.Children.Add(new ContentView { Content = mdL2 });
                 mediaLayout.Children.Add(new ContentView { Content = mdL3 });
-            }
+                mediaLayout.Children.Add(new ContentView { Content = mdL4 });
+
+            //}
+            /*
             else
             {
                 var MediaBtn1 = new Button
@@ -128,22 +144,9 @@ namespace Conarh_2016.Application.UI.Midia
                 mediaLayout.Children.Add(new ContentView { Content = mdL3 });
                 //mediaLayout.Children.Add(MediaBtn3);
             }
+            */
             layout.Children.Add(mediaLayout);
 
-            /*
-            Button testebtn = new Button()
-            {
-                Text = "vai lá",
-                TextColor = Color.White,
-                BackgroundColor = Color.Blue,
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.CenterAndExpand
-            };
-
-            testebtn.Clicked += doShit;
-            layout.Children.Add(testebtn);
-            */
-            //Content = layout;
 
             BGLayoutView bgLayout = new BGLayoutView(AppResources.DefaultBgImage, layout, true, true);
             Content = new ScrollView { Content = bgLayout };
@@ -159,7 +162,6 @@ namespace Conarh_2016.Application.UI.Midia
                 Orientation = StackOrientation.Horizontal,
                 BackgroundColor = AppResources.AgendaExpoColor,
                 Padding = new Thickness(10, 1, 10, 1),
-                //Spacing = 10,
                 Opacity = 0.75,
                 WidthRequest = AppProvider.Screen.Width - 20,
                 HorizontalOptions = LayoutOptions.Center,
@@ -176,9 +178,6 @@ namespace Conarh_2016.Application.UI.Midia
                 Source = ImageLoader.Instance.GetImage(_imagePath, false),
                 HeightRequest = 45,
                 WidthRequest = 80,
-                //WidthRequest = AppProvider.Screen.ConvertPixelsToDp(100),
-                //HorizontalOptions = LayoutOptions.CenterAndExpand,
-                //VerticalOptions = LayoutOptions.CenterAndExpand
             };
             linearLayout.Children.Add(mediaImage);
 
@@ -199,26 +198,19 @@ namespace Conarh_2016.Application.UI.Midia
 
             return linearLayout;
         }
+
+
         /*
-        private void OnButtonClicked(object sender, EventArgs e)
-        {
-            AppProvider.PopUpFactory.ShowMessage("clicou", AppResources.Warning);
-            //Device.OpenUri(new Uri(url));
-            // Device.OpenUri(new Uri("https://www.youtube.com/watch?v=Ec-drZPLRco"));
-        }
-
-
         private void OnButtonClicked(object sender, EventArgs e, String url)
         {
             Device.OpenUri(new Uri(url));
             // Device.OpenUri(new Uri("https://www.youtube.com/watch?v=Ec-drZPLRco"));
         }
         */
+
         private void OpenMedia1(object sender, EventArgs e)
         {
              Device.OpenUri(new Uri("https://www.youtube.com/watch?v=Ec-drZPLRco"));
-            
-            //Device.OpenUri(new Uri("http://www.gamefaqs.com/3ds/183130-pokemon-picross/faqs"));
         }
 
         private void OpenMedia2(object sender, EventArgs e)
@@ -231,7 +223,11 @@ namespace Conarh_2016.Application.UI.Midia
             Device.OpenUri(new Uri("https://www.youtube.com/watch?v=ngN5CImS_bA"));
         }
 
+        private void OpenMedia4(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri("https://www.youtube.com/watch?v=dMJhu-5GXdY"));
+        }
 
-     
+
     }
 }

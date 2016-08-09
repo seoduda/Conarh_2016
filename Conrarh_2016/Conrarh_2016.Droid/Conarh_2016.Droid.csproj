@@ -321,6 +321,7 @@
     <AndroidResource Include="Resources\drawable\media_1.png" />
     <AndroidResource Include="Resources\drawable\media_2.png" />
     <AndroidResource Include="Resources\drawable\media_3.png" />
+    <AndroidResource Include="Resources\drawable\media_4.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

@@ -272,6 +272,7 @@ namespace Conarh_2016.Application
         public static string MidiaImage1 = "media_1.png";
         public static string MidiaImage2 = "media_2.png";
         public static string MidiaImage3 = "media_3.png";
+        public static string MidiaImage4 = "media_4.png";
 
 
         public static string ProfileLevelProgressBarImageLabel = "levelProgressBarImageLabel.png";
@@ -288,6 +289,9 @@ namespace Conarh_2016.Application
         public static string SponsorUri = "http://www.healthways.com.br/";
 
         public static string I9acaoLogo = "i9acao_logo.png";
+        public static string I9acaoUri = "http://www.i9acao.com.br/";
+
+
 
         public static string WallPostLikeImage = "wallPostLikeImage.png";
 

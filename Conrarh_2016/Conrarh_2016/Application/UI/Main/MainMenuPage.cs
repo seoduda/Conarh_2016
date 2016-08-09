@@ -59,7 +59,7 @@ namespace Conarh_2016.Application.UI.Main
             layout.Children.Add(GetMenuButton(MainMenuItemData.WallPage));
             //if (Device.OS != TargetPlatform.iOS)
             //{
-                layout.Children.Add(GetMenuButton(MainMenuItemData.MidiaPage));
+            layout.Children.Add(GetMenuButton(MainMenuItemData.MidiaPage));
             //}
 
             layout.Children.Add(GetSeparator(1, AppProvider.Screen.Width, AppResources.MenuTitleTextColor));
@@ -85,20 +85,28 @@ namespace Conarh_2016.Application.UI.Main
 
         private void AddI9Logo(StackLayout layout)
         {
+            Image logoI9acao = new Image()
+            {
+                Scale = (0.6),
+                HeightRequest = 70,
+                HorizontalOptions = LayoutOptions.Center,
+                Source = ImageLoader.Instance.GetImage(AppResources.I9acaoLogo, false)
+            };
+            var LogoI9Click = new TapGestureRecognizer();
+            LogoI9Click.Tapped += OnLogoI9acaoClicked;
+            logoI9acao.GestureRecognizers.Add(LogoI9Click);
+
             layout.Children.Add(new ContentView
             {
                 Padding = new Thickness(20, 10, 10, 20),
-                Content = new Image()
-                {
-                    Scale = (0.5),
-                    HeightRequest = 70,
-                    HorizontalOptions = LayoutOptions.End,
-                    Source = ImageLoader.Instance.GetImage(AppResources.I9acaoLogo, false)
-                }
+                Content = logoI9acao
             });
         }
 
-
+        private void OnLogoI9acaoClicked(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri(AppResources.I9acaoUri));
+        }
 
         private void OnUserChanged(UserModel previous, UserModel current)
         {
