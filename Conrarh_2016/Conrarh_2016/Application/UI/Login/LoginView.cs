@@ -21,6 +21,8 @@ namespace Conarh_2016.Application.UI.Login
 
         public event Action ResetEmail;
 
+        public event Action LinkedinSignUp;
+
         public event Action<LoginUserData> LogIn;
 
         public LoginView() : base()
@@ -67,7 +69,7 @@ namespace Conarh_2016.Application.UI.Login
 
             var loginLinkedInRecognizer = new TapGestureRecognizer();
             //Binding events
-            loginLinkedInRecognizer.Tapped += tapImage_Tapped;
+            loginLinkedInRecognizer.Tapped += OnLinkedinSignupClicked;
             //Associating tap events to the image buttons
             loginLinkedInBtn.GestureRecognizers.Add(loginLinkedInRecognizer);
 
@@ -135,16 +137,6 @@ namespace Conarh_2016.Application.UI.Login
             Content = new ScrollView { Content = bgLayout };
         }
 
-        private void OnBannerClicked(object sender, EventArgs e)
-        {
-            Device.OpenUri(new Uri(AppResources.SponsorUri));
-        }
-
-        private void OnLoginSkipClicked(object sender, EventArgs e)
-        {
-            if (LogIn != null)
-                LogIn(null);
-        }
 
         private void OnLoginClicked(object sender, EventArgs e)
         {
@@ -170,6 +162,15 @@ namespace Conarh_2016.Application.UI.Login
             if (SignUp != null)
                 SignUp();
         }
+
+        private void OnLinkedinSignupClicked(object sender, EventArgs e)
+        {
+            if (LinkedinSignUp != null)
+            {
+                LinkedinSignUp();
+            }
+        }
+
 
         private AbsoluteLayout GetEntry(Keyboard keyboard, string defaultValue, string icon, int topPadding, bool isPassword, int iconHeight, out ExtendedEntry textEntry)
         {
@@ -217,30 +218,5 @@ namespace Conarh_2016.Application.UI.Login
             _passwordEntry.Font = Font.SystemFontOfSize(18, FontAttributes.Bold);
         }
 
-        private void tapImage_Tapped(object sender, EventArgs e)
-        {
-            signupLinkedin();
-        }
-
-        private void signupLinkedin()
-        {
-            if (Device.OS == TargetPlatform.iOS)
-            {
-                LinkedInLoginPage LInLP = new LinkedInLoginPage();
-                LInLP.PostSignUp += postSignupLinkedin;
-                //Navigation.PushModalAsync(LInLP);
-                AppController.Instance.AppRootPage.CurrentPage.Navigation.PushModalAsync(LInLP);
-                //AppController.Instance.AppRootPage.CurrentPage.Navigation.PushAsync(LInLP);
-            }
-            else
-            {
-                AppProvider.LinkedinLogin.createUserLinkedin();
-            }
-        }
-
-        public void postSignupLinkedin()
-        {
-            AppController.Instance.AppRootPage.CurrentPage.Navigation.PopAsync();
-        }
     }
 }

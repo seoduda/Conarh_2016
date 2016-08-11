@@ -62,7 +62,10 @@ namespace Conarh_2016.Droid.Services
                                 imageServerPath = (string)result["pictureUrl"];
                                 udata.ScorePoints = 0;
 
-                                UserController.Instance.RegisterUserLinkedin(udata, imageServerPath);
+                                //UserController.Instance.RegisterUserLinkedin(udata, imageServerPath);
+                                UserController.Instance.GetUserLinkedinPasswd(udata, imageServerPath);
+
+
                             }
                         }
                     }

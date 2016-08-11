@@ -1,4 +1,5 @@
 ﻿using Conarh_2016.Application.Domain.JsonConverters;
+using Conarh_2016.Application.Domain.PostData;
 using Newtonsoft.Json;
 
 namespace Conarh_2016.Application.Domain
@@ -157,5 +158,23 @@ namespace Conarh_2016.Application.Domain
                 ScorePoints = System.Math.Max(ScorePoints, newUserData.ScorePoints);
             }
         }
+
+        /* TODO CLEAN
+        public void UpdateWithCreateUserData(CreateUserData _cUserData)
+        {
+            Email = _cUserData.Email;
+            this.Job = _cUserData.Job;
+            this.Name = _cUserData.Name;
+            this.Phone= _cUserData.Phone;
+            /*
+            if (_cUserData.ProfileImage != null && !_cUserData.ProfileImage.ToLower().StartsWith("http"))
+                this. = _cUserData.Job;
+            this.Job = _cUserData.Job;
+            this.Job = _cUserData.Job;
+            */
+
+
+        }
+        */
     }
 }

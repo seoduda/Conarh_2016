@@ -13,11 +13,11 @@ using Xamarin.Auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(LinkedInLoginPage), typeof(LinkedInLoginPageRenderer))]
+[assembly: ExportRenderer(typeof(LinkedInSignupPage), typeof(LinkedInSignupPageRenderer))]
 
 namespace Conarh_2016.iOS.UI.Login
 {
-    internal class LinkedInLoginPageRenderer : PageRenderer
+    internal class LinkedInSignupPageRenderer : PageRenderer
     {
         private OAuth2Authenticator auth;
         private CreateUserData udata;
@@ -86,7 +86,9 @@ namespace Conarh_2016.iOS.UI.Login
                             imageServerPath = map["pictureUrl"];
                             udata.ScorePoints = 0;
 
-                            UserController.Instance.RegisterUserLinkedin(udata, imageServerPath);
+                            //UserController.Instance.RegisterUserLinkedin(udata, imageServerPath);
+                            UserController.Instance.GetUserLinkedinPasswd(udata, imageServerPath);
+
 
                             //DismissViewController(true, null);
                             //AppController.Instance.SuccessfulLinkedinLoginAction();
@@ -111,12 +113,7 @@ namespace Conarh_2016.iOS.UI.Login
             }
         }
 
-        private void postSignupLinkedin()
-        {
-            //DismissViewController(true, null);
-            //base.DangerousAutorelease();
-            //Dispose();
-        }
+     
 
         public Dictionary<string, string> decodeprettyJasonString(string response)
         {
@@ -159,92 +156,4 @@ namespace Conarh_2016.iOS.UI.Login
         }
     }
 
-    /*
-    internal class LinkedInLoginPageRenderer : PageRenderer
-    {
-        private OAuth2Authenticator auth;
-        private CreateUserData udata;
-
-        public event Action PostSignUp;
-
-        public override void ViewDidAppear(bool animated)
-        {
-            udata = new CreateUserData();
-            base.ViewDidAppear(animated);
-
-            auth = new OAuth2Authenticator(
-                       clientId: "77c1rz71bj79xe",
-                       clientSecret: "ixk8ykW2zSTqYLes",
-                       scope: "r_basicprofile r_emailaddress",
-                       authorizeUrl: new Uri("https://www.linkedin.com/uas/oauth2/authorization"),
-                       redirectUrl: new Uri("https://www.i9acao.com.br/"),
-                       accessTokenUrl: new Uri("https://www.linkedin.com/uas/oauth2/accessToken")
-               );
-            auth.Completed += (sender2, eventArgs) =>
-            {
-                if (eventArgs.IsAuthenticated)
-                {
-                    string dd = eventArgs.Account.Username;
-                    string imageServerPath;
-                    var values = eventArgs.Account.Properties;
-
-                    var access_token = values["access_token"];
-                    try
-                    {
-                        var request = System.Net.HttpWebRequest.Create(string.Format(@"https://api.linkedin.com/v1/people/~:(firstName,lastName,headline,picture-url,positions,email-address )?oauth2_access_token=" + access_token + "&format=json", ""));
-                        request.ContentType = "application/json";
-                        request.Method = "GET";
-
-                        using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
-                        {
-                            System.Console.Out.WriteLine("Stautus Code is: {0}", response.StatusCode);
-
-                            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                            {
-                                var content = reader.ReadToEnd();
-                                if (!string.IsNullOrWhiteSpace(content))
-                                {
-                                    System.Console.Out.WriteLine(content);
-                                }
-
-                                var result = JsonConvert.DeserializeObject<dynamic>(content);
-                                Dictionary<string, string> map = decodeprettyJasonString(content);
-                                udata.Job = map["headline"];
-                                udata.Email = map["emailAddress"];
-                                udata.Name = map["firstName"] + " " + map["lastName"];
-                                udata.Password = access_token;
-                                udata.Phone = " ";
-                                udata.ProfileImage = map["pictureUrl"];
-                                imageServerPath = map["pictureUrl"];
-                                udata.ScorePoints = 0;
-
-                                //this.DismissViewControllerAsync(true);
-                                //this.RemoveFromParentViewController();
-                                //this.DismissModalViewController(true);
-                                //this.DismissViewController(true, PostSignUp);
-                                //this.NavigationController.PopToRootViewController(true);
-                                //this.NavigationController.PopViewController(true);
-                                DismissViewController(true, null);
-                                UserController.Instance.RegisterUserLinkedin(udata, imageServerPath);
-                                AppController.Instance.SuccessfulLinkedinLoginAction();
-
-                                //postSignupLinkedin();
-                            }
-                        }
-                    }
-                    catch (Exception exx)
-                    {
-                        System.Console.WriteLine(exx.ToString());
-                    }
-                }
-                else
-                {
-                    DismissViewController(true, null);
-                }
-                DismissViewController(true, null);
-            };
-
-            PresentViewController(auth.GetUI(), true, postSignupLinkedin);
-        }
-        */
 }

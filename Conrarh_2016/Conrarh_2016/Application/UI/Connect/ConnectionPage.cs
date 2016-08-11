@@ -1,129 +1,124 @@
-﻿using Xamarin.Forms;
+﻿using Conarh_2016.Application.Domain;
+using Conarh_2016.Application.UI.Profile;
 using Conarh_2016.Application.UI.Shared;
-using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.Wrappers;
 using Conarh_2016.Core;
 using System;
-using Conarh_2016.Application.UI.Profile;
+using Xamarin.Forms;
 
 namespace Conarh_2016.Application.UI.Connect
 {
-
     public enum ContactListType
     {
         All,
         Pending
     }
 
-    public sealed class ConnectListWrapper: PullRefreshListWrapper
-	{
-		public ConnectionsDataWrapper CurrentModel;
-		private int progress = 0;
+    public sealed class ConnectListWrapper : PullRefreshListWrapper
+    {
+        public ConnectionsDataWrapper CurrentModel;
+        private int progress = 0;
 
-		private bool IsSearching = false;
-		private ConnectionsDataWrapper SearchDataWrapper;
-		private string Pattern = string.Empty;
-        
+        private bool IsSearching = false;
+        private ConnectionsDataWrapper SearchDataWrapper;
+        private string Pattern = string.Empty;
 
         public ConnectListWrapper(ConnectionsDataWrapper currentModel)
-		{
-			CurrentModel = currentModel;
-		}
-
-		public override void OnAction ()
-		{
-			if (IsBusy)
-				return;
-
-			IsBusy = true;
-			progress = 0;
-
-			if (IsSearching)
-				AppController.Instance.SearchUsers (SearchDataWrapper.SearchUsers, Pattern, Increase);
-			else
-				AppController.Instance.DownloadAllUsers (Increase);
-
-			UserController.Instance.UpdateProfileData (CurrentModel.LoginedUser, true, Increase);
-
+        {
+            CurrentModel = currentModel;
         }
 
-		public void Increase()
-		{
-			progress += 1;
-			if (progress == 2)
-				Done ();
-		}
+        public override void OnAction()
+        {
+            if (IsBusy)
+                return;
 
+            IsBusy = true;
+            progress = 0;
 
-		public void Search(ConnectionsDataWrapper dataWrapper, string pattern)
-		{
-			IsBusy = false;
+            if (IsSearching)
+                AppController.Instance.SearchUsers(SearchDataWrapper.SearchUsers, Pattern, Increase);
+            else
+                AppController.Instance.DownloadAllUsers(Increase);
 
-			IsSearching = true;
-			Pattern = pattern;
-			SearchDataWrapper = dataWrapper;
-			OnAction ();
-		}
+            UserController.Instance.UpdateProfileData(CurrentModel.LoginedUser, true, Increase);
+        }
 
-		public void ClearSearch()
-		{
-			IsBusy = false;
-			IsSearching = false;
+        public void Increase()
+        {
+            progress += 1;
+            if (progress == 2)
+                Done();
+        }
 
-			OnAction ();
-		}
-	}
+        public void Search(ConnectionsDataWrapper dataWrapper, string pattern)
+        {
+            IsBusy = false;
 
-	public sealed class ConnectionPage : ContentPage
-	{
-        private  ContactListType selectedContactedList = ContactListType.All;
+            IsSearching = true;
+            Pattern = pattern;
+            SearchDataWrapper = dataWrapper;
+            OnAction();
+        }
+
+        public void ClearSearch()
+        {
+            IsBusy = false;
+            IsSearching = false;
+
+            OnAction();
+        }
+    }
+
+    public sealed class ConnectionPage : ContentPage
+    {
+        private ContactListType selectedContactedList = ContactListType.All;
         public ConnectionsDataWrapper CurrentModel { private set; get; }
         public ConnectionsDataWrapper PendingConnectionsDataWrapper { private set; get; }
         public readonly ListView UserListView;
-        StackLayout layout;
+        private StackLayout layout;
         private StackLayout lowerLayout;
         private SearchBarView searchBarView;
 
-
         private readonly ConnectListWrapper _wrapper;
 
-		protected override void OnDisappearing ()
-		{
-			base.OnDisappearing ();
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
 
-			if (AppProvider.ImageCache != null)
-				AppProvider.ImageCache.Clear ();
+            if (AppProvider.ImageCache != null)
+                AppProvider.ImageCache.Clear();
 
-			if (AppProvider.FastCellCache != null)
-				AppProvider.FastCellCache.FlushAllCaches ();
-		}
+            if (AppProvider.FastCellCache != null)
+                AppProvider.FastCellCache.FlushAllCaches();
+        }
 
-		public ConnectionPage ()
-		{
-			Title = AppResources.Connect;
-			BackgroundColor = Color.Transparent;
+        public ConnectionPage()
+        {
+            Title = AppResources.Connect;
+            BackgroundColor = Color.Transparent;
 
             CurrentModel = AppModel.Instance.CurrentConnectionsWrapper;
             PendingConnectionsDataWrapper = GetPendingConnectionsDataWrapper();
             UserController.Instance.UpdateProfileData(CurrentModel.LoginedUser);
 
-            searchBarView = new SearchBarView ();
-			searchBarView.Clear += OnSearchClear;
-			searchBarView.Search += OnSearch;
+            searchBarView = new SearchBarView();
+            searchBarView.Clear += OnSearchClear;
+            searchBarView.Search += OnSearch;
 
-			_wrapper = new ConnectListWrapper (CurrentModel);
-			UserListView = new ListView {
-				RefreshCommand = _wrapper.RefreshCommand,
-				HasUnevenRows = true,
-				ItemTemplate = new DataTemplate (typeof(ConnectionCell)),
-				SeparatorVisibility = SeparatorVisibility.None,
-				IsPullToRefreshEnabled = false,
+            _wrapper = new ConnectListWrapper(CurrentModel);
+            UserListView = new ListView
+            {
+                RefreshCommand = _wrapper.RefreshCommand,
+                HasUnevenRows = true,
+                ItemTemplate = new DataTemplate(typeof(ConnectionCell)),
+                SeparatorVisibility = SeparatorVisibility.None,
+                IsPullToRefreshEnabled = false,
                 ItemsSource = GetItemsSource(),
                 //ItemsSource = CurrentModel,
                 BindingContext = _wrapper
-			};
-			UserListView.SetBinding<ConnectListWrapper> (ListView.IsRefreshingProperty, vm => vm.IsBusy, BindingMode.OneWay);
-
+            };
+            UserListView.SetBinding<ConnectListWrapper>(ListView.IsRefreshingProperty, vm => vm.IsBusy, BindingMode.OneWay);
 
             var buttonLayout = new StackLayout
             {
@@ -137,7 +132,6 @@ namespace Conarh_2016.Application.UI.Connect
                 },
                 Padding = new Thickness(0)
             };
-
 
             lowerLayout = new StackLayout
             {
@@ -160,14 +154,13 @@ namespace Conarh_2016.Application.UI.Connect
 
             //Content = layout;
             Content = bgLayout;
-
         }
 
         private ConnectionsDataWrapper GetPendingConnectionsDataWrapper()
         {
             ConnectionsDataWrapper PendingConnectionsDataWrapper = new ConnectionsDataWrapper();
-            
-            for (int i=0; i< CurrentModel.Count; i++)
+
+            for (int i = 0; i < CurrentModel.Count; i++)
             {
                 if (CurrentModel[i].State == ConnectState.RequestedToAccept)
                 {
@@ -175,7 +168,6 @@ namespace Conarh_2016.Application.UI.Connect
                 }
             }
             return PendingConnectionsDataWrapper;
-
         }
 
         private ConnectionsDataWrapper GetItemsSource()
@@ -185,7 +177,7 @@ namespace Conarh_2016.Application.UI.Connect
                 case ContactListType.All:
                     {
                         return CurrentModel;
-                        
+
                         break;
                     }
                 case ContactListType.Pending:
@@ -197,21 +189,38 @@ namespace Conarh_2016.Application.UI.Connect
             return null;
         }
 
-
         private void GetLowerLayoutChidren(ContactListType listType)
         {
             lowerLayout.Children.Clear();
             if (listType == ContactListType.All)
             {
                 lowerLayout.Children.Add(searchBarView);
-
             }
             lowerLayout.Children.Add(UserListView);
         }
 
-
         private void OnRankingClicked(object sender, EventArgs e)
         {
+            /* TODO tentativa de ordenação
+            ConnectionsDataWrapper temp = new ConnectionsDataWrapper();
+            int k;
+            for (int i = 0; i < CurrentModel.Count; i++)
+            {
+                k = i;
+                for (int j = i + 1; j < CurrentModel.Count -1; j++)
+                {
+                    if (CurrentModel[j].Name.CompareTo(CurrentModel[j + 1].Name) > 0)
+                    {
+                        k = j + 1;
+                    }
+                }
+                temp.Add(CurrentModel[k]);
+            }
+            CurrentModel.Clear();
+            for (int l = 0; l < temp.Count; l++)
+                CurrentModel.Add(temp[l]);
+                */
+
             Navigation.PushAsync(new RatingPage());
         }
 
@@ -223,7 +232,6 @@ namespace Conarh_2016.Application.UI.Connect
             selectedContactedList = ContactListType.Pending;
             GetLowerLayoutChidren(selectedContactedList);
             UserListView.ItemsSource = GetItemsSource();
-
         }
 
         private void OnAllContactsClicked(object sender, EventArgs e)
@@ -236,12 +244,11 @@ namespace Conarh_2016.Application.UI.Connect
             UserListView.ItemsSource = GetItemsSource();
         }
 
-        protected override void OnAppearing ()
-		{
-			base.OnAppearing ();
-			UserListView.BeginRefresh ();
-		}
-
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            UserListView.BeginRefresh();
+        }
 
         private Button GetButton(string title, Color color, EventHandler handler)
         {
@@ -257,30 +264,29 @@ namespace Conarh_2016.Application.UI.Connect
             return btn;
         }
 
-
         private string previousPattern = string.Empty;
-		void OnSearch (string pattern)
-		{
-			if (previousPattern.Equals (pattern))
-				return;
 
-			previousPattern = pattern;
-			CurrentModel = new ConnectionsDataWrapper(AppModel.Instance.CurrentUser,
-				new DynamicListData<User>(), AppModel.Instance.UsersModelsWrapper);
-			
-			UserListView.ItemsSource = CurrentModel;
+        private void OnSearch(string pattern)
+        {
+            if (previousPattern.Equals(pattern))
+                return;
 
-			_wrapper.Search (CurrentModel, previousPattern);
-		}
+            previousPattern = pattern;
+            CurrentModel = new ConnectionsDataWrapper(AppModel.Instance.CurrentUser,
+                new DynamicListData<User>(), AppModel.Instance.UsersModelsWrapper);
 
-		void OnSearchClear ()
-		{
-			previousPattern = string.Empty;
-			CurrentModel = AppModel.Instance.CurrentConnectionsWrapper;
-			UserListView.ItemsSource = CurrentModel;
+            UserListView.ItemsSource = CurrentModel;
 
-			_wrapper.ClearSearch ();
-		}
-	}
+            _wrapper.Search(CurrentModel, previousPattern);
+        }
 
+        private void OnSearchClear()
+        {
+            previousPattern = string.Empty;
+            CurrentModel = AppModel.Instance.CurrentConnectionsWrapper;
+            UserListView.ItemsSource = CurrentModel;
+
+            _wrapper.ClearSearch();
+        }
+    }
 }

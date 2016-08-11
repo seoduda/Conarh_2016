@@ -1,5 +1,6 @@
 ﻿using Conarh_2016.Core;
 using Conarh_2016.Core.Net;
+using Core.Tasks;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -35,8 +36,8 @@ namespace Conarh_2016.Application.BackgroundTasks.SendData.Kinvey
     }
     /* TODO - implementar classe PostImageKinveyBackgroundTask como : OneShotBackgroundTask */
    //public sealed class PostImageKinveyBackgroundTask : OneShotBackgroundTask<string>
-   public sealed class PostImageKinveyBackgroundTask
-   {
+   public sealed class PostImageKinveyBackgroundTask : OneShotBackgroundTask<string>
+    {
        public readonly KinveyImageType ImageType;
        public readonly string ImagePath;
        public readonly string Id;
@@ -48,7 +49,7 @@ namespace Conarh_2016.Application.BackgroundTasks.SendData.Kinvey
            ImagePath = imagePath;
        }
 
-       public string Execute()
+       public override string Execute()
        {
            string result = null;
            string serverImagePath = "";
@@ -123,5 +124,11 @@ namespace Conarh_2016.Application.BackgroundTasks.SendData.Kinvey
             return kpr._downloadURL;
         }
 
+        /*
+        public override string Execute()
+        {
+            throw new NotImplementedException();
+        }
+        */
     }
 }

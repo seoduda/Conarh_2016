@@ -25,6 +25,7 @@ namespace Conarh_2016.Application.UI.Shared
         private const int ImageHeight = 80;
         private ProgressBar progbar;
         public readonly UserModel Model;
+        private int saveCount = 0;
 
         public event Action EditUserProfile;
 
@@ -217,13 +218,23 @@ namespace Conarh_2016.Application.UI.Shared
 
         private void OnUserModelChanged()
         {
+            saveCount++;
+            if (saveCount == 2)
+            {
+                Device.BeginInvokeOnMainThread(() => UserController.Instance.UpdateProfileData(Model));
+            }
             Device.BeginInvokeOnMainThread(() => BindingContext = Model.User);
+            Model.IsChanged += OnUserModelChanged;
         }
 
         private void OnEditUserTapped(object sender, EventArgs e)
         {
             if (EditUserProfile != null)
+            {
+                saveCount = 1;
                 EditUserProfile();
+            }
+        
         }
     }
 }

@@ -16,13 +16,15 @@ namespace Conarh_2016.Application.UI.Wall
 		private const int Border = 20;
 
 		private Image _postImage;
-		private const int PostImageWidth = 450;
+        private Button btnPost;
+
+        private const int PostImageWidth = 450;
 
 		private readonly string _fakeImagePath;
 
 		public WallCreatePostPage ()
 		{
-			_fakeImagePath = Path.Combine(AppProvider.IOManager.DocumentPath, "fakeImage.jpeg");
+			_fakeImagePath = Path.Combine(AppProvider.IOManager.DocumentPath, "wallfakeImage.jpeg");
 
 			Title = AppResources.WallCreatePost;
 
@@ -57,7 +59,7 @@ namespace Conarh_2016.Application.UI.Wall
 
 			float btnWidth = (AppProvider.Screen.Width - Border) / 2;
 
-            var btnUpload = new Button { 
+            Button btnUpload = new Button { 
 				BackgroundColor = AppResources.MenuColor,
 				WidthRequest = btnWidth,
 				HeightRequest = 40,
@@ -77,7 +79,7 @@ namespace Conarh_2016.Application.UI.Wall
 
 			layout.Children.Add (_postTextField);
 
-			var btnPost = new Button { 
+            btnPost = new Button { 
 				BackgroundColor = AppResources.MenuColor,
 				WidthRequest = btnWidth,
 				Text = AppResources.WallPostButtonPost,
@@ -128,11 +130,16 @@ namespace Conarh_2016.Application.UI.Wall
 			
 		void OnPostClicked (object sender, System.EventArgs e)
 		{
-			if (string.IsNullOrEmpty (_postTextField.Text)) {
+        
+            if (string.IsNullOrEmpty (_postTextField.Text)) {
 				AppProvider.PopUpFactory.ShowMessage (AppResources.WallPostAddSomeTextMessage, AppResources.Warning);
 				return;
-			}
-			UserController.Instance.CreateWallPost (_postTextField.Text, _postImage.IsVisible ? _fakeImagePath : string.Empty);
+            }else
+            {
+                btnPost.IsEnabled = false;
+                UserController.Instance.CreateWallPost(_postTextField.Text, _postImage.IsVisible ? _fakeImagePath : string.Empty);
+            }
+			
 		}
 
         public void AddImage(string fakeImagePath, int cropSize)

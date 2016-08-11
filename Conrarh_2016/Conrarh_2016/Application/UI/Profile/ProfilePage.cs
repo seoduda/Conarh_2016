@@ -65,8 +65,8 @@ namespace Conarh_2016.Application.UI.Profile
 
 		void OnSaveProfileChanges (CreateUserData data)
 		{
-			UserController.Instance.SaveProfileChanges (data);
-		}
+            UserController.Instance.SaveProfileChanges (data);
+        }
 
 	}
 

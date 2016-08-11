@@ -141,6 +141,8 @@
     <Compile Include="Application\UI\Exhibitors\ExhibitorsDynamicPage.cs" />
     <Compile Include="Application\UI\Exhibitors\ExhibitorViewCell.cs" />
     <Compile Include="Application\UI\Login\LinkedInLoginPage.cs" />
+    <Compile Include="Application\UI\Login\LinkedInSignupPage.cs" />
+    <Compile Include="Application\UI\Login\LinkedInLoginView.cs" />
     <Compile Include="Application\UI\Login\LoginPage.cs" />
     <Compile Include="Application\UI\Login\LoginView.cs" />
     <Compile Include="Application\UI\Login\PolicyPage.cs" />

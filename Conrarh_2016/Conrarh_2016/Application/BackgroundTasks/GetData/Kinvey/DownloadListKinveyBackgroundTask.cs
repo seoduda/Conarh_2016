@@ -72,7 +72,7 @@ namespace Conarh_2016.Application.BackgroundTasks.GetData.Kinvey
                 if (TaskParameters.IsSaveToDb)
                     DbClient.Instance.SaveData<T>(data.Data).ConfigureAwait(false);
 
-                OnSaveData(data.Data);
+                //OnSaveData(data.Data);
             }
         }
 

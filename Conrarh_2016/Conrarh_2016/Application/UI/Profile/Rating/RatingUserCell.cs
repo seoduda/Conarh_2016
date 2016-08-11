@@ -10,7 +10,7 @@ namespace Conarh_2016.Application.UI.Profile
 	public sealed class RatingUserCell: ExtendedViewCell
 	{
 		private const int ImageWidth = 40;
-		private const int ButtonWidth = 70;
+		private const int ButtonWidth = 90;
 
 		private const int ImageStartXPos = 40;
 

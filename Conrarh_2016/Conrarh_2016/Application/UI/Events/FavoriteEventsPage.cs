@@ -63,7 +63,8 @@ namespace Conarh_2016.Application.UI.Events
             {
                 HeightRequest = 40,
                 TextColor = Color.White,
-                Text = "Monte sua programação selecionando seus eventos favoritos.",
+                Text = "Monte sua programação selecionando eventos favoritos.",
+                FontSize = 12,
                 BackgroundColor = AppResources.MenuColor
             };
 

@@ -6,6 +6,7 @@ using Conarh_2016.Application.Domain;
 using Conarh_2016.Application.Domain.PostData;
 using Conarh_2016.Application.Tools;
 using Conarh_2016.Application.UI.Events;
+using Conarh_2016.Application.UI.Login;
 using Conarh_2016.Application.UI.Main;
 using Conarh_2016.Application.Wrappers;
 using Conarh_2016.Core;
@@ -30,7 +31,6 @@ namespace Conarh_2016.Application
         #endregion IDisposable implementation
 
         private readonly Dictionary<AppBackgroundWorkerType, BackgroundWorker> _backgroundWorkers;
-        
 
         public RootPage AppRootPage;
 
@@ -365,6 +365,7 @@ namespace Conarh_2016.Application
             _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(getIsLikedPostTask);
         }
 
+        //public void CreateWallPost(string text, string imagePath, Action onDone)
         public void CreateWallPost(string text, string imagePath)
         {
             UserDialogs.Instance.ShowLoading(AppResources.LoadingSendingWallPost);
@@ -398,13 +399,15 @@ namespace Conarh_2016.Application
                     {
                         // var postImageToPost = new PostImageBackgroundTask(QueryBuilder.Instance.GetPostWallPostImageQuery(result.Id), imagePath);
                         var postImageToPost = new PostImageKinveyBackgroundTask(imagePath, result.Id, KinveyImageType.WallPost);
+                        /*
                         postImageToPost.Execute();
                         UserDialogs.Instance.ShowSuccess(AppResources.SuccessfulCreateWallPost, 1);
                         AppController.Instance.AppRootPage.Detail.Navigation.PopAsync();//
-                        
+
                         AppController.Instance.DownloadWallData(null);
                         AppController.Instance.AppRootPage.Detail.Navigation.PopAsync();
-                        /*
+                        */
+
                         postImageToPost.ContinueWith((pItask, pIresult) =>
                         {
                             if (pIresult == null)
@@ -427,7 +430,6 @@ namespace Conarh_2016.Application
                             }
                         });
                         _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(postImageToPost);
-                        */
                     }
                 }
             });
@@ -461,7 +463,6 @@ namespace Conarh_2016.Application
 
             UserDialogs.Instance.ShowLoading(AppResources.LoadingFavouriteActions);
             FavouriteEventData favData = AppModel.Instance.CurrentUser.FavouriteActions.Items.Find(temp => temp.EventId.Equals(eventData.Id));
-            
 
             if (favData != null)
             {
@@ -632,8 +633,6 @@ namespace Conarh_2016.Application
                 true);
             data.ConnectionRequestId = connectionModel.Request.Id;
 
-
-
             var requestTask = new RequestConnectionBackgroundTask(data, true, connectionModel.Request.Id);
             requestTask.ContinueWith((task, result) =>
             {
@@ -677,64 +676,47 @@ namespace Conarh_2016.Application
 
         private void ConnectToUncommonUser(ConnectionModel connectionModel)
         {
-            UserDialogs.Instance.PromptAsync(new PromptConfig
+            UserDialogs.Instance.ShowLoading(AppResources.LoadingSendingRequest);
+            var data = new RequestConnectionData(AppModel.Instance.CurrentUser.User.Id, connectionModel.UserModel.User.Id,
+                AppResources.GetPointsEarned(connectionModel.UserModel.User.UserType), true);
+            
+            var requestTask = new RequestConnectionBackgroundTask(data, true, null);
+            requestTask.ContinueWith((task, result) =>
             {
-                Title = AppResources.RequestEnterPassphrase,
-                Placeholder = AppResources.RequestEnterPassphraseDefault,
-                IsCancellable = true
-            }).ContinueWith(prompttask =>
-            {
-                PromptResult promptResult = prompttask.Result;
-
-                if (promptResult.Ok)
+                if (result == null)
                 {
-                    if (connectionModel.UserModel.User.Passphrase.Equals(promptResult.Text))
+                    UserDialogs.Instance.HideLoading();
+                    AppProvider.PopUpFactory.ShowMessage(AppResources.FailedServer, AppResources.Error);
+                }
+                else
+                {
+                    var postBadgeTask = new PostBadgeActionBackgroundTask(AppBadgeType.ConnectToUncommonUser, AppModel.Instance.CurrentUser.User.Id, AppModel.Instance.CurrentUser.BadgeActions);
+                    postBadgeTask.ContinueWith((badgeTask, badgeResult) =>
                     {
-                        UserDialogs.Instance.ShowLoading(AppResources.LoadingSendingRequest);
-                        var data = new RequestConnectionData(AppModel.Instance.CurrentUser.User.Id, connectionModel.UserModel.User.Id,
-                            AppResources.GetPointsEarned(connectionModel.UserModel.User.UserType), true);
+                        string query = QueryBuilder.Instance.GetConnectionRequestByIdKinveyQuery(result.Id);
+                        var getRequestTask = new GetItemByIdBackgroundTask<ConnectRequest>(query, connectionModel.UserModel.Connections);
 
-                        var requestTask = new RequestConnectionBackgroundTask(data, true, null);
-                        requestTask.ContinueWith((task, result) =>
+                        getRequestTask.ContinueWith((getTask, getResult) =>
                         {
-                            if (result == null)
+                            UserDialogs.Instance.HideLoading();
+                            if (getResult != null)
                             {
-                                UserDialogs.Instance.HideLoading();
-                                AppProvider.PopUpFactory.ShowMessage(AppResources.FailedServer, AppResources.Error);
-                            }
-                            else
-                            {
-                                var postBadgeTask = new PostBadgeActionBackgroundTask(AppBadgeType.ConnectToUncommonUser, AppModel.Instance.CurrentUser.User.Id, AppModel.Instance.CurrentUser.BadgeActions);
-                                postBadgeTask.ContinueWith((badgeTask, badgeResult) =>
+                                Device.BeginInvokeOnMainThread(() =>
                                 {
-                                    string query = QueryBuilder.Instance.GetConnectionRequestByIdKinveyQuery(result.Id);
-                                    var getRequestTask = new GetItemByIdBackgroundTask<ConnectRequest>(query, connectionModel.UserModel.Connections);
-
-                                    getRequestTask.ContinueWith((getTask, getResult) =>
-                                    {
-                                        UserDialogs.Instance.HideLoading();
-                                        if (getResult != null)
-                                        {
-                                            Device.BeginInvokeOnMainThread(() =>
-                                            {
-                                                UserDialogs.Instance.ShowSuccess(AppResources.SuccessfulAcceptRequestConnection, 1);
-                                                connectionModel.ApplyConnectRequest(getResult);
-                                                UpdateProfileData(AppModel.Instance.CurrentUser);
-                                            });
-                                        }
-                                    });
-
-                                    _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(getRequestTask);
+                                    if (Device.OS == TargetPlatform.iOS)
+                                        UserDialogs.Instance.ShowSuccess(AppResources.SuccessfulAcceptRequestConnection, 1);
+                                    connectionModel.ApplyConnectRequest(getResult);
+                                    UpdateProfileData(AppModel.Instance.CurrentUser);
                                 });
-                                _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(postBadgeTask);
                             }
                         });
-                        _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(requestTask);
-                    }
-                    else
-                        AppProvider.PopUpFactory.ShowMessage(AppResources.RequestEnterPassphraseWrong, AppResources.Error);
+
+                        _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(getRequestTask);
+                    });
+                    _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(postBadgeTask);
                 }
             });
+            _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(requestTask);
         }
 
         public void TryToConnect(ConnectionModel connectionModel)
@@ -757,8 +739,8 @@ namespace Conarh_2016.Application
             var saveProfileChanges = new RegisterUserBackgroundTask(profileChanges, false, AppModel.Instance.CurrentUser.User.Id);
             saveProfileChanges.ContinueWith((task, result) =>
             {
-                //AppModel.Instance.ap
-                UserDialogs.Instance.HideLoading();
+        //AppModel.Instance.ap
+        UserDialogs.Instance.HideLoading();
 
                 if (task.Exception != null)
                 {
@@ -812,9 +794,9 @@ namespace Conarh_2016.Application
                 else
                 {
                     userModel.UpdateUser(profileResult[0]); //points, score, etc
-                    //UserDialogs.Instance.HideLoading();
+                                                            //UserDialogs.Instance.HideLoading();
 
-                    var downloadBadges = new DownloadBadgesTypesBackgroundTask();
+            var downloadBadges = new DownloadBadgesTypesBackgroundTask();
                     downloadBadges.ContinueWith((badgesTask, badgesResult) =>
                     {
                         if (badgesResult == null)
@@ -831,11 +813,11 @@ namespace Conarh_2016.Application
 
                                 if (badgesUserResult == null)
                                     AppProvider.PopUpFactory.ShowMessage(AppResources.FailedServer, AppResources.Error);
-                                /* TODO - reativar DownloadConnections USERCONTROLLER:UpdateProfileData - validar se necessário*/
+                        /* TODO - reativar DownloadConnections USERCONTROLLER:UpdateProfileData - validar se necessário*/
                                 else if (downloadConnections)
                                     DownloadConnections(onFinish: onFinish);
                                 else
-                                Device.BeginInvokeOnMainThread(onFinish);
+                                    Device.BeginInvokeOnMainThread(onFinish);
                             });
                             _backgroundWorkers[AppBackgroundWorkerType.UserDefault].Add(downloadBadgesByUserTask);
                         }
@@ -847,19 +829,17 @@ namespace Conarh_2016.Application
             _backgroundWorkers[AppBackgroundWorkerType.UserDefault].Add(downloadProfileTask);
         }
 
+        public void GetUserLinkedinPasswd(CreateUserData data, String serverImagePath)
+        {
+            LinkedInLoginPage linkedinLogPage = new LinkedInLoginPage(data, serverImagePath);
+            AppController.Instance.AppRootPage.CurrentPage.Navigation.PushModalAsync(linkedinLogPage);
+            // AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.ProfilePage, true))
+        }
+
         public void RegisterUserLinkedin(CreateUserData data, String serverImagePath)
         {
-           
-           /*
-            if (Device.OS == TargetPlatform.iOS)
-                AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.LoginPage, true);
-                */
-                
-            
+            AppController.Instance.AppRootPage.CurrentPage.Navigation.PopModalAsync();
             UserDialogs.Instance.ShowLoading(AppResources.LoadingCreatingUser);
-
-            
-
             var registerTask = new RegisterUserBackgroundTask(data);
             registerTask.ContinueWith((task, result) =>
             {
@@ -879,13 +859,11 @@ namespace Conarh_2016.Application
                     lud.Password = result.Password;
                     LoginUser(lud);
 
-                    //Device.BeginInvokeOnMainThread(() => AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.ProfilePage, true));
-                    // () => AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.LoginPage, true, result.Email, result.Password));
-                }
+            //Device.BeginInvokeOnMainThread(() => AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.ProfilePage, true));
+            // () => AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.LoginPage, true, result.Email, result.Password));
+        }
             });
             _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(registerTask);
         }
     }
 }
- 
- 

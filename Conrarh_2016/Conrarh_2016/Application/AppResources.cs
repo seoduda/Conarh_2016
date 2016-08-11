@@ -74,6 +74,8 @@ namespace Conarh_2016.Application
 
         public static string LoginFirstMessage = "Você precisa se logar primeiro!";
         public static string Warning = "Aviso!";
+        public static string InsertPassword = "Por favor inserir a senha do aplicativo";
+        ///public static string  = "Por favor inserir a senha do aplicativo";
         public static string LoadingCreatingUser = "Criando usuário…";
         public static string LoadingLoginUser = "Login...";
         public static string LoadingLogoutUser = "Logout...";
@@ -123,6 +125,7 @@ namespace Conarh_2016.Application
         public static string ContactList = "Contatos";
         public static string LoadingResetPassword = "Enviando…";
         public static string SuccessfulResetPassword = "Enviado! Verifique seu email.";
+        public static string PasswordIsEmpty = "Senha inválida!";
         public static string ResetPasswordIsEmpty = "Email inválido!";
         public static string RequestEnterPassphrase = "Digite a palavra-chave para conectar";
         public static string RequestEnterPassphraseDefault = "Palavra-chave";
@@ -258,7 +261,8 @@ namespace Conarh_2016.Application
 
         public static string LoginBgImage = "login_bg_image.png";
         public static string LoginBtLinkedin = "login_bt_linkedin";
-        
+        public static string LinkedinLogo = "linkedinlogo.png";
+
 
         public static string LoginEmailImage = "loginEmailImage.png";
         public static string LoginPasswordImage = "loginPasswordImage.png";
@@ -371,7 +375,8 @@ namespace Conarh_2016.Application
         public static bool IsUserCommon(string userTypeId)
         {
             return UserTypes.ContainsKey(userTypeId) &&
-                (UserTypes[userTypeId] == AppUserType.Common || UserTypes[userTypeId] == AppUserType.Speecher);
+                (UserTypes[userTypeId] == AppUserType.Common);
+            //(UserTypes[userTypeId] == AppUserType.Common || UserTypes[userTypeId] == AppUserType.Speecher);
         }
 
         public static string GetLocalizedError(string msg)
