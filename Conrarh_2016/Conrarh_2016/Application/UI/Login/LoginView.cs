@@ -39,7 +39,7 @@ namespace Conarh_2016.Application.UI.Login
             layout.Children.Add(transpSpace);
 
             layout.Children.Add(GetEntry(Keyboard.Email, AppResources.LoginEmailDefaultEntry, AppResources.LoginEmailImage, 15, false, 15, out _emailEntry));
-            layout.Children.Add(GetEntry(Keyboard.Text, AppResources.LoginPasswordDefaultEntry, AppResources.LoginPasswordImage, 10, true, 10, out _passwordEntry));
+            layout.Children.Add(GetEntry(Keyboard.Url, AppResources.LoginPasswordDefaultEntry, AppResources.LoginPasswordImage, 10, true, 10, out _passwordEntry));
 
             var loginBtn = new Button
             {

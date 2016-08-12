@@ -40,7 +40,12 @@ namespace Conarh_2016.Application
         UserDownloadConnections = 22,
         UserDownloadBadgesActions = 23,
         UserDefault = 24,
-        UserDownloadFavouriteEvents = 25
+        UserDownloadFavouriteEvents = 25,
+
+        PopModal = 31
+
+
+
     }
 
     public sealed class AppController : Singletone<AppController>, IDisposable

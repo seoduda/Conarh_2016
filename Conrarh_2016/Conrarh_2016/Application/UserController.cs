@@ -831,19 +831,39 @@ namespace Conarh_2016.Application
 
         public void GetUserLinkedinPasswd(CreateUserData data, String serverImagePath)
         {
-            LinkedInLoginPage linkedinLogPage = new LinkedInLoginPage(data, serverImagePath);
-            AppController.Instance.AppRootPage.CurrentPage.Navigation.PushModalAsync(linkedinLogPage);
+
+            if (Device.OS == TargetPlatform.iOS)
+            {
+                AppController.Instance.AppRootPage.CurrentPage.Navigation.PopModalAsync();
+                LinkedInLoginPage linkedinLogPage = new LinkedInLoginPage(data, serverImagePath);
+                //AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.LoginLinkedinPage,false);
+                AppController.Instance.AppRootPage.CurrentPage.Navigation.PushAsync(linkedinLogPage);
+
+            }
+            else
+            {
+                LinkedInLoginPage linkedinLogPage = new LinkedInLoginPage(data, serverImagePath);
+                AppController.Instance.AppRootPage.CurrentPage.Navigation.PushModalAsync(linkedinLogPage);
+
+            }
+
+
             // AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.ProfilePage, true))
         }
 
         public void RegisterUserLinkedin(CreateUserData data, String serverImagePath)
         {
-            AppController.Instance.AppRootPage.CurrentPage.Navigation.PopModalAsync();
-            UserDialogs.Instance.ShowLoading(AppResources.LoadingCreatingUser);
-            var registerTask = new RegisterUserBackgroundTask(data);
-            registerTask.ContinueWith((task, result) =>
+            var popTask = AppController.Instance.AppRootPage.CurrentPage.Navigation.PopModalAsync();
+            popTask.ContinueWith((_pTask) =>
             {
-                UserDialogs.Instance.HideLoading();
+               // AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.LoginPage, true);
+
+                
+                UserDialogs.Instance.ShowLoading(AppResources.LoadingCreatingUser);
+                var registerTask = new RegisterUserBackgroundTask(data);
+                registerTask.ContinueWith((task, result) =>
+                {
+                    UserDialogs.Instance.HideLoading();
 
                 if (task.Exception != null)
                 {
@@ -859,11 +879,12 @@ namespace Conarh_2016.Application
                     lud.Password = result.Password;
                     LoginUser(lud);
 
-            //Device.BeginInvokeOnMainThread(() => AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.ProfilePage, true));
-            // () => AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.LoginPage, true, result.Email, result.Password));
-        }
-            });
+                //Device.BeginInvokeOnMainThread(() => AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.ProfilePage, true));
+                // () => AppController.Instance.AppRootPage.NavigateTo(MainMenuItemData.LoginPage, true, result.Email, result.Password));
+                }
+                });
             _backgroundWorkers[AppBackgroundWorkerType.UserPostData].Add(registerTask);
+            });
         }
     }
 }

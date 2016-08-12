@@ -171,7 +171,7 @@ namespace Conarh_2016.Application.Domain
                 this. = _cUserData.Job;
             this.Job = _cUserData.Job;
             this.Job = _cUserData.Job;
-            */
+            
 
 
         }

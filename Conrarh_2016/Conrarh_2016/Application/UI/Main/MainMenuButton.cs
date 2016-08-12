@@ -35,6 +35,7 @@ namespace Conarh_2016.Application.UI.Main
         public static MainMenuItemData LoginPage = new MainMenuItemData(false, AppResources.Login, typeof(Login.LoginPage), false, false);
         public static MainMenuItemData TestPage = new MainMenuItemData(false, "TESTE", typeof(Connect.ConnectionGridPage), false, false);
         public static MainMenuItemData LogOutPage = new MainMenuItemData(false, AppResources.LogOut, null, false, false);
+        public static MainMenuItemData LoginLinkedinPage = new MainMenuItemData(false, "Login Linkedin", typeof(Login.LinkedInLoginPage), false, false);
 
         public string Title { get; set; }
         public Type TargetType { get; set; }

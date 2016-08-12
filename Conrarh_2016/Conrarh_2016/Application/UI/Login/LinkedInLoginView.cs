@@ -33,6 +33,11 @@ namespace Conarh_2016.Application.UI.Login
                 HeightRequest = AppProvider.Screen.ConvertPixelsToDp(94),
                 HorizontalOptions = LayoutOptions.Center
         };
+            if (Device.OS == TargetPlatform.iOS)
+            {
+                LinkedinLogo.HeightRequest = AppProvider.Screen.ConvertPixelsToDp(AppProvider.Screen.Height / 8);
+                LinkedinLogo.WidthRequest = AppProvider.Screen.ConvertPixelsToDp((AppProvider.Screen.Width*3)/4);
+            }
             layout.Children.Add(LinkedinLogo);
 
             var fs = new FormattedString();
@@ -57,7 +62,7 @@ namespace Conarh_2016.Application.UI.Login
 
 
 
-            layout.Children.Add(GetEntry(Keyboard.Text, AppResources.LoginPasswordDefaultEntry, AppResources.LoginPasswordImage, 10, true, 10, out _passwordEntry));
+            layout.Children.Add(GetEntry(Keyboard.Url, AppResources.LoginPasswordDefaultEntry, AppResources.LoginPasswordImage, 10, true, 10, out _passwordEntry));
 
             var loginBtn = new Button
             {
